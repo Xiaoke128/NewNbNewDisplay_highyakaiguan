@@ -1,0 +1,9 @@
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\bin\Debug\UartUpgradeTool.exe.config
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\bin\Debug\UartUpgradeTool.exe
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\bin\Debug\UartUpgradeTool.pdb
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\obj\Debug\UartUpgradeTool.csprojResolveAssemblyReference.cache
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\obj\Debug\UartUpgradeTool.Form1.resources
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\obj\Debug\UartUpgradeTool.Properties.Resources.resources
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\obj\Debug\UartUpgradeTool.csproj.GenerateResource.Cache
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\obj\Debug\UartUpgradeTool.exe
+F:\wokFolder\git\TempHimiduty_2\UartUpgradeTool\UartUpgradeTool\obj\Debug\UartUpgradeTool.pdb
