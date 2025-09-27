@@ -573,6 +573,11 @@
               <FileType>1</FileType>
               <FilePath>.\commucateSlave.c</FilePath>
             </File>
+            <File>
+              <FileName>oled_new.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\oled_new.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1203,6 +1208,11 @@
               <FileName>commucateSlave.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\commucateSlave.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled_new.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\oled_new.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1835,6 +1845,11 @@
               <FileType>1</FileType>
               <FilePath>.\commucateSlave.c</FilePath>
             </File>
+            <File>
+              <FileName>oled_new.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\oled_new.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2465,6 +2480,11 @@
               <FileName>commucateSlave.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\commucateSlave.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled_new.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\oled_new.c</FilePath>
             </File>
           </Files>
         </Group>

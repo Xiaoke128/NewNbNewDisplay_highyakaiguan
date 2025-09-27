@@ -15,6 +15,7 @@
 #include "commucateSlave.h"
 #include <stdio.h>
 #include <string.h>
+#include "oled_new.h"
 
 #define APP_VETC_OFFSET		0x4000
 

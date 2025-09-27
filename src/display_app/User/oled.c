@@ -229,7 +229,7 @@ static void Write_Data(uint8_t Data)
 		OLED_DATA_REG;
 		SPI_CS_HIGH;
 }
-
+#if 0
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 //  Instruction Setting
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -258,7 +258,6 @@ void Set_Column_Address(unsigned char a, unsigned char b)
 	Write_Command(a);			//   Default => 0x00 (Column Start Address)
 	Write_Command(b);			//   Default => 0x7F (Column End Address)
 }
-
 
 void Set_Page_Address(unsigned char a, unsigned char b)
 {
@@ -383,7 +382,6 @@ void Set_Common_Config(unsigned char d)
 						//     Disable COM Left/Right Re-Map
 }
 
-
 void Set_VCOMH(unsigned char d)
 {
 	Write_Command(0xDB);			// Set VCOMH Deselect Level
@@ -395,7 +393,7 @@ void Set_NOP()
 {
 	Write_Command(0xE3);			// Command for No Operation
 }
-
+#endif
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 //  Global Variables
@@ -406,7 +404,7 @@ void Set_NOP()
 #define Max_Column	128
 #define Max_Row		64
 #define	Brightness	0xFF
-
+#if 0
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 //  Show Regular Pattern (Full Screen)
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -535,7 +533,7 @@ unsigned char i,j;
 		}
 	}
 }
-
+#endif
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 //  Show Chinese (Partial or Full Screen)
 //
@@ -727,7 +725,7 @@ void Write8_8_char(uint8_t data, uint8_t page, uint8_t colum, uint8_t num)
 				Write_Data(data);
 		}		
 }
-
+#if 0
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 //  Vertical / Fade Scrolling (Partial or Full Screen)
 //
@@ -894,7 +892,7 @@ void Sleep(unsigned char a)
 			break;
 	}
 }
-
+#endif
 
 void Oled_ConfigInit(void)
 {

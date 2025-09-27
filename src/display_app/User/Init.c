@@ -88,5 +88,6 @@ void MCU_Init(void)
 	SignalTimerInit();//action timer init
 	ButtonInit();
 	//WdgtInit();//watch dog init
-	OledInit();
+	//OledInit();
+	OLED_Init_E();
 }
