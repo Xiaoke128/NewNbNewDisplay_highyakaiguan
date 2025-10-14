@@ -525,8 +525,8 @@ ARM Macro Assembler    Page 9
 
 
 UVISION_VERSION SETA 526" --predefine="GD32F10X_MD SETA 1" --predefine="USE_STD
-PERIPH_DRIVER SETA 1" --list=.\list\startup_gd32f10x_md.lst ..\CORE\GD\GD32F10x
-\Source\ARM\startup_gd32f10x_md.s
+PERIPH_DRIVER SETA 1" --predefine="DEBUG SETA 1" --list=.\list\startup_gd32f10x
+_md.lst ..\CORE\GD\GD32F10x\Source\ARM\startup_gd32f10x_md.s
 
 
 
@@ -1242,4 +1242,4 @@ Symbol: __main
       At line 152 in file ..\CORE\GD\GD32F10x\Source\ARM\startup_gd32f10x_md.s
 Comment: __main used once
 2 symbols
-407 symbols in table
+408 symbols in table

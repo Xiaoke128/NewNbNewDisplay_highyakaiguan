@@ -69,7 +69,7 @@ typedef struct{
 	uint8_t ParseDone;
 	uint8_t addr;
 	uint8_t function;
-	uint8_t data[250];
+	uint8_t data[512];
 	uint16_t dataIndex;
 	uint16_t crc;
 }ModbusStr;

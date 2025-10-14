@@ -8,13 +8,16 @@ static void RunTempID(void);
 static void RunTempVal(void);
 static void RunHumiID(void);
 static void RunHumiVal(void);
+static void RunGetNumTemp(void);
+
 
 pFunction wlFunTable[] = {
 	RunCheckConnect,
 	RunTempID,
 	RunTempVal,
-	RunHumiID,
-	RunHumiVal,
+	RunGetNumTemp,
+	//RunHumiID,
+	//RunHumiVal,
 };
 
 static uint8_t ParseModbus(void)
@@ -54,7 +57,7 @@ static void SendCheckConnect(void)
 		uint8_t data[8] = {0};
 		uint16_t crc = 0;
 				
-		data[0] = 0x01;
+		data[0] = 0xA1;
 		data[1] = 0x03;
 		data[2] = 0x00;
 		data[3] = 0x00;
@@ -125,13 +128,18 @@ static void SendTempID(void)
 {
 		uint8_t data[8] = {0};
 		uint16_t crc = 0;
+		uint16_t temp = wlStrData.NumTemp * 2;
+		if(temp >= 180)
+		{
+			temp = 180;
+		}
 				
-		data[0] = 0x01;
+		data[0] = 0xA1;
 		data[1] = 0x03;
-		data[2] = 0x00;
-		data[3] = 0xF4;
-		data[4] = 0x00;
-		data[5] = 0x5A;
+		data[2] = 0x01;//0x00;
+		data[3] = 0x00;//0xF4;
+		data[4] = temp >> 8;
+		data[5] = temp;//0xB4;//0x5A;
 		crc = Modbus_Crc_Compute(data, 6);
 		data[6] = crc;
 		data[7] = crc >> 8;
@@ -143,6 +151,7 @@ static void CheckTempIDFunc(void)
 		static uint8_t step = 0;
 		uint8_t ret = 0;
 		uint8_t i = 0, j = 1;
+		uint16_t temp = wlStrData.NumTemp;
 	
 		switch(step)
 		{
@@ -156,8 +165,13 @@ static void CheckTempIDFunc(void)
 				ret = ParseModbus();
 				if(ret == 1)
 				{
-						for(i = 0; i < 90; i++)
+						if(temp >= 90)
 						{
+							temp = 90;
+						}
+						for(i = 0; i < temp; i++)
+						{
+								j += 2;
 								wlStrData.tempID_Val[i][0] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
 								j += 2;
 						}
@@ -177,6 +191,83 @@ static void CheckTempIDFunc(void)
 		}
 }
 
+
+
+
+static void NumTempEnable(void)
+{
+		wlStrData.flag.bit.getNumTemp = 1;
+}
+
+static void NumTempDisable(void)
+{
+		wlStrData.flag.bit.getNumTemp = 0;
+		wlStrData.runStep = WL_RUNNING_NOTHING;
+}
+
+static void SendNumTemp(void)
+{
+		uint8_t data[8] = {0};
+		uint16_t crc = 0;
+				
+		data[0] = 0xA1;
+		data[1] = 0x03;
+		data[2] = 0x00;//0x00;
+		data[3] = 0x03;//0x04;
+		data[4] = 0x00;
+		data[5] = 0x01;
+		crc = Modbus_Crc_Compute(data, 6);
+		data[6] = crc;
+		data[7] = crc >> 8;
+		NbUartSendBuf(data, 8);
+}
+
+static void CheckNumTempFunc(void)
+{
+		static uint8_t step = 0;
+		uint8_t ret = 0;
+		uint8_t j = 1;
+	
+		switch(step)
+		{
+			case 0://send read command
+				SendNumTemp();
+				modbusValInit();
+				wlStrData.runStep = WL_RUNNING_GET_NUM_TEMP;
+				step++;
+			break;
+			case 1://parse data
+				ret = ParseModbus();
+				if(ret == 1)
+				{
+						wlStrData.NumTemp = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
+						wlStrData.sysFlag.bit.NumTempGet = 1;
+						step = 0;
+						NumTempDisable();
+				}
+				else if(ret == 2)
+				{
+						step = 0;
+						NumTempDisable();
+				}
+			break;
+			default:
+				
+			break;
+		}
+}
+
+static void RunGetNumTemp(void)
+{
+	if(wlStrData.runStep == WL_RUNNING_NOTHING || wlStrData.runStep == WL_RUNNING_GET_NUM_TEMP)
+		{
+				if(wlStrData.flag.bit.getNumTemp)
+				{
+						CheckNumTempFunc();
+				}
+		}
+}
+
 static void RunTempID(void)
 {
 		if(wlStrData.runStep == WL_RUNNING_NOTHING || wlStrData.runStep == WL_RUNNING_GET_TEMP_ID)
@@ -187,6 +278,7 @@ static void RunTempID(void)
 				}
 		}
 }
+
 
 static void TempValEnable(void)
 {
@@ -203,13 +295,18 @@ static void SendTempVal(void)
 {
 		uint8_t data[8] = {0};
 		uint16_t crc = 0;
+		uint16_t temp = wlStrData.NumTemp;
+		if(temp >= 90)
+		{
+			temp = 90;
+		}
 				
-		data[0] = 0x01;
+		data[0] = 0xA1;
 		data[1] = 0x03;
-		data[2] = 0x00;
-		data[3] = 0x04;
-		data[4] = 0x00;
-		data[5] = 0x5A;
+		data[2] = 0x50;//0x00;
+		data[3] = 0x00;//0x04;
+		data[4] = temp >> 8;
+		data[5] = temp;
 		crc = Modbus_Crc_Compute(data, 6);
 		data[6] = crc;
 		data[7] = crc >> 8;
@@ -221,6 +318,7 @@ static void CheckTempValFunc(void)
 		static uint8_t step = 0;
 		uint8_t ret = 0;
 		uint8_t i = 0, j = 1;
+		uint16_t temp = wlStrData.NumTemp;
 	
 		switch(step)
 		{
@@ -234,9 +332,17 @@ static void CheckTempValFunc(void)
 				ret = ParseModbus();
 				if(ret == 1)
 				{
-						for(i = 0; i < 90; i++)
+						if(temp >= 90)
+						{
+							temp = 90;
+						}
+						for(i = 0; i < temp; i++)
 						{
 								wlStrData.tempID_Val[i][1] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
+								if(wlStrData.tempID_Val[i][1] != 0xFFFF)
+								{
+									wlStrData.tempID_Val[i][1] -= 500;
+								}
 								j += 2;
 						}
 						step = 0;
@@ -425,7 +531,7 @@ static void RunFunc(void)
 {
 		uint8_t i = 0;
 		
-		for(i = 0; i < 5; i++)
+		for(i = 0; i < 4; i++)
 		{
 				wlFunTable[i]();
 		}
@@ -458,23 +564,27 @@ static void EnbaleFunc(void)
 		if(count3 >= 2000)
 		{
 				count3 = 0;
-				if(!wlStrData.sysFlag.bit.HumiIDGet && wlStrData.sysFlag.bit.Connected)
+				if(wlStrData.sysFlag.bit.Connected)
 				{
-						HumiIDEnable();
+					NumTempEnable();
 				}
+				//if(!wlStrData.sysFlag.bit.HumiIDGet && wlStrData.sysFlag.bit.Connected)
+				//{
+						HumiIDEnable();
+				//}
 		}
 		if(count4 >= 1000)
 		{
 				count4 = 0;
 				if(wlStrData.sysFlag.bit.Connected)
 				{
-						if(wlStrData.sysFlag.bit.TempIDGet)
+						if(wlStrData.sysFlag.bit.TempIDGet && wlStrData.sysFlag.bit.NumTempGet)
 						{
 								TempValEnable();
 						}
 						if(wlStrData.sysFlag.bit.HumiIDGet)
 						{
-								HumiValEnable();
+								//HumiValEnable();
 						}
 				}
 		}

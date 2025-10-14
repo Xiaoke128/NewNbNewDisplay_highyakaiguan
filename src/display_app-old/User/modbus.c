@@ -82,7 +82,7 @@ void modbusMasterParse(uint8_t ch)
 		switch(modbus.step)
 		{
 			case MODBUS_SLAVE_ADDR:				
-				if(ch == 0x01)//default addr
+				if(ch == 0xA1)//default addr
 				{
 						modbus.step = MODBUS_FUNCTION_CODE;
 						modbus.addr = ch;
