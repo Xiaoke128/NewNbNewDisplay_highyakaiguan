@@ -43,6 +43,7 @@ static uint16_t GetWl_Max(void);
 static uint16_t GetWl_Min(void);
 static uint16_t GetWl_Diff(void);
 static uint16_t GetDeviceStatus(void);
+static uint16_t GetCh3_Set(void);
 
 //write function
 static void SetSlaveID(uint16_t data);
@@ -65,6 +66,7 @@ static void SetSelfTemp4(int16_t data);
 static void SetSelfTemp5(int16_t data);
 static void SetSelfTemp6(int16_t data);
 static void SetSelfHumi(int16_t data);
+static void SetCh3_Set(uint16_t data);
 //static void  SetCloseTime(uint16_t data);
 //static void SetOpenTime(uint16_t data);
 
@@ -76,37 +78,38 @@ FunTable table[] = {
 	{REG_BAUD_RATE_L,										GetBaudRateL},
 	{REG_RTC_TIME_H,										GetRTC_TimeH},
 	{REG_RTC_TIME_L,										GetRTC_TimeL},
-	{REG_TEM_INTERVAL,									GetTemSimpleInterval},
+	{REG_TEM_INTERVAL,										GetTemSimpleInterval},
 	{REG_CLOSE_ALARM,										GetCloseAlarm},
 	{REG_OPEN_ALARM,										GetOpenAlarm},
-	{REG_CLOSE_ABNORMAL,								GetCloseAbnormal},
-	{REG_OPEN_ABNORMAL,									GetOpenAbnormal},
-	{REG_TEM_ABNORMAL,									GetTemAbnormal},
-	{REG_HUMI_ABNORMAL,									GetHumiAbnormal},
-	{REG_TEM_DIFF_ALARM,								GetTemDiffAlarm},
+	{REG_CLOSE_ABNORMAL,									GetCloseAbnormal},
+	{REG_OPEN_ABNORMAL,										GetOpenAbnormal},
+	{REG_TEM_ABNORMAL,										GetTemAbnormal},
+	{REG_HUMI_ABNORMAL,										GetHumiAbnormal},
+	{REG_TEM_DIFF_ALARM,									GetTemDiffAlarm},
 	{REG_HW_VERSION,										GetHwVer},
 	{REG_INTERL_TEM,										GetInterTem},
 	{REG_EXTERL_TEM,										GetExterTem},
 	{REG_HUMIDUTY,											GetHumi},
-	{REG_CHANNEL_4_ALARM,								GetChannel4Alarm},
+	{REG_CHANNEL_4_ALARM,									GetChannel4Alarm},
 	{REG_OPEN_FLAG,											GetOpenCloseFlag},
 	{REG_OPEN_TIME,											GetOpenCloseTime},
 	{REG_OPEN_UNIX_H,										GetOpenCloseUnixH},
 	{REG_OPEN_UNIX_L,										GetOpenCloseUnixL},
-	{REG_UNIQUE_IDHLLL,									GetUniqueID_HLLL},
-	{REG_UNIQUE_IDLHLL,									GetUniqueID_LHLL},
-	{REG_UNIQUE_IDLLHL,									GetUniqueID_LLHL},
-	{REG_UNIQUE_IDLLLH,									GetUniqueID_LLLH},
+	{REG_UNIQUE_IDHLLL,										GetUniqueID_HLLL},
+	{REG_UNIQUE_IDLHLL,										GetUniqueID_LHLL},
+	{REG_UNIQUE_IDLLHL,										GetUniqueID_LLHL},
+	{REG_UNIQUE_IDLLLH,										GetUniqueID_LLLH},
 	{REG_CLOSE_FLAG,										GetCloseFlag},
 	{REG_CLOSE_TIME,										GetCloseTime},
-	{REG_CLOSE_UNIX_H,									GetCloseUnixH},
-	{REG_CLOSE_UNIX_L,									GetCloseUnixL},
-	{REG_WATER_TEMP_DIFF,								GetWaterTempDiff},
+	{REG_CLOSE_UNIX_H,										GetCloseUnixH},
+	{REG_CLOSE_UNIX_L,										GetCloseUnixL},
+	{REG_WATER_TEMP_DIFF,									GetWaterTempDiff},
 	{REG_WATER_TEMP,										GetWaterTemp},
 	{REG_WL_TEMP_MAX,										GetWl_Max},
 	{REG_WL_TEMP_MIN,										GetWl_Min},
-	{REG_WL_TEMP_MAX_MIN_DIFF,					GetWl_Diff},
-	{REG_DEVICE_STATUS,									GetDeviceStatus},
+	{REG_WL_TEMP_MAX_MIN_DIFF,								GetWl_Diff},
+	{REG_DEVICE_STATUS,										GetDeviceStatus},
+	{REG_CH3_SET,											GetCh3_Set},
 };
 
 WriteFunTable Wtable[] = {
@@ -115,14 +118,15 @@ WriteFunTable Wtable[] = {
 	{REG_BAUD_RATE_L,										SetBaudRateL},
 	{REG_RTC_TIME_H,										SetRtcH},
 	{REG_RTC_TIME_L,										SetRtcL},
-	{REG_TEM_INTERVAL,									SetTemSimpleInterval},
+	{REG_TEM_INTERVAL,										SetTemSimpleInterval},
 	{REG_CLOSE_ALARM,										SetCloseAlarm},
 	{REG_OPEN_ALARM,										SetOpenAlarm},
-	{REG_CLOSE_ABNORMAL,								SetCloseAbnormal},
-	{REG_OPEN_ABNORMAL,									SetOpenAbnormal},
-	{REG_TEM_ABNORMAL,									SetTemAbnormal},
-	{REG_HUMI_ABNORMAL,									SetHumiAbnormal},
-	{REG_TEM_DIFF_ALARM,								SetTemDiffAlarm},
+	{REG_CLOSE_ABNORMAL,									SetCloseAbnormal},
+	{REG_OPEN_ABNORMAL,										SetOpenAbnormal},
+	{REG_TEM_ABNORMAL,										SetTemAbnormal},
+	{REG_HUMI_ABNORMAL,										SetHumiAbnormal},
+	{REG_TEM_DIFF_ALARM,									SetTemDiffAlarm},
+	{REG_CH3_SET,											SetCh3_Set},
 };
 
 SelfWriteFunTable WtempHumiTable[] = {
@@ -547,6 +551,11 @@ static uint16_t GetDeviceStatus(void)
 	return (NbInfo.DataLedStatus ? 1 : 0);
 }
 
+static uint16_t GetCh3_Set(void)
+{
+	return StoreConf.Ch3_Set;
+}
+
 
 static void SetSlaveID(uint16_t data)
 {
@@ -629,6 +638,13 @@ static void SetTemDiffAlarm(uint16_t data)
 {
 		NbInfo.ConfData.TempDiffAlarmVal = data;
 		StoreConfUpdate();
+}
+
+static void SetCh3_Set(uint16_t data)
+{
+	StoreConf.Ch3_Set = data;
+	StoreConf.CrcVal = CheckCRC((uint8_t *)&StoreConf, sizeof(StoreConfStr) - 4);
+	WriteStoreConf();
 }
 
 

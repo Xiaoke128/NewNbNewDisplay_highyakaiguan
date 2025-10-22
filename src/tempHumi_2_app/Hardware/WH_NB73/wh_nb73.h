@@ -178,7 +178,7 @@ typedef struct{
 	uint32_t ReportStartTime;
 	ConfStr ServerConf;
 	uint8_t SlaveAddr;
-	uint8_t reerved;
+	uint8_t Ch3_Set;
 	uint32_t BaudRateModbus;
 	uint32_t CrcVal;
 }StoreConfStr;

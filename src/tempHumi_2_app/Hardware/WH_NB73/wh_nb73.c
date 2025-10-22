@@ -61,14 +61,16 @@ static AT_ResType ParseGetIp(void);
 
 static AT_ResType NbParse(void);
 
+static void RevDataRead(void);
+
 static void ClearRevBuf(void);
 NbInfomation NbInfo;
 StoreConfStr StoreConf;
 
-static uint8_t ResDataBuf[255];
-static uint8_t ResDataIndex = 0;
+static uint8_t ResDataBuf[1024];
+static uint16_t ResDataIndex = 0;
 
-static char sendBuf[255] = "AT+NSOST=1,10.3.226.194,9004,";
+static char sendBuf[255] = "AT+SKTSEND=1,";
 //static char sendBuf[255] = "AT+NSOST=1,10.26.10.54,1883,";
 static uint8_t SendBufIndex = 0;
 
@@ -286,7 +288,7 @@ static void SnedBufBuild(void)
 	uint8_t index = 0;
 	uint8_t i = 0;
 	
-	sendBuf[9] = NbInfo.Socket;
+	sendBuf[11] = NbInfo.Socket;
 	buf[index++] = 0x01;//protocol ver
 	buf[index++] = 0x01;//Device type
 	memcpy(&buf[index], NbInfo.IMEI_BCD, sizeof(NbInfo.IMEI_BCD));
@@ -298,12 +300,12 @@ static void SnedBufBuild(void)
 	buf[index++] = NbInfo.RSSI;
 	index += 5;//reserved 5 bytes
 
-	SendBufIndex = 31;
+	SendBufIndex = 13;
 	//SendBufIndex = 30;
 	if(NbInfo.Btype == SEND_REGISTER_BUF)//register package
 	{
-		sendBuf[29] = '4';//send data size is 45 bytes
-		sendBuf[30] = '5';
+		sendBuf[SendBufIndex++] = '4';//send data size is 45 bytes
+		sendBuf[SendBufIndex++] = '5';
 		//sendBuf[28] = '4';
 		//sendBuf[29] = '5';
 		sendBuf[SendBufIndex++] = ',';
@@ -330,8 +332,8 @@ static void SnedBufBuild(void)
 	}
 	else if(NbInfo.Btype == SEND_DATA_BUF)//data package
 	{
-		sendBuf[29] = '4';//send data size is 40 bytes
-		sendBuf[30] = '0';
+		sendBuf[SendBufIndex++] = '4';//send data size is 40 bytes
+		sendBuf[SendBufIndex++] = '0';
 		//sendBuf[28] = '3';//send data size is 38 bytes
 		//sendBuf[29] = '8';
 		sendBuf[SendBufIndex++] = ',';
@@ -383,8 +385,8 @@ static void SnedBufBuild(void)
 	else if(NbInfo.Btype == SEND_REVEIVE_BUF)
 	{
 		index = 16;
-		sendBuf[29] = '2';//send data size is 38 bytes
-		sendBuf[30] = '4';
+		sendBuf[SendBufIndex++] = '2';//send data size is 38 bytes
+		sendBuf[SendBufIndex++] = '4';
 		//sendBuf[28] = '2';//send data size is 38 bytes
 		//sendBuf[29] = '4';
 		sendBuf[SendBufIndex++] = ',';
@@ -503,7 +505,7 @@ static AT_ResType ParseGetImei(void)
 		NbInfo.InfoFlags.bit.IMEI_Get = 1;
 		for(i = 0; i < ResDataIndex; i++)
 		{
-			if((ResDataBuf[i] >= '2') && (ResDataBuf[i] <= '9'))
+			if((ResDataBuf[i] >= '1') && (ResDataBuf[i] <= '9'))
 			{
 				break;
 			}
@@ -593,7 +595,7 @@ static void GetCCIDDisable(void)
 
 static void GetCCID(void)
 {
-	char buf[] = "AT+NCCID?\r\n";
+	char buf[] = "AT+ECICCID\r\n";
 	
 	ClearRevBuf();
 	NbUartSendBuf((uint8_t *)buf, strlen(buf));
@@ -702,7 +704,7 @@ static void GetPciDisable(void)
 
 static void GetPCI(void)
 {
-	char buf[] = "AT+NUESTATS=RADIO\r\n";
+	char buf[] = "AT+ECSTATUS\r\n";
 	
 	ClearRevBuf();
 	NbUartSendBuf((uint8_t *)buf, strlen(buf));
@@ -725,7 +727,7 @@ static AT_ResType ParseGetPCI(void)
 		{
 			for(i = 0; i < strlen(temp); i++)
 			{
-				if(temp[i + 4] == '\r')
+				if(temp[i + 4] == ',')
 				{
 					break;
 				}
@@ -963,12 +965,12 @@ static AT_ResType ParseGetRSSI(void)
 	{
 		for(i = 0; i < ResDataIndex; i++)
 		{
-			if(ResDataBuf[i] == ':')
+			if(ResDataBuf[i] >= '0' || ResDataBuf[i] <= '9')
 			{
 				break;
 			}
 		}
-		i++;
+		//i++;
 		for(j = i; j < ResDataIndex; j++)
 		{
 			if(ResDataBuf[j] == ',')
@@ -1024,6 +1026,40 @@ static void CreateSocketFunc(void)
 	}
 }
 
+static void ConnectServer(void)
+{
+	char buf[] = "AT+SKTCONNECT=0,\"10.3.226.194\",9004\r\n";
+	
+	ClearRevBuf();
+	NbUartSendBuf((uint8_t *)buf, strlen(buf));
+}
+
+static AT_ResType ParseConnectServer(void)
+{
+	AT_ResType ResType = AT_RES_CHECKING;
+	static uint16_t count = 0;
+	
+	count++;
+	ResBuffAdd();
+	if(strstr((char *)ResDataBuf, "OK\r\n"))//response ok
+	{
+		NbInfo.InfoFlags.bit.SocketCreate = 1;
+		ResType = AT_RES_OK;
+		CreateSocketDisable();
+	}
+	else if(strstr((char *)ResDataBuf, "ERROR\r\n"))//response error
+	{
+		count = 0;
+		ResType = AT_RES_ERROR;
+	}
+	if(count >= AT_COM_RES_TIMEOUT)
+	{
+		count = 0;
+		ResType = AT_RES_TIMEOUT;
+	}
+	return ResType;
+}
+
 static void RunCreateSocket(void)
 {
 	static uint8_t step = 0;
@@ -1041,18 +1077,37 @@ static void RunCreateSocket(void)
 		res = ParseCreateSocket();
 		if(res == AT_RES_OK)
 		{
+			step = 2;
+		}
+		else if(res == AT_RES_ERROR)
+		{
+			step = 4;
+		}
+		else if(res == AT_RES_TIMEOUT)
+		{
+			step = 4;
+		}
+		break;
+	case 2:
+		ConnectServer();
+		step++;
+	break;
+	case 3:
+		res = ParseConnectServer();
+		if(res == AT_RES_OK)
+		{
 			step = 0;
 		}
 		else if(res == AT_RES_ERROR)
 		{
-			step = 2;
+			step = 4;
 		}
 		else if(res == AT_RES_TIMEOUT)
 		{
-			step = 2;
+			step = 4;
 		}
-		break;
-	case 2:
+	break;
+	case 4:
 		count++;
 		if(count >= (5 * 1000))
 		{
@@ -1075,7 +1130,7 @@ static void CreateSocketDisable(void)
 
 static void CreateSocket(void)
 {
-	char buf[] = "AT+NSOCR=DGRAM,17,10001,1\r\n";
+	char buf[] = "AT+SKTCREATE=1,2,17\r\n";
 	
 	ClearRevBuf();
 	NbUartSendBuf((uint8_t *)buf, strlen(buf));
@@ -1101,7 +1156,7 @@ static AT_ResType ParseCreateSocket(void)
 		}
 		NbInfo.InfoFlags.bit.SocketCreate = 1;
 		ResType = AT_RES_OK;
-		CreateSocketDisable();
+		
 	}
 	else if(strstr((char *)ResDataBuf, "ERROR\r\n"))//response error
 	{
@@ -1314,6 +1369,34 @@ static void ReadData(void)
 	NbUartSendBuf((uint8_t *)buf, sizeof(buf));
 }
 
+static void RevDataRead(void)
+{
+	uint16_t i = 0, j = 0;
+	char *readPoint = NULL;
+	uint16_t LenTemp = 0;
+	
+	
+	readPoint = strstr((char *)ResDataBuf, "+SKTRECV:");
+	LenTemp = strlen(readPoint);
+	for(i = 0; i < LenTemp; i++)
+	{
+		if(readPoint[i] == '\"')
+		{
+			break;
+		}
+	}
+	i++;
+	for(j = i; j < LenTemp; j++)
+	{
+		if(readPoint[j] == '\"')
+		{
+			break;
+		}
+	}
+	RevBufIndex = (j - i) / 2;
+	ReadData2Byte((char *)(&readPoint[i]), RevBufIndex);
+}
+
 static AT_ResType ParseReadData(void)
 {
 	AT_ResType ResType = AT_RES_CHECKING;
@@ -1502,22 +1585,24 @@ static void NbReset(void)
 	}
 	else if(count == 50)
 	{
-		NB_RESET_LOW;
+		//NB_RESET_LOW;
+		NB_RESET_HIGH;
 	}
 	else if(count == 7050)
 	{
 		//count = 0;
-		NB_RESET_HIGH;
+		//NB_RESET_HIGH;
+		NB_RESET_LOW;
 		//systemFlag.bit.NB_PowerReset = 1;
 	}
 	else if(count > 7050)
 	{
 		ResBuffAdd();
-		tempChar = strstr((char *)ResDataBuf, "+POWERON:1\r\n");
+		tempChar = strstr((char *)ResDataBuf, "ECRDY\r\n");
 		if(tempChar != NULL)
 		{
-			if(strstr((char *)tempChar, "SIMST:1\r\n") || strstr((char *)tempChar, "SIMST:0\r\n"))//check reset is ok
-			{
+			//if(strstr((char *)tempChar, "SIMST:1\r\n") || strstr((char *)tempChar, "SIMST:0\r\n"))//check reset is ok
+			//{
 				count = 0;
 				NbResetDisable();
 				if(!NbInfo.InfoFlags.bit.IMEI_Get)
@@ -1534,7 +1619,7 @@ static void NbReset(void)
 				NbInfo.InfoFlags.bit.SocketCreate = 0;
 				NbInfo.InfoFlags.bit.PCI_Get = 0;
 				//CreateSocketEnable();
-			}
+			//}
 		}
 		if(count >= 20350)//no response, reset again
 		{
@@ -1633,14 +1718,15 @@ static void AsynCheck(void)
 		{
 				HostUartSendBuf(&ch, 1);
 		}
-		temp = strstr((char *)ResDataBuf, "+NSONMI:");
+		temp = strstr((char *)ResDataBuf, "+SKTRECV:");
 		if(temp != NULL)
 		{
 			if(strstr(temp, "\r\n"))
 			{
 				//read enable
-				ReadDataEnable();//read data enable
-				ClearRevBuf();
+				//ReadDataEnable();//read data enable
+				//ClearRevBuf();
+				RevDataRead();
 				NbInfo.RunInStep = RUN_IN_NOTHING;
 			}
 		}
@@ -1664,12 +1750,13 @@ static AT_ResType NbParse(void)
 	AT_ResType res = AT_RES_CHECKING;
 	char *str = NULL;
 	
-	str = strstr((char *)ResDataBuf, "+NSONMI:");
+	str = strstr((char *)ResDataBuf, "+SKTRECV:");
 	if(str != NULL)
 	{
 		if(strstr(str, "\r\n"))
 		{
-			ReadDataEnable();//read data enable
+			//ReadDataEnable();//read data enable
+			RevDataRead();
 		}
 	}
 	if(strstr((char *)ResDataBuf, "OK\r\n"))

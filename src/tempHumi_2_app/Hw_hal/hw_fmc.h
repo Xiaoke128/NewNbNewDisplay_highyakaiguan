@@ -17,6 +17,7 @@
 #define STORE_INTERVAL_5_MINUTES		(5 * 60 * 1000)
 
 uint32_t CheckCRC(uint8_t *buf, uint16_t len);
+void WriteStoreConf(void);
 void WriteStoreInfo(void);
 void FMC_StoreInfoInit(void);
 void StoreInfoAdd(void);

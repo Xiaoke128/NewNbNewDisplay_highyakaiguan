@@ -38,7 +38,7 @@ void WriteStoreInfo(void)
 }
 
 //write store configure
-static void WriteStoreConf(void)
+void WriteStoreConf(void)
 {
 	uint32_t size = 0, i = 0;
 	uint32_t *addr = (uint32_t *)&StoreConf;

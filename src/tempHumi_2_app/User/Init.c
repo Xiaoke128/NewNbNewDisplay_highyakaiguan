@@ -4,7 +4,7 @@ SignalInfo SigInfo;
 StoreInfoStr StoreInfo;
 BackUpStr BackUpInfo;
 
-char Version[] = "V1.00R";
+char Version[] = "V1.04";
 static void GpioInit(void);
 static void VarInit(void);
 
@@ -52,9 +52,9 @@ static void GpioInit(void)
 	//gpio_init(LED_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, LED3_PIN);//LED3
 	//gpio_init(LED_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, LED4_PIN);//LED4
 	gpio_init(DE_485_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, DE_485_PIN);//DE_485
-	gpio_init(NB_POWER_CTR_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, NB_POWER_CTR_PIN);//NB POWER cotrol
+	gpio_init(NB_POWER_CTR_PORT, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, NB_POWER_CTR_PIN);//NB POWER cotrol
+	//NB_POWER_ON;
 	gpio_init(NB_RESET_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, NB_RESET_PIN);//NB RESET pin cotrol
-	
 	gpio_init(MODE_PORT, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, MODE1_PIN);//MODE1
 	gpio_init(MODE_PORT, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, MODE2_PIN);//MODE1
 	
@@ -62,7 +62,15 @@ static void GpioInit(void)
 	
 	gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_11);
 	GPIO_BOP(GPIOA) = GPIO_PIN_11;
-	NB_RESET_HIGH;
+	
+	gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_15);
+	GPIO_BOP(GPIOA) = GPIO_PIN_15;
+	
+	gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7);
+	GPIO_BOP(GPIOB) = GPIO_PIN_7;
+	
+	//NB_RESET_HIGH;
+	NB_RESET_LOW;
 	TX_ENABLE;
 	if(GET_MODE2_VAL)
 	{
@@ -112,7 +120,7 @@ static void VarInit(void)
 	systemFlag.bit.Run18B20Inter = 1;//get tempture when power on
 	systemFlag.bit.Run18B20Exter = 1;//get tempture when power on
 	
-	NB_POWER_ON;//nb power on
+	//NB_POWER_ON;//nb power on
 	NbResetEnable();//nb need to reset when power on
 	
 	PakStuctInit();
@@ -157,7 +165,9 @@ void MCU_Init(void)
 	Isl1208Init();//ISL1208 Init
 	DS18B20_Init();	//DS18B20 init
 	//NandFlashInit();//NAND flash init
+#ifndef DEBUG
 	WdgtInit();//watch dog init
+#endif
 	if(systemFlag.bit.ModbusOrNbiot == COMMUNICATE_MODBUS)
 	{
 		TX_ENABLE;

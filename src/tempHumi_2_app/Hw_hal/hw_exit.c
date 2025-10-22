@@ -155,7 +155,12 @@ void GetChannel3_Status(void)
 	if(systemFlag.bit.GetChannel3_Status)
 	{
 		systemFlag.bit.GetChannel3_Status = 0;
-		NbInfo.Channel3_Status = GET_EXIT_CHANNEL3_VAL;
+		if(StoreConf.Ch3_Set == 0) {
+			NbInfo.Channel3_Status = GET_EXIT_CHANNEL3_VAL;
+		}
+		else {
+			NbInfo.Channel3_Status = !GET_EXIT_CHANNEL3_VAL;
+		}
 	}
 	if(NbInfo.CloseDelayFlag)
 	{

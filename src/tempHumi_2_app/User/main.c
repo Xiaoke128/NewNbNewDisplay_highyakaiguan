@@ -30,7 +30,9 @@ int main(void)
 		if(systemFlag.bit.Time1ms)
 		{
 			systemFlag.bit.Time1ms = 0;
+#ifndef DEBUG
 			WdgtFeed();//watch dog feed
+#endif
 			DS18B20GetIntTemp();//Get internal tempture
 			GetChannel3_Status();
 			Cj2301_Init();
