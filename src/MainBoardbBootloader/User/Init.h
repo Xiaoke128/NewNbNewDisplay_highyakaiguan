@@ -24,7 +24,7 @@
 #define GET_MODE2_VAL			gpio_input_bit_get(MODE_PORT, MODE2_PIN)
 
 #define DE_485_PORT		GPIOA
-#define DE_485_PIN		GPIO_PIN_4
+#define DE_485_PIN		GPIO_PIN_7
 #define TX_ENABLE		GPIO_BOP(DE_485_PORT) = DE_485_PIN
 #define RX_ENABLE		GPIO_BC(DE_485_PORT) = DE_485_PIN
 
