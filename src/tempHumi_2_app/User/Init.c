@@ -140,6 +140,7 @@ static void RcuClockInit(void)
 	gpio_pin_remap_config(GPIO_SWJ_SWDPENABLE_REMAP,ENABLE);
 	gpio_pin_remap_config(GPIO_SPI0_REMAP, ENABLE);//SPI0 REMAP
 	rcu_periph_clock_enable(RCU_SPI0);//SPI0 CLOCK
+	rcu_periph_clock_enable(RCU_ADC1);
 }
 
 void MCU_Init(void)

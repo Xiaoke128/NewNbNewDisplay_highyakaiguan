@@ -164,32 +164,32 @@
           <Type>0</Type>
           <LineNumber>209</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134251740</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
+          <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\Hardware\WH_NB73\wh_nb73.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\2GenerationNewNb\../Hardware/WH_NB73/wh_nb73.c\209</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>80</LineNumber>
+          <LineNumber>914</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134270766</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\Hw_hal\hw_fmc.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\modbus.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\2GenerationNewNb\modbus.c\914</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -491,6 +491,22 @@
           <Filename>..\Hardware\WH_NB73\wh_nb73.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\2GenerationNbInterrupt_V1_00L\../Hardware/WH_NB73/wh_nb73.c\209</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>914</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\modbus.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1215,6 +1231,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\Hw_hal\hw_spi.c</PathWithFileName>
       <FilenameWithoutPath>hw_spi.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>6</GroupNumber>
+      <FileNumber>45</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\Hw_hal\hw_adc.c</PathWithFileName>
+      <FilenameWithoutPath>hw_adc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

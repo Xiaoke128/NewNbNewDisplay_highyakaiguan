@@ -50,7 +50,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\output\</OutputDirectory>
-          <OutputName>2GenerationNbInterrupt_V1_00R</OutputName>
+          <OutputName>2GenerationNewNb</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -627,6 +627,11 @@
               <FileName>hw_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hw_hal\hw_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>hw_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hw_hal\hw_adc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1253,6 +1258,11 @@
               <FileName>hw_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hw_hal\hw_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>hw_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hw_hal\hw_adc.c</FilePath>
             </File>
           </Files>
         </Group>

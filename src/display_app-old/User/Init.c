@@ -2,7 +2,7 @@
 SystemFlag systemFlag;
 StoreInfoStr StoreInfo;
 
-char Version[] = "V1.03";
+char Version[] = "V1.04";
 static void GpioInit(void);
 static void VarInit(void);
 
