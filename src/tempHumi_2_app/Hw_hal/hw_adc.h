@@ -5,4 +5,7 @@
 #include "gd32f10x.h"
 #include "Init.h"
 
+void AdcInit(void);
+void AdcTask(void);
+void WriteFlashTask(void);
 #endif

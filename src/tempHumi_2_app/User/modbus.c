@@ -665,6 +665,17 @@ uint16_t Modbus_Crc_Compute(const uint8_t *buf, uint16_t bufLen) {
 	return modbus16;
 }
 
+uint16_t Modbus_Crc_Compute_cont(const uint8_t *buf, uint16_t bufLen, uint16_t val) {
+	uint8_t num;
+	uint16_t modbus16 = val;
+	uint16_t index = 0;
+	for (index = 0; index < bufLen; ++index) {
+		num = (uint8_t) (modbus16 & UINT32_MAX);
+		modbus16 = (uint16_t) (((uint32_t) modbus16 >> 8) ^ crcTb[(num ^ buf[index]) & UINT8_MAX]);
+	}
+	return modbus16;
+}
+
 
 static uint16_t crcTb[] = {
 		0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -893,6 +904,103 @@ void modbusAct(void)
 										tempBuf[i++] = (uint8_t)(crc >> 8);
 										ModbusSend(tempBuf, i);
 								}
+						}
+						if(strtAddr == REG_NUM_SAMPLE) {
+							tempBuf[i++] = StoreConf.SlaveAddr;
+							tempBuf[i++] = MODBUS_READ_MUL_REG;
+							tempBuf[i++] = 2;
+							tempBuf[i++] = 0x00;
+							tempBuf[i++] = StoreInfo.NumberUseBlock;
+							crc = Modbus_Crc_Compute(tempBuf, i);
+							tempBuf[i++] = (uint8_t)crc;
+							tempBuf[i++] = (uint8_t)(crc >> 8);
+							ModbusSend(tempBuf, i);
+						}
+						if(strtAddr == REG_READ_DATA1_SIZE) {
+							tempBuf[i++] = StoreConf.SlaveAddr;
+							tempBuf[i++] = MODBUS_READ_MUL_REG;
+							tempBuf[i++] = 4;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[0] >> 24;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[0] >> 16;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[0] >> 8;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[0];
+							crc = Modbus_Crc_Compute(tempBuf, i);
+							tempBuf[i++] = (uint8_t)crc;
+							tempBuf[i++] = (uint8_t)(crc >> 8);
+							ModbusSend(tempBuf, i);
+						}
+						if(strtAddr == REG_READ_DATA2_SIZE) {
+							tempBuf[i++] = StoreConf.SlaveAddr;
+							tempBuf[i++] = MODBUS_READ_MUL_REG;
+							tempBuf[i++] = 4;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[1] >> 24;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[1] >> 16;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[1] >> 8;
+							tempBuf[i++] = StoreInfo.BlockStoreBytes[1];
+							crc = Modbus_Crc_Compute(tempBuf, i);
+							tempBuf[i++] = (uint8_t)crc;
+							tempBuf[i++] = (uint8_t)(crc >> 8);
+							ModbusSend(tempBuf, i);
+						}
+						if(strtAddr == REG_READ_DATA1) {
+							uint32_t templen = StoreInfo.BlockStoreBytes[0];
+							uint32_t addr = FLASH_BLOCK0_ADDR;
+							uint16_t index = 0;
+							while(templen > 0) {
+								tempBuf[i++] = StoreConf.SlaveAddr;
+								tempBuf[i++] = MODBUS_READ_MUL_REG;
+								if(templen >= 200) {
+									tempBuf[i++] = 202;
+									tempBuf[i++] = index >> 8;
+									tempBuf[i++] = index;
+									ReadDatFromFlash(addr, &tempBuf[i], 200);
+									i += 200;
+									templen -= 200;
+								}
+								else {
+									tempBuf[i++] = templen + 2;
+									tempBuf[i++] = index >> 8;
+									tempBuf[i++] = index;
+									ReadDatFromFlash(addr, &tempBuf[i], templen);
+									i += templen;
+									templen = 0;
+								}
+								crc = Modbus_Crc_Compute(tempBuf, i);
+								tempBuf[i++] = (uint8_t)crc;
+								tempBuf[i++] = (uint8_t)(crc >> 8);
+								ModbusSend(tempBuf, i);	
+								index++;
+							}
+						}
+						if(strtAddr == REG_READ_DATA2) {
+							uint32_t templen = StoreInfo.BlockStoreBytes[1];
+							uint32_t addr = FLASH_BLOCK1_ADDR;
+							uint16_t index = 0;
+							while(templen > 0) {
+								tempBuf[i++] = StoreConf.SlaveAddr;
+								tempBuf[i++] = MODBUS_READ_MUL_REG;
+								if(templen >= 200) {
+									tempBuf[i++] = 202;
+									tempBuf[i++] = index >> 8;
+									tempBuf[i++] = index;
+									ReadDatFromFlash(addr, &tempBuf[i], 200);
+									i += 200;
+									templen -= 200;
+								}
+								else {
+									tempBuf[i++] = templen + 2;
+									tempBuf[i++] = index >> 8;
+									tempBuf[i++] = index;
+									ReadDatFromFlash(addr, &tempBuf[i], templen);
+									i += templen;
+									templen = 0;
+								}
+								crc = Modbus_Crc_Compute(tempBuf, i);
+								tempBuf[i++] = (uint8_t)crc;
+								tempBuf[i++] = (uint8_t)(crc >> 8);
+								ModbusSend(tempBuf, i);	
+								index++;								
+							}
 						}
 				}				
 		}

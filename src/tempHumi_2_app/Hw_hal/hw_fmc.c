@@ -82,11 +82,11 @@ void FMC_StoreInfoInit(void)
 	if(crc == infoTemp.CrcVal)
 	{
 		
-		if(infoTemp.Version != STORE_INFO_VERSION_3)
+		if(infoTemp.Version != STORE_INFO_VERSION_4)
 		{
 			memset(&StoreInfo, 0, sizeof(StoreInfoStr));
 			StoreInfo.Head = 0x5A5A;
-			StoreInfo.Version = STORE_INFO_VERSION_3;
+			StoreInfo.Version = STORE_INFO_VERSION_4;
 			StoreInfo.NumInfo = 0;
 			StoreInfo.NeedSendNum = 0;
 			StoreInfo.CrcVal = CheckCRC((uint8_t *)&StoreInfo, sizeof(StoreInfoStr) - 4);

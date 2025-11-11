@@ -445,6 +445,8 @@ void EXTI10_15_IRQHandler(void)
 					SigInfo.KnifeFlag.bit.KnifeOpen = 0;
 			}
 			SigInfo.KnifeFlag.bit.KnifeClose = 1;
+			SigInfo.KnifeFlag.bit.NeedWriteCloseBuf = 1;
+			SigInfo.KnifeFlag.bit.KnifeCloseStart = 1;
 			SigInfo.KnifeCloseTemp = 1;
 			SigInfo.Count = 0;
 			SignalTimerEnable();
@@ -460,6 +462,8 @@ void EXTI10_15_IRQHandler(void)
 					SigInfo.KnifeFlag.bit.KnifeClose = 0;
 			}
 			SigInfo.KnifeFlag.bit.KnifeOpen = 1;
+			SigInfo.KnifeFlag.bit.NeedWriteOpenBuf = 1;
+			SigInfo.KnifeFlag.bit.KnifeOpenStart = 1;
 			SigInfo.Count = 0;
 			SignalTimerEnable();
 		}

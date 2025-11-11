@@ -11,9 +11,9 @@ void SpiInit(void)
     /* SPI0_CS(PB6) GPIO pin configuration */
     gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_6);
 		/* WP (PB7) */
-		gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7);
+		//gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7);
 		SPI_FLASH_CS_HIGH;
-		SPI_FLASH_WP_HIGH;
+		//SPI_FLASH_WP_HIGH;
 	
 		/* SPI0 parameter config */
     spi_init_struct.trans_mode           = SPI_TRANSMODE_FULLDUPLEX;
@@ -21,7 +21,7 @@ void SpiInit(void)
     spi_init_struct.frame_size           = SPI_FRAMESIZE_8BIT;
     spi_init_struct.clock_polarity_phase = SPI_CK_PL_LOW_PH_1EDGE;
     spi_init_struct.nss                  = SPI_NSS_SOFT;
-    spi_init_struct.prescale             = SPI_PSC_4;
+    spi_init_struct.prescale             = SPI_PSC_2;
     spi_init_struct.endian               = SPI_ENDIAN_MSB;
     spi_init(SPI0, &spi_init_struct);
 

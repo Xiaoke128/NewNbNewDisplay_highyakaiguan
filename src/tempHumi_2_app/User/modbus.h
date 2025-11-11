@@ -76,6 +76,11 @@ typedef enum{
 	//REG_CLOSE_TIME,
 	//REG_OPEN_TIME,
 //FOR TEST
+	REG_NUM_SAMPLE = 0x1000,
+	REG_READ_DATA1_SIZE = 0x1001,
+	REG_READ_DATA2_SIZE = 0x1003,
+	REG_READ_DATA1 = 0x2000,
+	REG_READ_DATA2 = 0x4000,
 }ModbusRegEnum;
 
 
@@ -140,6 +145,7 @@ typedef struct{
 
 extern ModbusTempHumiStr TempHumiData;
 uint16_t Modbus_Crc_Compute(const uint8_t *buf, uint16_t bufLen);
+uint16_t Modbus_Crc_Compute_cont(const uint8_t *buf, uint16_t bufLen, uint16_t val);
 void CheckFun(void);
 void modbusValInit(void);
 void ModbusTimerAct(void);

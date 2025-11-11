@@ -51,6 +51,27 @@ void SignalTimerInit(void)
     //timer_enable(TIMER2);
 }
 
+void AdcTimerInit(void)
+{
+	timer_parameter_struct timer_initpara;
+	
+	rcu_periph_clock_enable(RCU_TIMER3);
+    timer_deinit(TIMER3);
+	
+	/* TIMER0 configuration */
+    timer_initpara.prescaler         = 107;
+    timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
+    timer_initpara.counterdirection  = TIMER_COUNTER_UP;
+    timer_initpara.period            = 39;// 40 * 1 / 1000000 = 40us
+    timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
+    timer_initpara.repetitioncounter = 0;
+    timer_init(TIMER3,&timer_initpara);
+	
+	timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
+    timer_interrupt_enable(TIMER3, TIMER_INT_UP);
+    timer_enable(TIMER3);
+}
+
 
 void SignalTimerEnable(void)
 {
@@ -73,6 +94,8 @@ void nvic_config(void)
     nvic_priority_group_set(NVIC_PRIGROUP_PRE1_SUB3);
     nvic_irq_enable(TIMER1_IRQn, 1, 1);
 	nvic_irq_enable(TIMER2_IRQn, 1, 2);
+	nvic_irq_enable(TIMER3_IRQn, 1, 3);
+	nvic_irq_enable(DMA0_Channel0_IRQn,0,0);
 }
 
 /*!
@@ -83,10 +106,10 @@ void nvic_config(void)
 */
 void TIMER1_IRQHandler(void)
 {
-	static uint16_t count = 0;
-	static uint16_t oneSecondCount = 0;
-	static uint16_t halfSecondCount = 0;
-	static uint16_t led_count = 0;
+	static uint32_t count = 0;
+	static uint32_t oneSecondCount = 0;
+	static uint32_t halfSecondCount = 0;
+	static uint32_t led_count = 0;
 	static uint8_t led_state = 0;
 	
     if(SET == timer_interrupt_flag_get(TIMER1, TIMER_INT_FLAG_UP)){
@@ -169,5 +192,18 @@ void TIMER2_IRQHandler(void)
         /* clear channel 0 interrupt bit */
         timer_interrupt_flag_clear(TIMER2, TIMER_INT_FLAG_UP);
 		SigInfo.Count++;
+    }
+}
+
+void TIMER3_IRQHandler(void)
+{
+	if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_UP)){
+        /* clear channel 0 interrupt bit */
+        timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
+		if(systemFlag.bit.AdcReady)
+		{
+			//systemFlag.bit.AdcNeedSample = 1;
+			adc_software_trigger_enable(ADC0, ADC_REGULAR_CHANNEL);
+		}
     }
 }

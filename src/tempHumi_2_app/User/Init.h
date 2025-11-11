@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "commucateSlave.h"
+#include "hw_adc.h"
 
 #define APP_VETC_OFFSET		0x4000
 
@@ -61,8 +62,10 @@ typedef union {
 		uint8_t		Cj2301_TempHumi		:1;//上电是否找到有线温湿度传感器
 		uint8_t 	RunCj2301					:1;//读取有线温湿度传感器
 		uint8_t		BypassMode				:1;//上位机可以直接和显示板通信
-		uint8_t   GetChannel3_Status :1;
-		uint32_t	Reserved		:17;
+		uint8_t   	GetChannel3_Status :1;
+		uint8_t		AdcReady		:1;
+		uint8_t 	AdcNeedSample	:1;
+		uint32_t	Reserved		:15;
 	}bit;
 }SystemFlag;
 
@@ -78,7 +81,11 @@ typedef union {
 		uint8_t 	KnifeOpen		:1;//开闸标志
 		uint8_t		KnifeFeedBack	:1;//返回标志
 		uint8_t		ModeCheck		:1;//0:和T3比较， 1：和T4比较
-		uint8_t		Reserved		:4;
+		uint8_t   	NeedWriteOpenBuf	:1;
+		uint8_t   	NeedWriteCloseBuf	:1;
+		uint8_t 	KnifeCloseStart		:1;
+		uint8_t		KnifeOpenStart		:1;
+		//uint8_t		Reserved		:2;
 	}bit;
 }KnifeBreakInt;
 
@@ -104,7 +111,10 @@ typedef struct{
 	uint8_t Version;
 	uint8_t NumInfo;
 	uint8_t NeedSendNum;
-	uint8_t reserved[3];
+	uint8_t reserved;
+	uint8_t NumberUseBlock;
+	uint8_t CurrentBlock;
+	uint32_t BlockStoreBytes[2];
 	InfoStr Info[MAX_STORE_INFO_SIZE];
 	uint32_t CrcVal;
 }StoreInfoStr;

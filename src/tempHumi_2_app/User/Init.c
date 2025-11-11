@@ -4,7 +4,7 @@ SignalInfo SigInfo;
 StoreInfoStr StoreInfo;
 BackUpStr BackUpInfo;
 
-char Version[] = "V1.04";
+char Version[] = "V1.04A";
 static void GpioInit(void);
 static void VarInit(void);
 
@@ -41,6 +41,15 @@ void BackUpClearOne(void)
 
 static void GpioInit(void)
 {
+	gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_11);
+	GPIO_BOP(GPIOA) = GPIO_PIN_11;
+	
+	gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_15);
+	GPIO_BOP(GPIOA) = GPIO_PIN_15;
+	
+	gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7);
+	GPIO_BOP(GPIOB) = GPIO_PIN_7;
+	delay_1ms(10);
     /* enable the led clock */
     //rcu_periph_clock_enable(RCU_GPIOC);//使能GPIOC的时钟
 	//rcu_periph_clock_enable(RCU_GPIOB);//使能GPIOC的时钟
@@ -60,14 +69,7 @@ static void GpioInit(void)
 	
 	gpio_init(GPIOB, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_0);//hostwake up
 	
-	gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_11);
-	GPIO_BOP(GPIOA) = GPIO_PIN_11;
 	
-	gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_15);
-	GPIO_BOP(GPIOA) = GPIO_PIN_15;
-	
-	gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7);
-	GPIO_BOP(GPIOB) = GPIO_PIN_7;
 	
 	//NB_RESET_HIGH;
 	NB_RESET_LOW;
@@ -140,7 +142,9 @@ static void RcuClockInit(void)
 	gpio_pin_remap_config(GPIO_SWJ_SWDPENABLE_REMAP,ENABLE);
 	gpio_pin_remap_config(GPIO_SPI0_REMAP, ENABLE);//SPI0 REMAP
 	rcu_periph_clock_enable(RCU_SPI0);//SPI0 CLOCK
-	rcu_periph_clock_enable(RCU_ADC1);
+	rcu_periph_clock_enable(RCU_ADC0);
+	rcu_periph_clock_enable(RCU_DMA0);
+	rcu_periph_clock_enable(RCU_SPI0);
 }
 
 void MCU_Init(void)
@@ -161,10 +165,14 @@ void MCU_Init(void)
 	printf("Build Time: %s %s\r\nVersion: %s\r\nIP & Port:10.3.226.194,9004\r\n", __DATE__, __TIME__, Version);//print build time and date
 	Timer_1ms_Init();//1ms timer init
 	SignalTimerInit();//action timer init
+	AdcInit();
+	AdcTimerInit();
 	ExitInit();//exit interrupt init
 	I2C_Init();//I2C init
 	Isl1208Init();//ISL1208 Init
 	DS18B20_Init();	//DS18B20 init
+	
+	NandFlashInit();
 	//NandFlashInit();//NAND flash init
 #ifndef DEBUG
 	WdgtInit();//watch dog init

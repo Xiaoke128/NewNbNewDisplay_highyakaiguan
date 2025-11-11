@@ -8,6 +8,7 @@
 #include "Isl1208.h"
 #include "wh_nb73.h"
 #include "modbus.h"
+#include "hw_adc.h"
 //#define USART0_REMAP
 unsigned char temp[5] = " 00.0";
 static void CheckLedNormal(void);
@@ -27,6 +28,8 @@ int main(void)
 	
 		MCU_Init();//system init
     while(1){
+		//AdcTask();
+		WriteFlashTask();
 		if(systemFlag.bit.Time1ms)
 		{
 			systemFlag.bit.Time1ms = 0;
