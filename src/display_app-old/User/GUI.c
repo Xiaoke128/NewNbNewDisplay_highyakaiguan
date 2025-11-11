@@ -1527,7 +1527,7 @@ static void AbnormalShowDataMenuFun(void)
 				switch(key)
 				{
 					case KEY_UP_CLICK:
-						if(page > 0)
+						if(page > 1)
 						{
 								page--;
 								step = 0;
