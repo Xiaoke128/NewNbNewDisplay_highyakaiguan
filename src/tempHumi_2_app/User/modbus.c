@@ -947,6 +947,7 @@ void modbusAct(void)
 							uint32_t addr = FLASH_BLOCK0_ADDR;
 							uint16_t index = 0;
 							while(templen > 0) {
+								i = 0;
 								tempBuf[i++] = StoreConf.SlaveAddr;
 								tempBuf[i++] = MODBUS_READ_MUL_REG;
 								if(templen >= 200) {
@@ -956,6 +957,7 @@ void modbusAct(void)
 									ReadDatFromFlash(addr, &tempBuf[i], 200);
 									i += 200;
 									templen -= 200;
+									addr += 200;
 								}
 								else {
 									tempBuf[i++] = templen + 2;
@@ -963,6 +965,7 @@ void modbusAct(void)
 									tempBuf[i++] = index;
 									ReadDatFromFlash(addr, &tempBuf[i], templen);
 									i += templen;
+									addr += templen;
 									templen = 0;
 								}
 								crc = Modbus_Crc_Compute(tempBuf, i);
@@ -977,6 +980,7 @@ void modbusAct(void)
 							uint32_t addr = FLASH_BLOCK1_ADDR;
 							uint16_t index = 0;
 							while(templen > 0) {
+								i = 0;
 								tempBuf[i++] = StoreConf.SlaveAddr;
 								tempBuf[i++] = MODBUS_READ_MUL_REG;
 								if(templen >= 200) {
@@ -986,6 +990,7 @@ void modbusAct(void)
 									ReadDatFromFlash(addr, &tempBuf[i], 200);
 									i += 200;
 									templen -= 200;
+									addr += 200;
 								}
 								else {
 									tempBuf[i++] = templen + 2;
@@ -993,6 +998,7 @@ void modbusAct(void)
 									tempBuf[i++] = index;
 									ReadDatFromFlash(addr, &tempBuf[i], templen);
 									i += templen;
+									addr += templen;
 									templen = 0;
 								}
 								crc = Modbus_Crc_Compute(tempBuf, i);

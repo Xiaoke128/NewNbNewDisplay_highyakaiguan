@@ -4,7 +4,7 @@ SignalInfo SigInfo;
 StoreInfoStr StoreInfo;
 BackUpStr BackUpInfo;
 
-char Version[] = "V1.04A";
+char Version[] = "V1.04F";
 static void GpioInit(void);
 static void VarInit(void);
 

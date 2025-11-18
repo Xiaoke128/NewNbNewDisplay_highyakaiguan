@@ -87,20 +87,23 @@ void WriteDataToFlash(uint32_t addr, uint8_t *buf, uint16_t len)
 {
 	uint16_t tempLen = len;
 	uint16_t i = 0, j = 0;
+	uint32_t tempAddr = addr;
 	
 	while(tempLen > 0) {
-		WriteEnable();
 		WaitForActionEnd();
+		WriteEnable();
+		
 		SPI_FLASH_CS_LOW;
 		spi_flash_send_byte(COMMAND_PROGRAM_DATA);
-		spi_flash_send_byte((uint8_t)(addr >> 16));
-		spi_flash_send_byte((uint8_t)(addr >> 8));
-		spi_flash_send_byte((uint8_t)(addr));
-		if(tempLen > 256) {
+		spi_flash_send_byte((uint8_t)(tempAddr >> 16));
+		spi_flash_send_byte((uint8_t)(tempAddr >> 8));
+		spi_flash_send_byte((uint8_t)(tempAddr));
+		if(tempLen >= 256) {
 			for(i = 0; i < 256; i++) {
 				spi_flash_send_byte(buf[j++]);
 			}
 			tempLen -= 256;
+			tempAddr += 256;
 		}
 		else {
 			for(i = 0; i < tempLen; i++) {
@@ -108,6 +111,7 @@ void WriteDataToFlash(uint32_t addr, uint8_t *buf, uint16_t len)
 			}
 			tempLen = 0;
 		}
+		//WaitForActionEnd();
 		SPI_FLASH_CS_HIGH;
 	}
 }

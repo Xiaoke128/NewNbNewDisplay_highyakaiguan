@@ -6,8 +6,10 @@ uint16_t AdcSampVal2[256] = {0};
 
 uint16_t RunAdcSampVal1[512] = {0};
 uint16_t RunAdcSampVal2[512] = {0};
+uint16_t RunAdcSampVal3[512] = {0};
 uint16_t RunAdcIndex1 = 0;
 uint16_t RunAdcIndex2 = 0;
+uint16_t RunAdcIndex3 = 0;
 uint8_t bufInUseNum = 0;
 
 uint16_t AdcValIndex = 0;
@@ -27,8 +29,8 @@ void AdcInit(void)
 	adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, DISABLE); 
 	adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);
 	adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 2);
-	adc_regular_channel_config(ADC1, 0, ADC_CHANNEL_4, ADC_SAMPLETIME_13POINT5);//1000000 / (1000000 / 6750000 * (239.5 + 12.5)) = 26.785k
-    adc_regular_channel_config(ADC1, 1, ADC_CHANNEL_5, ADC_SAMPLETIME_13POINT5);
+	adc_regular_channel_config(ADC0, 0, ADC_CHANNEL_4, ADC_SAMPLETIME_13POINT5);//1000000 / (1000000 / 6750000 * (239.5 + 12.5)) = 26.785k
+    adc_regular_channel_config(ADC0, 1, ADC_CHANNEL_5, ADC_SAMPLETIME_13POINT5);
 	
 	adc_external_trigger_source_config(ADC0, ADC_REGULAR_CHANNEL, ADC0_1_2_EXTTRIG_REGULAR_NONE); 
 	adc_external_trigger_config(ADC0, ADC_REGULAR_CHANNEL, ENABLE);
@@ -145,20 +147,31 @@ void DMA0_Channel0_IRQHandler(void)
 			else {
 				temp = AdcSampVal[1];
 			}
-			if(!bufInUseNum) {
+			if(bufInUseNum == 0) {
 				RunAdcSampVal1[RunAdcIndex1++] = temp;
 				if(RunAdcIndex1 >= 512) {
 					bufInUseNum = 1;
 					RunAdcIndex2 = 0;
-					WriteIndex = 1;
+					RunAdcIndex3 = 0;
+					WriteIndex |= 0x01;
 				}
 			}
-			else {
+			else if(bufInUseNum == 1){
 				RunAdcSampVal2[RunAdcIndex2++] = temp;
 				if(RunAdcIndex2 >= 512) {
+					bufInUseNum = 2;
+					RunAdcIndex1 = 0;
+					RunAdcIndex3 = 0;
+					WriteIndex |= 0x02;
+				}
+			}
+			else if(bufInUseNum == 2) {
+				RunAdcSampVal3[RunAdcIndex3++] = temp;
+				if(RunAdcIndex3 >= 512) {
 					bufInUseNum = 0;
 					RunAdcIndex1 = 0;
-					WriteIndex = 2;
+					RunAdcIndex2 = 0;
+					WriteIndex |= 0x04;
 				}
 			}
 			count++;
@@ -166,7 +179,7 @@ void DMA0_Channel0_IRQHandler(void)
 				count = 0;
 				SigInfo.KnifeFlag.bit.KnifeCloseStart = 0;
 				SigInfo.KnifeFlag.bit.KnifeOpenStart = 0;
-				WriteIndex = 3;
+				WriteIndex |= 0x08;
 			}
 		}
     }
@@ -177,7 +190,7 @@ void WriteFlashTask(void)
 {
 	static uint32_t addr = 0;
 	static uint8_t blockIndex = 0;
-	uint8_t tempBuf[256] = {0};
+	uint16_t tempBuf[256] = {0};
 	
 	if(SigInfo.KnifeFlag.bit.NeedWriteCloseBuf) {
 		if(StoreInfo.CurrentBlock == 0) {
@@ -237,32 +250,47 @@ void WriteFlashTask(void)
 		SigInfo.KnifeFlag.bit.NeedWriteOpenBuf = 0;
 		StoreInfo.BlockStoreBytes[blockIndex] = 512;
 	}
-	else if(WriteIndex == 1) {
+	if(WriteIndex & 0x01) {
 		WriteDataToFlash(addr, (uint8_t *)RunAdcSampVal1, 512 * 2);
 		addr += 1024;
-		WriteIndex = 0;
+		//WriteIndex = 0;
 		StoreInfo.BlockStoreBytes[blockIndex] += 1024;
+		WriteIndex = WriteIndex & 0xFE;
 	}
-	else if(WriteIndex == 2) {
+	else if(WriteIndex & 0x02) {
 		WriteDataToFlash(addr, (uint8_t *)RunAdcSampVal2, 512 * 2);
 		addr += 1024;
-		WriteIndex = 0;
+		//WriteIndex = 0;
 		StoreInfo.BlockStoreBytes[blockIndex] += 1024;
+		WriteIndex = WriteIndex & 0xFD;
 	}
-	else if(WriteIndex == 3) {
-		if(bufInUseNum) {
+	else if(WriteIndex & 0x04) {
+		WriteDataToFlash(addr, (uint8_t *)RunAdcSampVal3, 512 * 2);
+		addr += 1024;
+		//WriteIndex = 0;
+		StoreInfo.BlockStoreBytes[blockIndex] += 1024;
+		WriteIndex = WriteIndex & 0xFB;
+	}
+	else if(WriteIndex & 0x08) {
+		if(bufInUseNum == 1) {
 			WriteDataToFlash(addr, (uint8_t *)RunAdcSampVal2, RunAdcIndex2 * 2);
 			StoreInfo.BlockStoreBytes[blockIndex] += RunAdcIndex2 * 2;
 		}
-		else {
+		else if(bufInUseNum == 0){
 			WriteDataToFlash(addr, (uint8_t *)RunAdcSampVal1, RunAdcIndex1 * 2);
 			StoreInfo.BlockStoreBytes[blockIndex] += RunAdcIndex1 * 2;
 		}
-		WriteIndex = 0;
+		else if(bufInUseNum == 2) {
+			WriteDataToFlash(addr, (uint8_t *)RunAdcSampVal3, RunAdcIndex3 * 2);
+			StoreInfo.BlockStoreBytes[blockIndex] += RunAdcIndex3 * 2;
+		}
+		//WriteIndex = 0;
 		RunAdcIndex1 = 0;
 		RunAdcIndex2 = 0;
+		RunAdcIndex3 = 0;
 		StoreInfo.CrcVal = CheckCRC((uint8_t *)&StoreInfo, sizeof(StoreInfoStr) - 4);
 		WriteStoreInfo();
+		WriteIndex = WriteIndex & 0xF7;
 	}
 	
 }

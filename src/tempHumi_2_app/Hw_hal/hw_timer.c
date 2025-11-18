@@ -62,7 +62,7 @@ void AdcTimerInit(void)
     timer_initpara.prescaler         = 107;
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
-    timer_initpara.period            = 39;// 40 * 1 / 1000000 = 40us
+    timer_initpara.period            = 399;// 40 * 1 / 1000000 = 40us
     timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
     timer_initpara.repetitioncounter = 0;
     timer_init(TIMER3,&timer_initpara);
