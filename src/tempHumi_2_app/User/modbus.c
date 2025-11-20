@@ -974,6 +974,12 @@ void modbusAct(void)
 								ModbusSend(tempBuf, i);	
 								index++;
 							}
+							if(StoreInfo.BlockStoreBytes[0] > 0) {
+								StoreInfo.BlockStoreBytes[0] = 0;
+								StoreInfo.NumberUseBlock--;
+								StoreInfo.CrcVal = CheckCRC((uint8_t *)&StoreInfo, sizeof(StoreInfoStr) - 4);
+								WriteStoreInfo();
+							}
 						}
 						if(strtAddr == REG_READ_DATA2) {
 							uint32_t templen = StoreInfo.BlockStoreBytes[1];
@@ -1006,6 +1012,12 @@ void modbusAct(void)
 								tempBuf[i++] = (uint8_t)(crc >> 8);
 								ModbusSend(tempBuf, i);	
 								index++;								
+							}
+							if(StoreInfo.BlockStoreBytes[1] > 0) {
+								StoreInfo.BlockStoreBytes[1] = 0;
+								StoreInfo.NumberUseBlock--;
+								StoreInfo.CrcVal = CheckCRC((uint8_t *)&StoreInfo, sizeof(StoreInfoStr) - 4);
+								WriteStoreInfo();
 							}
 						}
 				}				

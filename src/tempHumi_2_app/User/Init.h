@@ -21,7 +21,7 @@
 #include "commucateSlave.h"
 #include "hw_adc.h"
 
-#define APP_VETC_OFFSET		0x4000
+#define APP_VETC_OFFSET		0x3000
 
 #define DE_485_PORT		GPIOA
 #define DE_485_PIN		GPIO_PIN_7

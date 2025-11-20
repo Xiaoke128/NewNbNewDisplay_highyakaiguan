@@ -164,7 +164,7 @@
           <Type>0</Type>
           <LineNumber>209</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134252840</Address>
+          <Address>134252836</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -178,41 +178,9 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>914</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134274864</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\modbus.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\2GenerationNewNb\modbus.c\914</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>212</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134266402</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Hw_hal\hw_adc.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\2GenerationNewNb\../Hw_hal/hw_adc.c\212</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
           <LineNumber>153</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134240004</Address>
+          <Address>134240000</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -222,22 +190,6 @@
           <Filename>..\Hw_hal\hw_adc.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\2GenerationNewNb\../Hw_hal/hw_adc.c\153</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>229</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134266570</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Hw_hal\hw_adc.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\2GenerationNewNb\../Hw_hal/hw_adc.c\229</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -532,41 +484,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>229</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134250110</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Hw_hal\hw_adc.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\2GenerationNbInterrupt_V1_00L\../Hw_hal/hw_adc.c\229</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>212</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134249942</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Hw_hal\hw_adc.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\2GenerationNbInterrupt_V1_00L\../Hw_hal/hw_adc.c\212</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
           <LineNumber>914</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134258264</Address>
+          <Address>134258260</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -578,7 +498,7 @@
           <Expression>\\2GenerationNbInterrupt_V1_00L\modbus.c\914</Expression>
         </Bp>
         <Bp>
-          <Number>3</Number>
+          <Number>1</Number>
           <Type>0</Type>
           <LineNumber>209</LineNumber>
           <EnabledFlag>1</EnabledFlag>
@@ -592,6 +512,22 @@
           <Filename>..\Hardware\WH_NB73\wh_nb73.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\2GenerationNbInterrupt_V1_00L\../Hardware/WH_NB73/wh_nb73.c\209</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>153</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Hw_hal\hw_adc.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -734,6 +670,21 @@
           <count>27</count>
           <WinNumber>1</WinNumber>
           <ItemText>AdcSampVal2</ItemText>
+        </Ww>
+        <Ww>
+          <count>28</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tempBuf</ItemText>
+        </Ww>
+        <Ww>
+          <count>29</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>AdcSampVal1</ItemText>
+        </Ww>
+        <Ww>
+          <count>30</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>adcStart,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>

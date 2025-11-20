@@ -210,12 +210,13 @@ void WriteFlashTask(void)
 			StoreInfo.NumberUseBlock = 2;
 		}
 		if(adcStart > 0) {
-			memcpy(tempBuf, &AdcSampVal1[adcStart - 1], (255 - adcStart) * 2);
-			memcpy(&tempBuf[255 - adcStart], AdcSampVal1, adcStart * 2);
+			memcpy(tempBuf, &AdcSampVal1[adcStart], (256 - adcStart) * 2);
+			memcpy(&tempBuf[256 - adcStart], AdcSampVal1, adcStart * 2);
 		}
 		else {
 			memcpy(tempBuf, AdcSampVal1, 256 * 2);
 		}
+		tempBuf[0] = 0x0001;
 		WriteDataToFlash(addr, (uint8_t *)tempBuf, 256 * 2);
 		addr += 512;
 		SigInfo.KnifeFlag.bit.NeedWriteCloseBuf = 0;
@@ -239,12 +240,13 @@ void WriteFlashTask(void)
 			StoreInfo.NumberUseBlock = 2;
 		}
 		if(adcStart > 0) {
-			memcpy(tempBuf, &AdcSampVal2[adcStart - 1], (255 - adcStart) * 2);
-			memcpy(&tempBuf[255 - adcStart], AdcSampVal2, adcStart * 2);
+			memcpy(tempBuf, &AdcSampVal2[adcStart], (256 - adcStart) * 2);
+			memcpy(&tempBuf[256 - adcStart], AdcSampVal2, adcStart * 2);
 		}
 		else {
 			memcpy(tempBuf, AdcSampVal2, 256 * 2);
 		}
+		tempBuf[0] = 0x0002;
 		WriteDataToFlash(addr, (uint8_t *)tempBuf, 256 * 2);
 		addr += 512;			
 		SigInfo.KnifeFlag.bit.NeedWriteOpenBuf = 0;

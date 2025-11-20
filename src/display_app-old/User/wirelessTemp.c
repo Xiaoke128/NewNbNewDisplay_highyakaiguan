@@ -31,6 +31,7 @@ static uint8_t ParseModbus(void)
 		}
 		if(modbus.ParseDone)
 		{
+				count = 0;
 				return 1;
 		}
 		if(count >= 300)
@@ -124,20 +125,28 @@ static void TempIDDisable(void)
 		wlStrData.runStep = WL_RUNNING_NOTHING;
 }
 
-static void SendTempID(void)
+static void SendTempID(uint8_t index)
 {
 		uint8_t data[8] = {0};
 		uint16_t crc = 0;
 		uint16_t temp = wlStrData.NumTemp * 2;
+		uint16_t tempAddr = 0x0100;
 		if(temp >= 180)
 		{
 			temp = 180;
 		}
+		if((wlStrData.NumTemp * 2) > ((index + 1) * 64)) {
+			temp = 64;
+		}
+		else {
+			temp = (wlStrData.NumTemp * 2) - (index * 64);
+		}
+		tempAddr += index * 64;
 				
 		data[0] = 0xA1;
 		data[1] = 0x03;
-		data[2] = 0x01;//0x00;
-		data[3] = 0x00;//0xF4;
+		data[2] = tempAddr >> 8;//0x00;
+		data[3] = tempAddr;//0xF4;
 		data[4] = temp >> 8;
 		data[5] = temp;//0xB4;//0x5A;
 		crc = Modbus_Crc_Compute(data, 6);
@@ -146,38 +155,60 @@ static void SendTempID(void)
 		NbUartSendBuf(data, 8);
 }
 
+static uint8_t id_index = 0;
+static uint8_t idBufIndex = 0;
+
 static void CheckTempIDFunc(void)
 {
 		static uint8_t step = 0;
 		uint8_t ret = 0;
 		uint8_t i = 0, j = 1;
 		uint16_t temp = wlStrData.NumTemp;
+		
 	
 		switch(step)
 		{
-			case 0://send read command
-				SendTempID();
+			case 0:
+				idBufIndex = 0;
+				idBufIndex = 0;
+				step++;
+			break;
+			case 1://send read command
+				SendTempID(id_index);
 				modbusValInit();
 				wlStrData.runStep = WL_RUNNING_GET_TEMP_ID;
 				step++;
 			break;
-			case 1://parse data
+			case 2://parse data
 				ret = ParseModbus();
 				if(ret == 1)
 				{
-						if(temp >= 90)
-						{
-							temp = 90;
+						if(wlStrData.NumTemp > ((id_index + 1) * 32)) {
+							temp = 32;
 						}
+						else {
+							temp = (wlStrData.NumTemp) - (id_index * 32);
+						}
+						j = 1;
 						for(i = 0; i < temp; i++)
 						{
 								j += 2;
-								wlStrData.tempID_Val[i][0] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
+								wlStrData.tempID_Val[idBufIndex++][0] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
 								j += 2;
+								//idBufIndex++;
 						}
-						wlStrData.sysFlag.bit.TempIDGet = 1;
-						step = 0;
-						TempIDDisable();
+						if(idBufIndex >= wlStrData.NumTemp) {
+							wlStrData.sysFlag.bit.TempIDGet = 1;
+							step = 0;
+							TempIDDisable();
+							id_index = 0;
+						}
+						else {
+							id_index++;
+							step = 1;
+						}
+						
+						
 				}
 				else if(ret == 2)
 				{
@@ -291,20 +322,28 @@ static void TempValDisable(void)
 		wlStrData.runStep = WL_RUNNING_NOTHING;
 }
 
-static void SendTempVal(void)
+static void SendTempVal(uint8_t index)
 {
 		uint8_t data[8] = {0};
 		uint16_t crc = 0;
 		uint16_t temp = wlStrData.NumTemp;
+		uint16_t tempAddr = 0x5000;
 		if(temp >= 90)
 		{
 			temp = 90;
 		}
+		if(wlStrData.NumTemp > ((index + 1) * 64)) {
+			temp = 64;
+		}
+		else {
+			temp = wlStrData.NumTemp - (index * 64);
+		}
+		tempAddr += index * 64;
 				
 		data[0] = 0xA1;
 		data[1] = 0x03;
-		data[2] = 0x50;//0x00;
-		data[3] = 0x00;//0x04;
+		data[2] = tempAddr >> 8;//0x00;
+		data[3] = tempAddr;//0x04;
 		data[4] = temp >> 8;
 		data[5] = temp;
 		crc = Modbus_Crc_Compute(data, 6);
@@ -312,6 +351,9 @@ static void SendTempVal(void)
 		data[7] = crc >> 8;
 		NbUartSendBuf(data, 8);
 }
+
+static uint8_t val_index = 0;
+static uint8_t valBufIndex = 0;
 
 static void CheckTempValFunc(void)
 {
@@ -322,31 +364,45 @@ static void CheckTempValFunc(void)
 	
 		switch(step)
 		{
-			case 0://send read command
-				SendTempVal();
+			case 0:
+				val_index = 0;
+				valBufIndex = 0;
+				step++;
+			break;
+			case 1://send read command
+				SendTempVal(val_index);
 				modbusValInit();
 				wlStrData.runStep = WL_RUNNING_GET_TEMP_VAL;
 				step++;
 			break;
-			case 1://parse data
+			case 2://parse data
 				ret = ParseModbus();
 				if(ret == 1)
 				{
-						if(temp >= 90)
-						{
-							temp = 90;
+						if(wlStrData.NumTemp > ((val_index + 1) * 64)) {
+							temp = 64;
+						}
+						else {
+							temp = wlStrData.NumTemp - (val_index * 64);
 						}
 						for(i = 0; i < temp; i++)
 						{
-								wlStrData.tempID_Val[i][1] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
-								if(wlStrData.tempID_Val[i][1] != 0xFFFF)
+								wlStrData.tempID_Val[valBufIndex][1] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
+								if(wlStrData.tempID_Val[valBufIndex][1] != 0xFFFF)
 								{
-									wlStrData.tempID_Val[i][1] -= 500;
+									wlStrData.tempID_Val[valBufIndex][1] -= 500;
 								}
 								j += 2;
+								valBufIndex++;
 						}
-						step = 0;
-						TempValDisable();
+						if(valBufIndex >= wlStrData.NumTemp) {
+							step = 0;
+							TempValDisable();
+						}
+						else {
+							val_index++;
+							step = 1;
+						}
 				}
 				else if(ret == 2)
 				{
