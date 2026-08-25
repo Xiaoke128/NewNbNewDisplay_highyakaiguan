@@ -42,6 +42,10 @@ static void SendCommuncationStatusFun(void);
 static void SendMainBoardInfoDisable(void);
 static void RunSendMainBoardInfo(void);
 static void SendMainBoardInfoFun(void);
+static void GetVolEnable(void);
+static void GetVolDisable(void);
+static void RunGetVol(void);
+static void GetVolFun(void);
 ProtocolStr ProStr;
 ProFunStr ProFunctionFlag;
 
@@ -56,6 +60,7 @@ Profunc funTable[] = {
 	SetAbnormalFun,
 	SendCommuncationStatusFun,
 	SendMainBoardInfoFun,
+	GetVolFun,
 };
 
 static uint8_t GetParseProtocolStatus(void)
@@ -638,6 +643,71 @@ static void GetTempIdFun(void)
 		}	
 }
 
+static void GetVolEnable(void)
+{
+		ProFunctionFlag.enableFlag.bit.GetVol = 1;
+}
+
+static void GetVolDisable(void)
+{
+		ProFunctionFlag.enableFlag.bit.GetVol = 0;
+		ProFunctionFlag.runStep = RUN_NOTHING;
+}
+
+static void RunGetVol(void)
+{
+		static uint8_t step = 0;
+		uint8_t ret = 0, i = 0, j = 1;
+
+		switch(step)
+		{
+			case 0:
+				ClearData();
+				ProFunctionFlag.runStep = RUN_GET_VOL;
+				BuildSendProPak(COMMAND_GET_VOL, NULL, 0);
+				
+				step++;
+			break;
+			case 1:
+				ret = GetParseProtocolStatus();
+				if(ret == 1)
+				{
+						if(ProStr.buf[0])
+						{
+								ProFunctionFlag.getFlag.bit.VolGet = 1;
+								for(i = 0; i < 20; i++)
+								{
+										TempHumiData.volVal[i] = (uint16_t)(ProStr.buf[j] << 8) + ProStr.buf[j + 1];
+										j += 2;
+								}
+						}
+
+						GetVolDisable();
+						step = 0;
+				}
+				else if(ret == 2)
+				{
+						GetVolDisable();
+						step = 0;
+				}
+			break;
+			default:
+				
+			break;
+		}
+}
+
+static void GetVolFun(void)
+{
+		if(ProFunctionFlag.runStep == RUN_NOTHING || ProFunctionFlag.runStep == RUN_GET_VOL)
+		{
+				if(ProFunctionFlag.enableFlag.bit.GetVol)
+				{
+						RunGetVol();
+				}
+		}	
+}
+
 static void GetWlStatusEnable(void)
 {
 		ProFunctionFlag.enableFlag.bit.GetWlEnable = 1;
@@ -885,6 +955,7 @@ static void ProCheckRunFunc(void)
 				if(ProFunctionFlag.getFlag.bit.TempIDGet)
 				{
 						GetTempValEnable();
+						GetVolEnable();
 				}
 				if(ProFunctionFlag.getFlag.bit.HumiIDGet)
 				{

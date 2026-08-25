@@ -136,6 +136,7 @@ typedef struct{
 	uint16_t humiID[15];
 	uint16_t tempVal[90];
 	uint16_t humiVal[15];
+	uint16_t volVal[20];
 	int16_t selfTemp[6];
 	uint32_t selfTempUnix[6];
 	int16_t selfHumi;

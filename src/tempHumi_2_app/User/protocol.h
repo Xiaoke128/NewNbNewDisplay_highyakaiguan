@@ -22,6 +22,7 @@ typedef enum{
 	RUN_SET_ABNORMAL,
 	RUN_SEND_COMMUNICATION_STATUS,
 	RUN_SEND_MAIN_BOARD_INFO,
+	RUN_GET_VOL,
 }RunStep;
 
 typedef union {
@@ -32,7 +33,8 @@ typedef union {
 		uint8_t		HumiIDGet					:1;
 		uint8_t		AbnormalGet				:1;
 		uint8_t		CommunicationOk		:1;
-		uint8_t		Reserved					:3;
+		uint8_t		VolGet						:1;
+		uint8_t		Reserved					:2;
 	}bit;
 }ProGetFlag;
 
@@ -49,7 +51,8 @@ typedef union{
 		uint8_t		SetAbnormalEnable			:1;
 		uint8_t		SendCommunicateStatus	:1;
 		uint8_t		SendMainBoardInfo			:1;
-		uint8_t		reserved							:6;
+		uint8_t		GetVol								:1;
+		uint8_t		reserved							:5;
 	}bit;
 }ProEnableFlag;
 
@@ -64,6 +67,7 @@ typedef enum{
 	COMMAND_SET_ABNORMAL_VAL,
 	COMMAND_SEND_COMMUNICATION_STATUS,
 	COMMAND_SEND_MAIN_BOARD_INFO,
+	COMMAND_GET_VOL,
 }ComEnum;
 
 typedef enum{
