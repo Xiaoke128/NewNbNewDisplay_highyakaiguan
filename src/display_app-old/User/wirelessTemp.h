@@ -10,8 +10,9 @@ typedef union {
 		uint8_t		Connected					:1;
 		uint8_t		TempIDGet					:1;
 		uint8_t		HumiIDGet					:1;
-		uint8_t		NumTempGet					:1;
-		uint8_t		Reserved					:4;
+		uint8_t		NumTempGet				:1;
+		uint8_t		VolGet						:1;
+		uint8_t		Reserved					:3;
 	}bit;
 }WlSysFlag;
 
@@ -24,7 +25,8 @@ typedef union {
 		uint8_t 	getHumiID				:1;
 		uint8_t 	getHumiVal				:1;
 		uint8_t 	getNumTemp				:1;
-		uint8_t		Reserved				:2;
+		uint8_t		getVol						:1;
+		uint8_t		Reserved				:1;
 	}bit;
 }Wlflag;
 
@@ -36,6 +38,7 @@ typedef enum{
 		WL_RUNNING_GET_HUMI_ID,
 		WL_RUNNING_GET_HUMI_VAL,
 		WL_RUNNING_GET_NUM_TEMP,
+		WL_RUNNING_GET_VOL,
 }wlRun;
 
 typedef struct{
@@ -45,6 +48,7 @@ typedef struct{
 	uint16_t NumTemp;
 	uint16_t tempID_Val[90][2];
 	uint16_t humiID_Val[15][2];
+	uint16_t Voltage[20];
 }WlStr;
 
 extern WlStr wlStrData;

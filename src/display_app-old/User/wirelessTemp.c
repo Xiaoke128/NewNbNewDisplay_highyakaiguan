@@ -9,13 +9,14 @@ static void RunTempVal(void);
 static void RunHumiID(void);
 static void RunHumiVal(void);
 static void RunGetNumTemp(void);
-
+static void RunVolGet(void);
 
 pFunction wlFunTable[] = {
 	RunCheckConnect,
 	RunTempID,
 	RunTempVal,
 	RunGetNumTemp,
+	RunVolGet,
 	//RunHumiID,
 	//RunHumiVal,
 };
@@ -427,6 +428,91 @@ static void RunTempVal(void)
 		}
 }
 
+static void VolEnable(void)
+{
+		wlStrData.flag.bit.getVol = 1;
+}
+
+static void VolDisable(void)
+{
+		wlStrData.flag.bit.getVol = 0;
+		wlStrData.runStep = WL_RUNNING_NOTHING;
+}
+
+static void SendGetVol(void)
+{
+		uint8_t data[8] = {0};
+		uint16_t crc = 0;
+		uint16_t temp = wlStrData.NumTemp;
+		uint16_t tempAddr = 0x53E8;
+		if(temp >= 20)
+		{
+			temp = 20;
+		}
+				
+		data[0] = 0xA1;
+		data[1] = 0x03;
+		data[2] = tempAddr >> 8;//0x00;
+		data[3] = tempAddr;//0x04;
+		data[4] = temp >> 8;
+		data[5] = temp;
+		crc = Modbus_Crc_Compute(data, 6);
+		data[6] = crc;
+		data[7] = crc >> 8;
+		NbUartSendBuf(data, 8);
+}
+
+static void VolGetFunc(void)
+{
+		static uint8_t step = 0;
+		uint8_t ret = 0;
+		uint8_t i = 0, j = 1;
+		uint16_t temp = wlStrData.NumTemp;
+	
+		switch(step)
+		{
+			case 0://send read command
+				SendGetVol();
+				modbusValInit();
+				wlStrData.runStep = WL_RUNNING_GET_VOL;
+				step++;
+			break;
+			case 1://parse data
+				ret = ParseModbus();
+				if(ret == 1)
+				{
+						for(i = 0; i < temp; i++)
+						{
+								wlStrData.Voltage[i] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
+								j += 2;
+						}
+						wlStrData.sysFlag.bit.VolGet = 1;
+						step = 0;
+						VolDisable();
+				}
+				else if(ret == 2)
+				{
+						step = 0;
+						VolDisable();
+				}
+			break;
+			default:
+				
+			break;
+		}
+}
+
+static void RunVolGet(void)
+{
+		if(wlStrData.runStep == WL_RUNNING_NOTHING || wlStrData.runStep == WL_RUNNING_GET_VOL)
+		{
+				if(wlStrData.flag.bit.getVol)
+				{
+						VolGetFunc();
+				}
+		}
+}
+
 static void HumiIDEnable(void)
 {
 		wlStrData.flag.bit.getHumiID = 1;
@@ -587,7 +673,7 @@ static void RunFunc(void)
 {
 		uint8_t i = 0;
 		
-		for(i = 0; i < 4; i++)
+		for(i = 0; i < 5; i++)
 		{
 				wlFunTable[i]();
 		}
@@ -595,12 +681,13 @@ static void RunFunc(void)
 
 static void EnbaleFunc(void)
 {
-		static uint16_t count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+		static uint16_t count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0;
 	
 		count1++;
 		count2++;
 		count3++;
 		count4++;
+		count5++;
 		if(count1 >= 5000)
 		{
 				count1 = 0;
@@ -644,6 +731,17 @@ static void EnbaleFunc(void)
 						}
 				}
 		}
+		if(count5 >= 1000)
+		{
+				count5 = 0;
+				if(wlStrData.sysFlag.bit.Connected)
+				{
+						if(wlStrData.sysFlag.bit.TempIDGet && wlStrData.sysFlag.bit.NumTempGet)
+						{
+								VolEnable();
+						}
+				}
+		}
 }
 
 void WlVarInit(void)
@@ -651,6 +749,7 @@ void WlVarInit(void)
 		memset(&wlStrData, 0, sizeof(wlStrData));
 		memset(wlStrData.humiID_Val, 0xFF, sizeof(wlStrData.humiID_Val));
 		memset(wlStrData.tempID_Val, 0xFF, sizeof(wlStrData.tempID_Val));
+		memset(wlStrData.Voltage, 0xFF, sizeof(wlStrData.Voltage));
 		CheckConnectEnable();
 }
 

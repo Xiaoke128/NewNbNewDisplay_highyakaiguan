@@ -19,6 +19,7 @@ static void PtimerRun(void);
 static void SetAbnormal(void);
 static void SendCommunictionStatus(void);
 static void SendMainBoardInfo(void);
+static void VolGet(void);
 
 ComFunStr ProFunTable[] = {
 	{COMMAND_GET_WL_STATUS,							GetWlStatus},
@@ -31,6 +32,7 @@ ComFunStr ProFunTable[] = {
 	{COMMAND_SET_ABNORMAL,							SetAbnormal},
 	{COMMAND_SEND_COMMUNICATION_STATUS,	SendCommunictionStatus},
 	{COMMAND_SEND_MAIN_BOARD_INFO,			SendMainBoardInfo},
+	{COMMAND_GET_VOL_VALUE,							VolGet},
 };
 
 
@@ -339,6 +341,20 @@ static void SendMainBoardInfo(void)
 				StoreConf.SlaveAddr = MainBoardInfo.slaveID;
 				StoreConfStore();
 		}
+}
+
+static void VolGet(void)
+{
+		uint8_t buf[41] = {0};
+		uint8_t i = 0, j = 0;
+		
+		buf[j++] = wlStrData.sysFlag.bit.VolGet;
+		for(i = 0; i < 15; i++)
+		{
+				buf[j++] = wlStrData.Voltage[i] >> 8;
+				buf[j++] = wlStrData.Voltage[i];
+		}
+		ProResponse(COMMAND_GET_VOL_VALUE, buf, sizeof(buf));
 }
 
 void ProParse(uint8_t ch)
