@@ -585,6 +585,187 @@ void GUI_MainMenu(uint8_t selectLine)
 		}
 }
 
+static uint16_t GetVolCode(uint8_t dataDest[2][280], uint8_t index)
+{
+		uint16_t k = 0;
+		uint8_t i = 0, j = 0;
+		uint8_t temp = 0;
+		uint16_t tempture = 0;
+		char data[50] = {0};
+		
+		sprintf(data, "%d/%d:", index, 20);
+		for(j = 0; j < strlen(data); j++) {
+			for(i = 0; i < (sizeof(AsciiIndex) - 1); i++) {
+				if(data[j] == AsciiIndex[i]) {
+						memcpy(&dataDest[0][k], &AsciiCode[i * 2][0], 8);
+						memcpy(&dataDest[1][k], &AsciiCode[i * 2 + 1][0], 8);
+						k += 8;
+						break;
+				}
+			}
+		}
+		memset(data, 0, sizeof(data));
+			if(wlStrData.tempID_Val[index][1] == 0xFFFF || wlStrData.tempID_Val[index][1] == 0x0000) {
+				memcpy(&dataDest[0][k], &NothingCode[0][0], 16);
+				memcpy(&dataDest[1][k], &NothingCode[1][0], 16);
+				k += 16;
+			}
+			else {
+				sprintf(data, "%0.1f %0.3f", (wlStrData.tempID_Val[index][1] - 500) * 0.1, wlStrData.Voltage[index] / 1000.0);
+				for(j = 0; j < strlen(data); j++) {
+					for(i = 0; i < (sizeof(AsciiIndex) - 1); i++) {
+						if(data[j] == AsciiIndex[i]) {
+							memcpy(&dataDest[0][k], &AsciiCode[i * 2][0], 8);
+							memcpy(&dataDest[1][k], &AsciiCode[i * 2 + 1][0], 8);
+							k += 8;
+							break;
+						}
+					}
+				}
+			}
+		return k;
+}
+
+void ShowVolFun(void)
+{
+		static uint8_t step = 0;
+		static uint8_t SelectLine = 1;
+		static uint8_t page = 0;
+		KeyVal key = KEY_NONE;
+		static uint8_t count = 0;
+		uint8_t vol0[2][280] = {0};
+		uint8_t vol1[2][280] = {0};
+		uint8_t vol2[2][280] = {0};
+		uint8_t vol3[2][280] = {0};		
+		uint16_t vol0_len = 0, vol1_len = 0, vol2_len = 0, vol3_len = 0;
+		static uint16_t scrollNum = 0;
+		static bool delayFlag = FALSE;
+		static uint16_t countDelay = 0;
+		uint16_t maxLine = 0;
+	
+		if(systemFlag.bit.NoActJump)
+		{			
+				if(step != 0)
+				{
+						systemFlag.bit.NoActJump = 0;
+						step = 0;
+				}
+		}
+		switch(step)
+		{
+			case 0:
+				scrollNum = 0;
+				count = 0;
+				delayFlag = FALSE;
+				countDelay = 0;
+				Fill_RAM(0x00);
+				//GUI_MechProperties();
+				vol0_len = GetVolCode(vol0, page * 4);
+				MechProShowScrolling(vol0, vol0_len, 0x00, scrollNum);
+				vol1_len = GetVolCode(vol1, page * 4 + 1);
+				MechProShowScrolling(vol1, vol1_len, 0x02, scrollNum);
+				vol2_len = GetVolCode(vol2, page * 4 + 2);
+				MechProShowScrolling(vol2, vol2_len, 0x04, scrollNum);
+				vol3_len = GetVolCode(vol3, page * 4 + 3);
+				MechProShowScrolling(vol3, vol3_len, 0x06, scrollNum);						
+				step++;
+			break;
+			case 1:
+				key = GetButtonVal();
+				switch(key)
+				{
+					case KEY_UP_CLICK:
+						//GUI_Func = InterlayerHumidityFun;
+						if(page > 0) {
+							page--;
+						}
+						step = 0;
+					break;
+					case KEY_DOWN_CLICK:
+						//GUI_Func = ContactTempFirstFun;
+						if(page < 4) {
+							page++;
+						}
+						step = 0;
+					break;
+					case KEY_BACK_CLICK:
+						//GUI_Func = MainMenuFun;
+						step = 0;
+					break;
+					case KEY_ENTER_CLICK:
+						
+					break;
+					case KEY_NONE:
+						
+					break;
+					case KEY_UP_LONG:
+						
+					break;
+					case KEY_DOWN_LONG:
+						
+					break;
+					case KEY_BACK_LONG:
+						
+					break;
+					case KEY_ENETR_LONG:
+						GUI_Func = MainBoardInfoFun;
+						step = 0;
+					break;
+					default:
+						
+					break;
+				}
+				if(delayFlag)
+				{
+						count++;
+						if(count >= OLED_SCROING_COUNT)
+						{
+								memset(vol0, 0, sizeof(vol0));
+								memset(vol1, 0, sizeof(vol1));
+								memset(vol2, 0, sizeof(vol2));
+								memset(vol3, 0, sizeof(vol3));
+								count = 0;
+								scrollNum++;
+								vol0_len = GetVolCode(vol0, page * 4);
+								vol1_len = GetVolCode(vol1, page * 4 + 1);
+								vol2_len = GetVolCode(vol2, page * 4 + 2);
+								vol3_len = GetVolCode(vol3, page * 4 + 3);
+								maxLine = vol0_len >= vol1_len ? vol0_len : vol1_len;
+								maxLine = maxLine >= vol2_len ? maxLine : vol2_len;
+								maxLine = maxLine >= vol3_len ? maxLine : vol3_len;
+								if(maxLine < 128)
+								{
+										maxLine = 128;
+								}
+								vol0_len = maxLine;
+								vol1_len = maxLine;
+								vol2_len = maxLine;
+								vol3_len = maxLine;
+								if(scrollNum >= maxLine)
+								{
+										scrollNum = 0;
+								}
+								MechProShowScrolling(vol0, vol0_len, 0x00, scrollNum);
+								MechProShowScrolling(vol1, vol1_len, 0x02, scrollNum);
+								MechProShowScrolling(vol2, vol2_len, 0x04, scrollNum);
+								MechProShowScrolling(vol3, vol3_len, 0x06, scrollNum);
+						}
+				}
+				else
+				{
+						countDelay++;
+						if(countDelay >= 1000)
+						{
+								countDelay = 0;
+								delayFlag = TRUE;
+						}
+				}
+			break;
+			default:
+				
+			break;
+		}
+}
 
 void MainMenuFun(void)
 {
@@ -2755,32 +2936,6 @@ void MechProperitesFun(void)
 								{
 										scrollNum = 0;
 								}
-#if 0
-								if(CloseIndex >= MechProDataCloseLine)
-								{
-										CloseIndex = 0;
-								}														
-								if(OpenIndex >= MechProDataOpenLine)
-								{
-										OpenIndex = 0;
-								}																
-								if(InterIndex >= MechProDataInterLine)
-								{
-										InterIndex = 0;
-								}
-								if(MechProDataCloseLine > 128 && MechProDataOpenLine > 128)
-								{
-										OpenIndex = CloseIndex;
-								}
-								if(MechProDataOpenLine > 128 && MechProDataInterLine > 128)
-								{
-										InterIndex = OpenIndex;
-								}
-								if(MechProDataCloseLine > 128 && MechProDataInterLine > 128)
-								{
-										InterIndex = CloseIndex;
-								}
-#endif
 								MechProShowScrolling(MechProDataCode0, MechProDataTitleLine, 0x00, scrollNum);
 								MechProShowScrolling(MechProDataCode1, MechProDataCloseLine, 0x02, scrollNum);
 								MechProShowScrolling(MechProDataCode2, MechProDataOpenLine, 0x04, scrollNum);
@@ -2867,7 +3022,8 @@ void CommunicationFailFun(void)
 						
 					break;
 					case KEY_ENTER_CLICK:
-						GUI_Func = MainMenuFun;
+						//GUI_Func = MainMenuFun;
+						GUI_Func = ShowVolFun;
 						step = 0;
 					break;
 					case KEY_NONE:
@@ -2917,7 +3073,8 @@ void DeviceInitFun(void)
 						}
 						if(ProVal >= 100)
 						{
-								GUI_Func = MainMenuFun;
+								//GUI_Func = MainMenuFun;
+								GUI_Func = ShowVolFun;
 						}						
 				}
 			break;
