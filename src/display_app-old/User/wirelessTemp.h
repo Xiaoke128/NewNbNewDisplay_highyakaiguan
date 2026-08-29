@@ -25,8 +25,8 @@ typedef union {
 		uint8_t 	getHumiID				:1;
 		uint8_t 	getHumiVal				:1;
 		uint8_t 	getNumTemp				:1;
-		uint8_t		getVol						:1;
-		uint8_t		Reserved				:1;
+		uint8_t		getVol					:1;
+		uint8_t		setWlDevId				:1;
 	}bit;
 }Wlflag;
 
@@ -39,6 +39,7 @@ typedef enum{
 		WL_RUNNING_GET_HUMI_VAL,
 		WL_RUNNING_GET_NUM_TEMP,
 		WL_RUNNING_GET_VOL,
+		WL_RUNNING_SET_DEV_ID,
 }wlRun;
 
 typedef struct{
@@ -49,11 +50,12 @@ typedef struct{
 	uint16_t tempID_Val[90][2];
 	uint16_t humiID_Val[15][2];
 	uint16_t Voltage[20];
+	uint16_t WlSetDevId[20];
 }WlStr;
 
 extern WlStr wlStrData;
 
 void WlVarInit(void);
 void GetWirelessTempTask(void);
-
+void SetDevIdEnable(void);
 #endif

@@ -20,6 +20,7 @@ static void SetAbnormal(void);
 static void SendCommunictionStatus(void);
 static void SendMainBoardInfo(void);
 static void VolGet(void);
+static void WlDevIdSet(void);
 
 ComFunStr ProFunTable[] = {
 	{COMMAND_GET_WL_STATUS,							GetWlStatus},
@@ -33,6 +34,7 @@ ComFunStr ProFunTable[] = {
 	{COMMAND_SEND_COMMUNICATION_STATUS,	SendCommunictionStatus},
 	{COMMAND_SEND_MAIN_BOARD_INFO,			SendMainBoardInfo},
 	{COMMAND_GET_VOL_VALUE,							VolGet},
+	{COMMAND_SET_WL_DEV_ID,							WlDevIdSet},
 };
 
 
@@ -349,12 +351,36 @@ static void VolGet(void)
 		uint8_t i = 0, j = 0;
 		
 		buf[j++] = wlStrData.sysFlag.bit.VolGet;
-		for(i = 0; i < 15; i++)
+		for(i = 0; i < 20; i++)
 		{
 				buf[j++] = wlStrData.Voltage[i] >> 8;
 				buf[j++] = wlStrData.Voltage[i];
 		}
 		ProResponse(COMMAND_GET_VOL_VALUE, buf, sizeof(buf));
+}
+
+
+static void WlDevIdSet(void)
+{
+		uint8_t i = 0, j = 0;
+		uint16_t tenpBuf[20] = {0};
+	
+		for(i = 0; i < 20; i++)
+		{
+				wlStrData.WlSetDevId[i] = (uint16_t)(protocol.data[j] << 8) + (uint16_t)(protocol.data[j + 1]);
+				j += 2;
+		}
+		ProResponse(COMMAND_SET_WL_DEV_ID, NULL, 0);
+		
+		for(i = 0; i < 20; i++)
+		{
+				tenpBuf[i] = wlStrData.humiID_Val[i][0];
+		}
+		if((memcmp(wlStrData.WlSetDevId, tenpBuf, sizeof(tenpBuf)) != 0) && wlStrData.sysFlag.bit.TempIDGet)
+		{
+				//memcpy(wlStrData.WlDevId, tenpBuf, sizeof(tenpBuf));
+				SetDevIdEnable();
+		}
 }
 
 void ProParse(uint8_t ch)

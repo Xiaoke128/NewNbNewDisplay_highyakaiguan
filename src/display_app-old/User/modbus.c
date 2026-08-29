@@ -99,10 +99,31 @@ void modbusMasterParse(uint8_t ch)
 						modbus.function = ch;
 						TempBuf[TempBufIndex++] = ch;
 				}
+				else if(ch == MODBUS_WRITE_MUL_REG)
+				{
+						modbus.step = MODBUS_REG_HIGH;
+						TempBuf[TempBufIndex++] = ch;
+				}
 				else
 				{
 						modbus.step = MODBUS_SLAVE_ADDR;
 				}
+			break;
+			case MODBUS_REG_HIGH:
+					modbus.step = MODBUS_REG_LOW;
+					TempBuf[TempBufIndex++] = ch;
+			break;
+			case MODBUS_REG_LOW:
+					modbus.step = MODBUS_LEN_HIGH;
+					TempBuf[TempBufIndex++] = ch;
+			break;
+			case MODBUS_LEN_HIGH:
+					modbus.step = MODBUS_LEN_LOW;
+					TempBuf[TempBufIndex++] = ch;
+			break;
+			case MODBUS_LEN_LOW:
+					modbus.step = MODBUS_CRC_L;
+					TempBuf[TempBufIndex++] = ch;
 			break;
 			case MODBUS_DATA:
 				if(modbus.dataIndex == 0)

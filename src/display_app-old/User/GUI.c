@@ -54,7 +54,7 @@ const uint8_t AbnrmalData[][16] = {
 {0x42,0x82,0x7F,0x01,0x80,0x60,0x1F,0x00,0xFC,0x44,0x47,0x44,0x44,0xFC,0x00,0x00},/*"Он",5*/
 };
 
-const uint8_t AsciiIndex[] = "0123456789ms:/\\.%*() MVJC-IEDABFGHKLNOPQRSTUWXYZ";
+const uint8_t AsciiIndex[] = "0123456789msv:/\\.%*() MVJC-IEDABFGHKLNOPQRSTUWXYZ";
 
 const uint8_t AsciiCode[][8] = {
 	{0x00,0xE0,0x10,0x08,0x08,0x10,0xE0,0x00},
@@ -81,6 +81,8 @@ const uint8_t AsciiCode[][8] = {
 	{0x20,0x3F,0x20,0x00,0x3F,0x20,0x00,0x3F},/*"m",10*/
 	{0x00,0x00,0x80,0x80,0x80,0x80,0x80,0x00},
 	{0x00,0x33,0x24,0x24,0x24,0x24,0x19,0x00},/*"s",11*/
+	{0x80,0x80,0x80,0x00,0x80,0x80,0x80,0x00},
+	{0x00,0x03,0x0C,0x30,0x0C,0x03,0x00,0x00},/*"v",12*/
 	{0x00,0x00,0x00,0xC0,0xC0,0x00,0x00,0x00},
 	{0x00,0x00,0x00,0x30,0x30,0x00,0x00,0x00},/*":",12*/
 	{0x00,0x00,0x00,0x00,0x80,0x60,0x18,0x04},
@@ -589,11 +591,9 @@ static uint16_t GetVolCode(uint8_t dataDest[2][280], uint8_t index)
 {
 		uint16_t k = 0;
 		uint8_t i = 0, j = 0;
-		uint8_t temp = 0;
-		uint16_t tempture = 0;
 		char data[50] = {0};
 		
-		sprintf(data, "%d/%d:", index, 20);
+		sprintf(data, "%d/%d:", index + 1, 20);
 		for(j = 0; j < strlen(data); j++) {
 			for(i = 0; i < (sizeof(AsciiIndex) - 1); i++) {
 				if(data[j] == AsciiIndex[i]) {
@@ -611,7 +611,22 @@ static uint16_t GetVolCode(uint8_t dataDest[2][280], uint8_t index)
 				k += 16;
 			}
 			else {
-				sprintf(data, "%0.1f %0.3f", (wlStrData.tempID_Val[index][1] - 500) * 0.1, wlStrData.Voltage[index] / 1000.0);
+				sprintf(data, "%0.1f", (wlStrData.tempID_Val[index][1]) * 0.1);
+				for(j = 0; j < strlen(data); j++) {
+					for(i = 0; i < (sizeof(AsciiIndex) - 1); i++) {
+						if(data[j] == AsciiIndex[i]) {
+							memcpy(&dataDest[0][k], &AsciiCode[i * 2][0], 8);
+							memcpy(&dataDest[1][k], &AsciiCode[i * 2 + 1][0], 8);
+							k += 8;
+							break;
+						}
+					}
+				}
+				memcpy(&dataDest[0][k], &TempCode[0][0], 16);
+				memcpy(&dataDest[1][k], &TempCode[1][0], 16);
+				k += 16;
+				memset(data, 0, sizeof(data));
+				sprintf(data, "% 0.3fmv",wlStrData.Voltage[index] / 1000.0);
 				for(j = 0; j < strlen(data); j++) {
 					for(i = 0; i < (sizeof(AsciiIndex) - 1); i++) {
 						if(data[j] == AsciiIndex[i]) {
@@ -629,7 +644,6 @@ static uint16_t GetVolCode(uint8_t dataDest[2][280], uint8_t index)
 void ShowVolFun(void)
 {
 		static uint8_t step = 0;
-		static uint8_t SelectLine = 1;
 		static uint8_t page = 0;
 		KeyVal key = KEY_NONE;
 		static uint8_t count = 0;

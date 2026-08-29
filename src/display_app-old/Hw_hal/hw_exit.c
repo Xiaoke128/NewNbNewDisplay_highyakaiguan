@@ -320,8 +320,8 @@ void ButtonScan(void)
 						count = 0;
 						if(GUI_Func != MechProperitesFun)
 						{
-								systemFlag.bit.NoActJump = 1;
-								GUI_Func = MechProperitesFun;
+								//systemFlag.bit.NoActJump = 1;
+								//GUI_Func = MechProperitesFun;
 						}
 				}
 		}

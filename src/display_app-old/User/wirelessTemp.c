@@ -10,6 +10,7 @@ static void RunHumiID(void);
 static void RunHumiVal(void);
 static void RunGetNumTemp(void);
 static void RunVolGet(void);
+static void RunSetDevId(void);
 
 pFunction wlFunTable[] = {
 	RunCheckConnect,
@@ -17,6 +18,7 @@ pFunction wlFunTable[] = {
 	RunTempVal,
 	RunGetNumTemp,
 	RunVolGet,
+	RunSetDevId,
 	//RunHumiID,
 	//RunHumiVal,
 };
@@ -115,6 +117,98 @@ static void RunCheckConnect(void)
 		}
 }
 
+void SetDevIdEnable(void)
+{
+		wlStrData.flag.bit.setWlDevId = 1;
+}
+
+static void SetDevIdDisable(void)
+{
+		wlStrData.flag.bit.setWlDevId = 0;
+		wlStrData.runStep = WL_RUNNING_NOTHING;
+}
+
+static void SendSetDevId(void)
+{
+		uint8_t data[100] = {0};
+		uint16_t crc = 0;
+		uint8_t i = 0, j = 0;
+		uint16_t tempAddr = 0x0100;
+		
+		data[i++] = 0xA1;
+		data[i++] = 0x10;
+		data[i++] = tempAddr >> 8;//0x00;
+		data[i++] = tempAddr;//0xF4;
+		data[i++] = 0x00;
+		data[i++] = 0x28;
+		data[i++] = 0x50;
+		for(j = 0; j < 20; j++)
+		{
+				if(wlStrData.WlSetDevId[j] == 0x0000) {
+						data[i++] = 0x00;
+						data[i++] = 0x00;
+				}
+				else {
+						data[i++] = 0xFF;
+						data[i++] = 0xFF;
+				}
+				data[i++] = wlStrData.WlSetDevId[j] >> 8;
+				data[i++] = wlStrData.WlSetDevId[j];
+		}
+		crc = Modbus_Crc_Compute(data, i);
+		data[i++] = crc;
+		data[i++] = crc >> 8;
+		NbUartSendBuf(data, i);
+}
+
+static void CheckSetDevIdFun(void)
+{
+		static uint8_t step = 0;
+		uint8_t ret = 0;
+	
+		switch(step)
+		{
+			case 0:
+				step++;
+			break;
+			case 1://send read command
+				SendSetDevId();
+				modbusValInit();
+				wlStrData.runStep = WL_RUNNING_SET_DEV_ID;
+				step++;
+			break;
+			case 2://parse data
+				ret = ParseModbus();
+				if(ret == 1)
+				{
+						step = 0;
+						SetDevIdDisable();
+						wlStrData.sysFlag.bit.NumTempGet = 0;
+						wlStrData.sysFlag.bit.TempIDGet = 0;
+				}
+				else if(ret == 2)
+				{
+						step = 0;
+						SetDevIdDisable();
+				}
+			break;
+			default:
+				
+			break;
+		}
+}
+
+static void RunSetDevId(void)
+{
+		if(wlStrData.runStep == WL_RUNNING_NOTHING || wlStrData.runStep == WL_RUNNING_SET_DEV_ID)
+		{
+				if(wlStrData.flag.bit.setWlDevId)
+				{
+						CheckSetDevIdFun();
+				}
+		}
+}
+
 static void TempIDEnable(void)
 {
 		wlStrData.flag.bit.getTempID = 1;
@@ -155,6 +249,8 @@ static void SendTempID(uint8_t index)
 		data[7] = crc >> 8;
 		NbUartSendBuf(data, 8);
 }
+
+
 
 static uint8_t id_index = 0;
 static uint8_t idBufIndex = 0;
@@ -673,7 +769,7 @@ static void RunFunc(void)
 {
 		uint8_t i = 0;
 		
-		for(i = 0; i < 5; i++)
+		for(i = 0; i < 6; i++)
 		{
 				wlFunTable[i]();
 		}
@@ -742,6 +838,7 @@ static void EnbaleFunc(void)
 						}
 				}
 		}
+		
 }
 
 void WlVarInit(void)
