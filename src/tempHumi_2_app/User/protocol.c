@@ -46,6 +46,7 @@ static void GetVolEnable(void);
 static void GetVolDisable(void);
 static void RunGetVol(void);
 static void GetVolFun(void);
+static void SetDevIdFun(void);
 ProtocolStr ProStr;
 ProFunStr ProFunctionFlag;
 
@@ -61,6 +62,7 @@ Profunc funTable[] = {
 	SendCommuncationStatusFun,
 	SendMainBoardInfoFun,
 	GetVolFun,
+	SetDevIdFun,
 };
 
 static uint8_t GetParseProtocolStatus(void)
@@ -708,6 +710,69 @@ static void GetVolFun(void)
 		}	
 }
 
+void SetDevIdEnable(void)
+{
+		ProFunctionFlag.enableFlag.bit.SetDevId = 1;
+}
+
+static void SetDevIdDisable(void)
+{
+		ProFunctionFlag.enableFlag.bit.SetDevId = 0;
+		ProFunctionFlag.runStep = RUN_NOTHING;
+}
+
+static void RunSetDevId(void)
+{
+		static uint8_t step = 0;
+		uint8_t ret = 0, i = 0, j = 0;
+		uint8_t buf[80] = {0};
+		
+		switch(step)
+		{
+			case 0:
+				ClearData();
+				ProFunctionFlag.runStep = RUN_SET_DEV_ID;
+				for(i = 0; i < 20; i++)
+				{
+						buf[j++] = StoreConf.WlTempId[i] >> 24;
+						buf[j++] = StoreConf.WlTempId[i] >> 16;
+						buf[j++] = StoreConf.WlTempId[i] >> 8;
+						buf[j++] = StoreConf.WlTempId[i];
+				}
+				BuildSendProPak(COMMAND_SET_DEV_ID, buf, j);
+				
+				step++;
+			break;
+			case 1:
+				ret = GetParseProtocolStatus();
+				if(ret == 1)
+				{
+						SetDevIdDisable();
+						step = 0;
+				}
+				else if(ret == 2)
+				{
+						SetDevIdDisable();
+						step = 0;
+				}
+			break;
+			default:
+				
+			break;
+		}
+}
+
+static void SetDevIdFun(void)
+{
+		if(ProFunctionFlag.runStep == RUN_NOTHING || ProFunctionFlag.runStep == RUN_SET_DEV_ID)
+		{
+				if(ProFunctionFlag.enableFlag.bit.SetDevId)
+				{
+						RunSetDevId();
+				}
+		}	
+}
+
 static void GetWlStatusEnable(void)
 {
 		ProFunctionFlag.enableFlag.bit.GetWlEnable = 1;
@@ -935,11 +1000,12 @@ void ParsePro(uint8_t ch)
 
 static void ProCheckRunFunc(void)
 {
-		static uint16_t count1 = 0, count2 = 0;
+		static uint16_t count1 = 0, count2 = 0, count3 = 0;
 
 				
 		count1++;
 		count2++;
+		count3++;
 		if(count1 >= 1000)
 		{
 				count1 = 0;
@@ -995,6 +1061,14 @@ static void ProCheckRunFunc(void)
 						NbInfo.SendDisplayPakNum--;
 				}
 				SetAbnormalEnable();
+		}
+		if(count3 >= 5000)
+		{
+				count3 = 0;
+				if(ProFunctionFlag.getFlag.bit.WlIvild)
+				{
+						SetDevIdEnable();
+				}
 		}
 }
 

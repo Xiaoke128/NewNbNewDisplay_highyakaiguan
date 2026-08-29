@@ -120,6 +120,7 @@ void FMC_StoreInfoInit(void)
 	else
 	{
 		//StoreConfUpdate();
+		memset(StoreConf.WlTempId, 0, sizeof(StoreConf.WlTempId));
 		StoreConf.ReportStartTime = NbInfo.ReportStartUtime;
 		memcpy(&StoreConf.ServerConf, &NbInfo.ConfData, sizeof(ConfStr));
 		StoreConf.SlaveAddr = MODBUS_DEFAULT_ADDR;

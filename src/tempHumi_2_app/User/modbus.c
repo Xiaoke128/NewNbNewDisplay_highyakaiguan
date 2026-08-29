@@ -801,6 +801,64 @@ void modbusAct(void)
 								tempBuf[i++] = (uint8_t)(crc >> 8);
 								ModbusSend(tempBuf, i);
 						}
+						if(strtAddr >= MODBUS_WL_VOL_VALUE_GET_START_REG && strtAddr <= MODBUS_WL_VOL_VALUE_GET_END_REG)
+						{
+							if(num <= (MODBUS_WL_VOL_VALUE_GET_END_REG - strtAddr + 1))
+							{
+									i = 0;
+									tempBuf[i++] = StoreConf.SlaveAddr;
+									tempBuf[i++] = MODBUS_READ_MUL_REG;
+									tempBuf[i++] = num * 2;
+									for(k = 0; k < num; k++)
+										{
+												if((strtAddr + k - MODBUS_WL_VOL_VALUE_GET_START_REG) < 20)
+												{
+														tempBuf[i++] = TempHumiData.volVal[strtAddr + k - MODBUS_WL_VOL_VALUE_GET_START_REG] >> 8;
+														tempBuf[i++] = TempHumiData.volVal[strtAddr + k - MODBUS_WL_VOL_VALUE_GET_START_REG];
+												}
+												else
+												{
+														tempBuf[i++] = 0xFF;
+														tempBuf[i++] = 0xFF;
+												}
+										}
+										crc = Modbus_Crc_Compute(tempBuf, i);
+										tempBuf[i++] = (uint8_t)crc;
+										tempBuf[i++] = (uint8_t)(crc >> 8);
+										ModbusSend(tempBuf, i);
+							}
+						}
+						if(strtAddr >= MODBUS_WL_SET_GET_DEV_ID_START_REG && strtAddr <= MODBUS_WL_SET_GET_DEV_ID_END_REG)
+						{
+							if(num <= (MODBUS_WL_SET_GET_DEV_ID_END_REG - strtAddr + 1))
+							{
+									i = 0;
+									tempBuf[i++] = StoreConf.SlaveAddr;
+									tempBuf[i++] = MODBUS_READ_MUL_REG;
+									tempBuf[i++] = num * 2;
+									for(k = 0; k < num; k += 2)
+										{
+												if((strtAddr + k - MODBUS_WL_SET_GET_DEV_ID_START_REG) < 40)
+												{
+														tempBuf[i++] = StoreConf.WlTempId[strtAddr + k / 2 - MODBUS_WL_SET_GET_DEV_ID_START_REG] >> 24;
+														tempBuf[i++] = StoreConf.WlTempId[strtAddr + k / 2 - MODBUS_WL_SET_GET_DEV_ID_START_REG] >> 16;
+														tempBuf[i++] = StoreConf.WlTempId[strtAddr + k / 2 - MODBUS_WL_SET_GET_DEV_ID_START_REG] >> 8;
+														tempBuf[i++] = StoreConf.WlTempId[strtAddr + k / 2 - MODBUS_WL_SET_GET_DEV_ID_START_REG];
+												}
+												else
+												{
+														tempBuf[i++] = 0xFF;
+														tempBuf[i++] = 0xFF;
+														tempBuf[i++] = 0xFF;
+														tempBuf[i++] = 0xFF;
+												}
+										}
+										crc = Modbus_Crc_Compute(tempBuf, i);
+										tempBuf[i++] = (uint8_t)crc;
+										tempBuf[i++] = (uint8_t)(crc >> 8);
+										ModbusSend(tempBuf, i);
+							}
+						}
 						if(strtAddr >= MODBUS_WL_TEMP_ID_START_REG && strtAddr <= MODBUS_WL_TEMP_ID_END_REG)
 						{
 								if(num <= (MODBUS_WL_TEMP_ID_END_REG - strtAddr + 1))
@@ -1087,6 +1145,34 @@ void modbusAct(void)
 										WtempHumiTable[j + k].fun((uint16_t)(modbus.data[m] << 8) + modbus.data[m + 1]);
 										m += 2;
 								}
+						}
+						if(strtAddr >= MODBUS_WL_SET_GET_DEV_ID_START_REG && strtAddr <= MODBUS_WL_SET_GET_DEV_ID_END_REG)
+						{
+							if(num <= (MODBUS_WL_SET_GET_DEV_ID_END_REG - strtAddr + 1))
+							{
+										for(k = 0; k < num; k += 2)
+										{
+												if((strtAddr + k - MODBUS_WL_SET_GET_DEV_ID_START_REG) < 40)
+												{
+														StoreConf.WlTempId[strtAddr + k / 2 - MODBUS_WL_SET_GET_DEV_ID_START_REG] = ((uint32_t)(modbus.data[m] << 24)) + ((uint32_t)(modbus.data[m + 1] << 16)) + ((uint32_t)(modbus.data[m + 2] << 8)) + ((uint32_t)(modbus.data[m + 3]));
+														m += 4;
+												}
+										}
+										StoreConf.CrcVal = CheckCRC((uint8_t *)&StoreConf, sizeof(StoreConfStr) - 4);
+										WriteStoreConf();
+										SetDevIdEnable();
+										i = 0;
+										tempBuf[i++] = StoreConf.SlaveAddr;
+										tempBuf[i++] = MODBUS_WRITE_MUL_REG;
+										tempBuf[i++] = strtAddr >> 8;
+										tempBuf[i++] = strtAddr;
+										tempBuf[i++] = (uint8_t)(num >> 8);
+										tempBuf[i++] = (uint8_t)num;
+										crc = Modbus_Crc_Compute(tempBuf, i);
+										tempBuf[i++] = (uint8_t)crc >> 8;
+										tempBuf[i++] = (uint8_t)(crc >> 8);
+										ModbusSend(tempBuf, i);
+							}
 						}
 #endif
 				}

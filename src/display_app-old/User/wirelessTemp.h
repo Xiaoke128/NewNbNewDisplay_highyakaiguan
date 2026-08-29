@@ -50,7 +50,8 @@ typedef struct{
 	uint16_t tempID_Val[90][2];
 	uint16_t humiID_Val[15][2];
 	uint16_t Voltage[20];
-	uint16_t WlSetDevId[20];
+	uint32_t WlSetDevId[20];
+	uint32_t WlGetDevId[20];
 }WlStr;
 
 extern WlStr wlStrData;

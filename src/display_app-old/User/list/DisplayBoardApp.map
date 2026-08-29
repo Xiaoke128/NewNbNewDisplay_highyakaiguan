@@ -559,6 +559,8 @@ Section Cross References
     wirelesstemp.o(i.CheckTempValFunc) refers to wirelesstemp.o(.data) for step
     wirelesstemp.o(i.CheckTempValFunc) refers to modbus.o(.bss) for modbus
     wirelesstemp.o(i.EnbaleFunc) refers to wirelesstemp.o(i.CheckConnectEnable) for CheckConnectEnable
+    wirelesstemp.o(i.EnbaleFunc) refers to memcmp.o(.text) for memcmp
+    wirelesstemp.o(i.EnbaleFunc) refers to wirelesstemp.o(i.SetDevIdEnable) for SetDevIdEnable
     wirelesstemp.o(i.EnbaleFunc) refers to wirelesstemp.o(i.TempIDEnable) for TempIDEnable
     wirelesstemp.o(i.EnbaleFunc) refers to wirelesstemp.o(i.NumTempEnable) for NumTempEnable
     wirelesstemp.o(i.EnbaleFunc) refers to wirelesstemp.o(i.HumiIDEnable) for HumiIDEnable
@@ -646,7 +648,7 @@ Section Cross References
     wirelesstemp.o(i.VolGetFunc) refers to wirelesstemp.o(.bss) for wlStrData
     wirelesstemp.o(i.VolGetFunc) refers to wirelesstemp.o(.data) for step
     wirelesstemp.o(i.VolGetFunc) refers to modbus.o(.bss) for modbus
-    wirelesstemp.o(i.WlVarInit) refers to memseta.o(.text) for __aeabi_memclr
+    wirelesstemp.o(i.WlVarInit) refers to memseta.o(.text) for __aeabi_memclr4
     wirelesstemp.o(i.WlVarInit) refers to wirelesstemp.o(i.CheckConnectEnable) for CheckConnectEnable
     wirelesstemp.o(i.WlVarInit) refers to wirelesstemp.o(.bss) for wlStrData
     wirelesstemp.o(.data) refers to wirelesstemp.o(i.RunCheckConnect) for RunCheckConnect
@@ -734,7 +736,6 @@ Section Cross References
     protocol.o(i.VolGet) refers to memseta.o(.text) for __aeabi_memclr4
     protocol.o(i.VolGet) refers to protocol.o(i.ProResponse) for ProResponse
     protocol.o(i.VolGet) refers to wirelesstemp.o(.bss) for wlStrData
-    protocol.o(i.WlDevIdSet) refers to memseta.o(.text) for __aeabi_memclr4
     protocol.o(i.WlDevIdSet) refers to protocol.o(i.ProResponse) for ProResponse
     protocol.o(i.WlDevIdSet) refers to memcmp.o(.text) for memcmp
     protocol.o(i.WlDevIdSet) refers to wirelesstemp.o(i.SetDevIdEnable) for SetDevIdEnable
@@ -2000,350 +2001,350 @@ Image Symbol Table
     i.CheckSetDevIdFun                       0x08004fb0   Section        0  wirelesstemp.o(i.CheckSetDevIdFun)
     CheckSetDevIdFun                         0x08004fb1   Thumb Code   124  wirelesstemp.o(i.CheckSetDevIdFun)
     i.CheckTempIDFunc                        0x08005034   Section        0  wirelesstemp.o(i.CheckTempIDFunc)
-    CheckTempIDFunc                          0x08005035   Thumb Code   268  wirelesstemp.o(i.CheckTempIDFunc)
-    i.CheckTempValFunc                       0x08005154   Section        0  wirelesstemp.o(i.CheckTempValFunc)
-    CheckTempValFunc                         0x08005155   Thumb Code   304  wirelesstemp.o(i.CheckTempValFunc)
-    i.CheckTimeStore                         0x08005298   Section        0  protocol.o(i.CheckTimeStore)
-    CheckTimeStore                           0x08005299   Thumb Code   152  protocol.o(i.CheckTimeStore)
-    i.CommunAdd                              0x0800533c   Section        0  hw_uart.o(i.CommunAdd)
-    i.CommunCheck                            0x08005390   Section        0  hw_uart.o(i.CommunCheck)
-    i.CommunGetData                          0x080053a4   Section        0  hw_uart.o(i.CommunGetData)
-    i.CommunUartSendBuf                      0x08005400   Section        0  hw_uart.o(i.CommunUartSendBuf)
-    i.CommunicationFailFun                   0x08005430   Section        0  gui.o(i.CommunicationFailFun)
-    i.ConactTempSecondFun                    0x080054a4   Section        0  gui.o(i.ConactTempSecondFun)
-    i.ContactTempFirstFun                    0x08005748   Section        0  gui.o(i.ContactTempFirstFun)
-    i.DataAbnormalFlash                      0x080059ec   Section        0  protocol.o(i.DataAbnormalFlash)
-    DataAbnormalFlash                        0x080059ed   Thumb Code    72  protocol.o(i.DataAbnormalFlash)
-    i.DataLogShowDataMenuFun                 0x08005a40   Section        0  gui.o(i.DataLogShowDataMenuFun)
-    DataLogShowDataMenuFun                   0x08005a41   Thumb Code   702  gui.o(i.DataLogShowDataMenuFun)
-    i.DatalogMenuFun                         0x08005d30   Section        0  gui.o(i.DatalogMenuFun)
-    i.DebugMon_Handler                       0x08005eec   Section        0  gd32f10x_it.o(i.DebugMon_Handler)
-    i.DeviceInitFun                          0x08005ef0   Section        0  gui.o(i.DeviceInitFun)
-    i.DeviceStartFun                         0x08005f88   Section        0  gui.o(i.DeviceStartFun)
-    i.DisalyAbnormalHumiAdd                  0x08005fe8   Section        0  oled.o(i.DisalyAbnormalHumiAdd)
-    i.DispalyHumiStoreAdd                    0x08006058   Section        0  oled.o(i.DispalyHumiStoreAdd)
-    i.DispalyTempStoreAdd                    0x080060b0   Section        0  oled.o(i.DispalyTempStoreAdd)
-    i.DisplayAbnormalSignalAdd               0x08006134   Section        0  oled.o(i.DisplayAbnormalSignalAdd)
-    i.DisplayAnnormalTempAdd                 0x080061bc   Section        0  oled.o(i.DisplayAnnormalTempAdd)
-    i.DisplayInterTempAdd                    0x0800622c   Section        0  oled.o(i.DisplayInterTempAdd)
-    i.DisplayMainProInit                     0x08006294   Section        0  protocol.o(i.DisplayMainProInit)
-    i.DisplayMainProTask                     0x080062b0   Section        0  protocol.o(i.DisplayMainProTask)
-    i.DisplayOnePage                         0x080062de   Section        0  oled.o(i.DisplayOnePage)
-    i.DisplaySignalStoreAdd                  0x08006334   Section        0  oled.o(i.DisplaySignalStoreAdd)
-    i.EXTI10_15_IRQHandler                   0x08006410   Section        0  hw_exit.o(i.EXTI10_15_IRQHandler)
-    i.EnbaleFunc                             0x080064c0   Section        0  wirelesstemp.o(i.EnbaleFunc)
-    EnbaleFunc                               0x080064c1   Thumb Code   262  wirelesstemp.o(i.EnbaleFunc)
-    i.EnterUpgradeAction                     0x080065e0   Section        0  commucateslave.o(i.EnterUpgradeAction)
-    EnterUpgradeAction                       0x080065e1   Thumb Code    58  commucateslave.o(i.EnterUpgradeAction)
-    i.FMC_StoreInfoInit                      0x08006628   Section        0  hw_fmc.o(i.FMC_StoreInfoInit)
-    i.Fill_RAM                               0x08006758   Section        0  oled.o(i.Fill_RAM)
-    i.FlashEarsePage                         0x08006788   Section        0  hw_fmc.o(i.FlashEarsePage)
-    i.GUI_AbnormalMenu                       0x080067cc   Section        0  gui.o(i.GUI_AbnormalMenu)
-    GUI_AbnormalMenu                         0x080067cd   Thumb Code   722  gui.o(i.GUI_AbnormalMenu)
-    i.GUI_AbnormalTile                       0x08006ac4   Section        0  gui.o(i.GUI_AbnormalTile)
-    GUI_AbnormalTile                         0x08006ac5   Thumb Code   250  gui.o(i.GUI_AbnormalTile)
-    i.GUI_CommuncationFail                   0x08006bdc   Section        0  gui.o(i.GUI_CommuncationFail)
-    i.GUI_ContactTemp                        0x08006c08   Section        0  gui.o(i.GUI_ContactTemp)
-    GUI_ContactTemp                          0x08006c09   Thumb Code   152  gui.o(i.GUI_ContactTemp)
-    i.GUI_ContactTempSecond                  0x08006cb4   Section        0  gui.o(i.GUI_ContactTempSecond)
-    GUI_ContactTempSecond                    0x08006cb5   Thumb Code   152  gui.o(i.GUI_ContactTempSecond)
-    i.GUI_DataLogList                        0x08006d60   Section        0  gui.o(i.GUI_DataLogList)
-    GUI_DataLogList                          0x08006d61   Thumb Code   662  gui.o(i.GUI_DataLogList)
-    i.GUI_DataLogMenu                        0x08007018   Section        0  gui.o(i.GUI_DataLogMenu)
-    GUI_DataLogMenu                          0x08007019   Thumb Code    26  gui.o(i.GUI_DataLogMenu)
-    i.GUI_DeviceInit                         0x08007038   Section        0  gui.o(i.GUI_DeviceInit)
-    GUI_DeviceInit                           0x08007039   Thumb Code   166  gui.o(i.GUI_DeviceInit)
-    i.GUI_DeviceStart                        0x080070f4   Section        0  gui.o(i.GUI_DeviceStart)
-    GUI_DeviceStart                          0x080070f5   Thumb Code   244  gui.o(i.GUI_DeviceStart)
-    i.GUI_InterlayerHumi                     0x08007200   Section        0  gui.o(i.GUI_InterlayerHumi)
-    GUI_InterlayerHumi                       0x08007201   Thumb Code   152  gui.o(i.GUI_InterlayerHumi)
-    i.GUI_MainMenu                           0x080072ac   Section        0  gui.o(i.GUI_MainMenu)
-    i.GUI_UpdateProcessBar                   0x080073bc   Section        0  gui.o(i.GUI_UpdateProcessBar)
-    i.GUI_showLog                            0x080073f0   Section        0  gui.o(i.GUI_showLog)
-    GUI_showLog                              0x080073f1   Thumb Code   382  gui.o(i.GUI_showLog)
-    i.GetAbnormalCode                        0x08007594   Section        0  gui.o(i.GetAbnormalCode)
-    GetAbnormalCode                          0x08007595   Thumb Code  1414  gui.o(i.GetAbnormalCode)
-    i.GetButtonVal                           0x08007b4c   Section        0  hw_exit.o(i.GetButtonVal)
-    i.GetContactTempDataCode                 0x08007b5c   Section        0  gui.o(i.GetContactTempDataCode)
-    GetContactTempDataCode                   0x08007b5d   Thumb Code   560  gui.o(i.GetContactTempDataCode)
-    i.GetDatalogCode                         0x08007dbc   Section        0  gui.o(i.GetDatalogCode)
-    GetDatalogCode                           0x08007dbd   Thumb Code  1632  gui.o(i.GetDatalogCode)
-    i.GetHumiID                              0x08008454   Section        0  protocol.o(i.GetHumiID)
-    GetHumiID                                0x08008455   Thumb Code    92  protocol.o(i.GetHumiID)
-    i.GetHumiVal                             0x080084b8   Section        0  protocol.o(i.GetHumiVal)
-    GetHumiVal                               0x080084b9   Thumb Code    80  protocol.o(i.GetHumiVal)
-    i.GetInterHumiDataCode                   0x0800850c   Section        0  gui.o(i.GetInterHumiDataCode)
-    GetInterHumiDataCode                     0x0800850d   Thumb Code   342  gui.o(i.GetInterHumiDataCode)
-    i.GetMainBoardInfo                       0x08008690   Section        0  gui.o(i.GetMainBoardInfo)
-    i.GetMechProDataCloseCode                0x0800898c   Section        0  gui.o(i.GetMechProDataCloseCode)
-    GetMechProDataCloseCode                  0x0800898d   Thumb Code   468  gui.o(i.GetMechProDataCloseCode)
-    i.GetMechProDataInterTemCode             0x08008b98   Section        0  gui.o(i.GetMechProDataInterTemCode)
-    GetMechProDataInterTemCode               0x08008b99   Thumb Code   610  gui.o(i.GetMechProDataInterTemCode)
-    i.GetMechProDataOpenCode                 0x08008e38   Section        0  gui.o(i.GetMechProDataOpenCode)
-    GetMechProDataOpenCode                   0x08008e39   Thumb Code   468  gui.o(i.GetMechProDataOpenCode)
-    i.GetMechProDataTitleCode                0x08009044   Section        0  gui.o(i.GetMechProDataTitleCode)
-    GetMechProDataTitleCode                  0x08009045   Thumb Code   248  gui.o(i.GetMechProDataTitleCode)
-    i.GetTempID                              0x08009148   Section        0  protocol.o(i.GetTempID)
-    GetTempID                                0x08009149   Thumb Code    96  protocol.o(i.GetTempID)
-    i.GetTempVal                             0x080091ac   Section        0  protocol.o(i.GetTempVal)
-    GetTempVal                               0x080091ad   Thumb Code    80  protocol.o(i.GetTempVal)
-    i.GetVolCode                             0x08009200   Section        0  gui.o(i.GetVolCode)
-    GetVolCode                               0x08009201   Thumb Code   532  gui.o(i.GetVolCode)
-    i.GetWirelessTempTask                    0x08009454   Section        0  wirelesstemp.o(i.GetWirelessTempTask)
-    i.GetWlStatus                            0x08009460   Section        0  protocol.o(i.GetWlStatus)
-    GetWlStatus                              0x08009461   Thumb Code    28  protocol.o(i.GetWlStatus)
-    i.GpioInit                               0x08009480   Section        0  init.o(i.GpioInit)
-    GpioInit                                 0x08009481   Thumb Code    76  init.o(i.GpioInit)
-    i.HardFault_Handler                      0x080094d0   Section        0  gd32f10x_it.o(i.HardFault_Handler)
-    i.HumiIDEnable                           0x080094d4   Section        0  wirelesstemp.o(i.HumiIDEnable)
-    HumiIDEnable                             0x080094d5   Thumb Code    16  wirelesstemp.o(i.HumiIDEnable)
-    i.InterlayerHumidityFun                  0x080094e8   Section        0  gui.o(i.InterlayerHumidityFun)
-    i.KeyBackScan                            0x0800965c   Section        0  hw_exit.o(i.KeyBackScan)
-    KeyBackScan                              0x0800965d   Thumb Code   204  hw_exit.o(i.KeyBackScan)
-    i.KeyDownScan                            0x08009744   Section        0  hw_exit.o(i.KeyDownScan)
-    KeyDownScan                              0x08009745   Thumb Code   204  hw_exit.o(i.KeyDownScan)
-    i.KeyEnterScan                           0x0800982c   Section        0  hw_exit.o(i.KeyEnterScan)
-    KeyEnterScan                             0x0800982d   Thumb Code   204  hw_exit.o(i.KeyEnterScan)
-    i.KeyUpScan                              0x08009914   Section        0  hw_exit.o(i.KeyUpScan)
-    KeyUpScan                                0x08009915   Thumb Code   204  hw_exit.o(i.KeyUpScan)
-    i.LedControl                             0x080099fc   Section        0  protocol.o(i.LedControl)
-    LedControl                               0x080099fd   Thumb Code    68  protocol.o(i.LedControl)
-    i.MCU_Init                               0x08009a48   Section        0  init.o(i.MCU_Init)
-    i.MainBoardInfoFun                       0x08009ae4   Section        0  gui.o(i.MainBoardInfoFun)
-    i.MainMenuFun                            0x08009db0   Section        0  gui.o(i.MainMenuFun)
-    i.MechProShowScrolling                   0x08009ee4   Section        0  oled.o(i.MechProShowScrolling)
-    i.MechProperitesFun                      0x0800a000   Section        0  gui.o(i.MechProperitesFun)
-    i.MemManage_Handler                      0x0800a274   Section        0  gd32f10x_it.o(i.MemManage_Handler)
-    i.Modbus_Crc_Compute                     0x0800a278   Section        0  modbus.o(i.Modbus_Crc_Compute)
-    i.NMI_Handler                            0x0800a2a8   Section        0  gd32f10x_it.o(i.NMI_Handler)
-    i.NbAdd                                  0x0800a2ac   Section        0  hw_uart.o(i.NbAdd)
-    i.NbCheck                                0x0800a300   Section        0  hw_uart.o(i.NbCheck)
-    i.NbGetData                              0x0800a314   Section        0  hw_uart.o(i.NbGetData)
-    i.NbUartSendBuf                          0x0800a370   Section        0  hw_uart.o(i.NbUartSendBuf)
-    i.NetLedFlash                            0x0800a3a0   Section        0  protocol.o(i.NetLedFlash)
-    NetLedFlash                              0x0800a3a1   Thumb Code    92  protocol.o(i.NetLedFlash)
-    i.NumTempDisable                         0x0800a410   Section        0  wirelesstemp.o(i.NumTempDisable)
-    NumTempDisable                           0x0800a411   Thumb Code    18  wirelesstemp.o(i.NumTempDisable)
-    i.NumTempEnable                          0x0800a428   Section        0  wirelesstemp.o(i.NumTempEnable)
-    NumTempEnable                            0x0800a429   Thumb Code    16  wirelesstemp.o(i.NumTempEnable)
-    i.OledGpioInit                           0x0800a43c   Section        0  oled.o(i.OledGpioInit)
-    OledGpioInit                             0x0800a43d   Thumb Code    64  oled.o(i.OledGpioInit)
-    i.OledInit                               0x0800a480   Section        0  oled.o(i.OledInit)
-    i.Oled_ConfigInit                        0x0800a490   Section        0  oled.o(i.Oled_ConfigInit)
-    i.PakAction                              0x0800a524   Section        0  commucateslave.o(i.PakAction)
-    PakAction                                0x0800a525   Thumb Code    20  commucateslave.o(i.PakAction)
-    i.PakStuctInit                           0x0800a53c   Section        0  commucateslave.o(i.PakStuctInit)
-    i.PakTimerRun                            0x0800a574   Section        0  commucateslave.o(i.PakTimerRun)
-    i.PakTimerStart                          0x0800a5ac   Section        0  commucateslave.o(i.PakTimerStart)
-    PakTimerStart                            0x0800a5ad   Thumb Code    12  commucateslave.o(i.PakTimerStart)
-    i.PakTimerStop                           0x0800a5bc   Section        0  commucateslave.o(i.PakTimerStop)
-    PakTimerStop                             0x0800a5bd   Thumb Code    10  commucateslave.o(i.PakTimerStop)
-    i.ParseModbus                            0x0800a5cc   Section        0  wirelesstemp.o(i.ParseModbus)
-    ParseModbus                              0x0800a5cd   Thumb Code    72  wirelesstemp.o(i.ParseModbus)
-    i.PendSV_Handler                         0x0800a61c   Section        0  gd32f10x_it.o(i.PendSV_Handler)
-    i.ProAction                              0x0800a620   Section        0  protocol.o(i.ProAction)
-    ProAction                                0x0800a621   Thumb Code    46  protocol.o(i.ProAction)
-    i.ProParse                               0x0800a658   Section        0  protocol.o(i.ProParse)
-    i.ProResponse                            0x0800a7d8   Section        0  protocol.o(i.ProResponse)
-    ProResponse                              0x0800a7d9   Thumb Code   150  protocol.o(i.ProResponse)
-    i.PtimerDisable                          0x0800a870   Section        0  protocol.o(i.PtimerDisable)
-    PtimerDisable                            0x0800a871   Thumb Code    10  protocol.o(i.PtimerDisable)
-    i.PtimerEnable                           0x0800a880   Section        0  protocol.o(i.PtimerEnable)
-    PtimerEnable                             0x0800a881   Thumb Code    12  protocol.o(i.PtimerEnable)
-    i.PtimerRun                              0x0800a890   Section        0  protocol.o(i.PtimerRun)
-    PtimerRun                                0x0800a891   Thumb Code    40  protocol.o(i.PtimerRun)
-    i.RcuClockInit                           0x0800a8c0   Section        0  init.o(i.RcuClockInit)
-    RcuClockInit                             0x0800a8c1   Thumb Code    68  init.o(i.RcuClockInit)
-    i.ReceParse                              0x0800a908   Section        0  commucateslave.o(i.ReceParse)
-    i.ResponsePak                            0x0800aa18   Section        0  commucateslave.o(i.ResponsePak)
-    ResponsePak                              0x0800aa19   Thumb Code   132  commucateslave.o(i.ResponsePak)
-    i.RunCheckConnect                        0x0800aaa0   Section        0  wirelesstemp.o(i.RunCheckConnect)
-    RunCheckConnect                          0x0800aaa1   Thumb Code    32  wirelesstemp.o(i.RunCheckConnect)
-    i.RunFunc                                0x0800aac4   Section        0  wirelesstemp.o(i.RunFunc)
-    RunFunc                                  0x0800aac5   Thumb Code    26  wirelesstemp.o(i.RunFunc)
-    i.RunGetNumTemp                          0x0800aae4   Section        0  wirelesstemp.o(i.RunGetNumTemp)
-    RunGetNumTemp                            0x0800aae5   Thumb Code    32  wirelesstemp.o(i.RunGetNumTemp)
-    i.RunSetDevId                            0x0800ab08   Section        0  wirelesstemp.o(i.RunSetDevId)
-    RunSetDevId                              0x0800ab09   Thumb Code    30  wirelesstemp.o(i.RunSetDevId)
-    i.RunTempID                              0x0800ab2c   Section        0  wirelesstemp.o(i.RunTempID)
-    RunTempID                                0x0800ab2d   Thumb Code    32  wirelesstemp.o(i.RunTempID)
-    i.RunTempVal                             0x0800ab50   Section        0  wirelesstemp.o(i.RunTempVal)
-    RunTempVal                               0x0800ab51   Thumb Code    32  wirelesstemp.o(i.RunTempVal)
-    i.RunVolGet                              0x0800ab74   Section        0  wirelesstemp.o(i.RunVolGet)
-    RunVolGet                                0x0800ab75   Thumb Code    32  wirelesstemp.o(i.RunVolGet)
-    i.SVC_Handler                            0x0800ab98   Section        0  gd32f10x_it.o(i.SVC_Handler)
-    i.SendCheckConnect                       0x0800ab9a   Section        0  wirelesstemp.o(i.SendCheckConnect)
-    SendCheckConnect                         0x0800ab9b   Thumb Code    74  wirelesstemp.o(i.SendCheckConnect)
-    i.SendCommunictionStatus                 0x0800abe4   Section        0  protocol.o(i.SendCommunictionStatus)
-    SendCommunictionStatus                   0x0800abe5   Thumb Code    28  protocol.o(i.SendCommunictionStatus)
-    i.SendGetVol                             0x0800ac04   Section        0  wirelesstemp.o(i.SendGetVol)
-    SendGetVol                               0x0800ac05   Thumb Code    92  wirelesstemp.o(i.SendGetVol)
-    i.SendMainBoardInfo                      0x0800ac64   Section        0  protocol.o(i.SendMainBoardInfo)
-    SendMainBoardInfo                        0x0800ac65   Thumb Code   182  protocol.o(i.SendMainBoardInfo)
-    i.SendNumTemp                            0x0800ad28   Section        0  wirelesstemp.o(i.SendNumTemp)
-    SendNumTemp                              0x0800ad29   Thumb Code    78  wirelesstemp.o(i.SendNumTemp)
-    i.SendSetDevId                           0x0800ad78   Section        0  wirelesstemp.o(i.SendSetDevId)
-    SendSetDevId                             0x0800ad79   Thumb Code   238  wirelesstemp.o(i.SendSetDevId)
-    i.SendSignalInfo                         0x0800ae6c   Section        0  protocol.o(i.SendSignalInfo)
-    SendSignalInfo                           0x0800ae6d   Thumb Code   126  protocol.o(i.SendSignalInfo)
-    i.SendTempID                             0x0800aef4   Section        0  wirelesstemp.o(i.SendTempID)
-    SendTempID                               0x0800aef5   Thumb Code   142  wirelesstemp.o(i.SendTempID)
-    i.SendTempVal                            0x0800af88   Section        0  wirelesstemp.o(i.SendTempVal)
-    SendTempVal                              0x0800af89   Thumb Code   130  wirelesstemp.o(i.SendTempVal)
-    i.SetAbnormal                            0x0800b010   Section        0  protocol.o(i.SetAbnormal)
-    SetAbnormal                              0x0800b011   Thumb Code    66  protocol.o(i.SetAbnormal)
-    i.SetDevIdDisable                        0x0800b05c   Section        0  wirelesstemp.o(i.SetDevIdDisable)
-    SetDevIdDisable                          0x0800b05d   Thumb Code    18  wirelesstemp.o(i.SetDevIdDisable)
-    i.SetDevIdEnable                         0x0800b074   Section        0  wirelesstemp.o(i.SetDevIdEnable)
-    i.SetSelfTempHumi                        0x0800b088   Section        0  protocol.o(i.SetSelfTempHumi)
-    SetSelfTempHumi                          0x0800b089   Thumb Code  1802  protocol.o(i.SetSelfTempHumi)
-    i.Set_Addressing_Mode                    0x0800b79c   Section        0  oled.o(i.Set_Addressing_Mode)
-    i.Set_Charge_Pump                        0x0800b7ae   Section        0  oled.o(i.Set_Charge_Pump)
-    i.Set_Common_Config                      0x0800b7c0   Section        0  oled.o(i.Set_Common_Config)
-    i.Set_Common_Remap                       0x0800b7d2   Section        0  oled.o(i.Set_Common_Remap)
-    i.Set_Contrast_Control                   0x0800b7de   Section        0  oled.o(i.Set_Contrast_Control)
-    i.Set_Display_Clock                      0x0800b7f0   Section        0  oled.o(i.Set_Display_Clock)
-    i.Set_Display_Offset                     0x0800b802   Section        0  oled.o(i.Set_Display_Offset)
-    i.Set_Display_On_Off                     0x0800b814   Section        0  oled.o(i.Set_Display_On_Off)
-    i.Set_Entire_Display                     0x0800b820   Section        0  oled.o(i.Set_Entire_Display)
-    i.Set_Inverse_Display                    0x0800b82c   Section        0  oled.o(i.Set_Inverse_Display)
-    i.Set_Multiplex_Ratio                    0x0800b838   Section        0  oled.o(i.Set_Multiplex_Ratio)
-    i.Set_Precharge_Period                   0x0800b84a   Section        0  oled.o(i.Set_Precharge_Period)
-    i.Set_Segment_Remap                      0x0800b85c   Section        0  oled.o(i.Set_Segment_Remap)
-    i.Set_Start_Column                       0x0800b868   Section        0  oled.o(i.Set_Start_Column)
-    i.Set_Start_Line                         0x0800b894   Section        0  oled.o(i.Set_Start_Line)
-    i.Set_Start_Page                         0x0800b8a2   Section        0  oled.o(i.Set_Start_Page)
-    i.Set_VCOMH                              0x0800b8b0   Section        0  oled.o(i.Set_VCOMH)
-    i.ShowChar                               0x0800b8c2   Section        0  oled.o(i.ShowChar)
-    i.ShowChinese                            0x0800b936   Section        0  oled.o(i.ShowChinese)
-    i.ShowVolFun                             0x0800b9ac   Section        0  gui.o(i.ShowVolFun)
-    i.SignalTimerInit                        0x0800bcb8   Section        0  hw_timer.o(i.SignalTimerInit)
-    i.SpiInit                                0x0800bd04   Section        0  hw_spi.o(i.SpiInit)
-    i.StoreConfStore                         0x0800bd48   Section        0  hw_fmc.o(i.StoreConfStore)
-    i.StoreInfoStore                         0x0800bd60   Section        0  hw_fmc.o(i.StoreInfoStore)
-    i.SysTick_Handler                        0x0800bd7c   Section        0  gd32f10x_it.o(i.SysTick_Handler)
-    i.SystemInit                             0x0800bd80   Section        0  system_gd32f10x.o(i.SystemInit)
-    i.TIMER1_IRQHandler                      0x0800be04   Section        0  hw_timer.o(i.TIMER1_IRQHandler)
-    i.TIMER2_IRQHandler                      0x0800be30   Section        0  hw_timer.o(i.TIMER2_IRQHandler)
-    i.TempIDDisable                          0x0800be4c   Section        0  wirelesstemp.o(i.TempIDDisable)
-    TempIDDisable                            0x0800be4d   Thumb Code    18  wirelesstemp.o(i.TempIDDisable)
-    i.TempIDEnable                           0x0800be64   Section        0  wirelesstemp.o(i.TempIDEnable)
-    TempIDEnable                             0x0800be65   Thumb Code    16  wirelesstemp.o(i.TempIDEnable)
-    i.TempValDisable                         0x0800be78   Section        0  wirelesstemp.o(i.TempValDisable)
-    TempValDisable                           0x0800be79   Thumb Code    18  wirelesstemp.o(i.TempValDisable)
-    i.TempValEnable                          0x0800be90   Section        0  wirelesstemp.o(i.TempValEnable)
-    TempValEnable                            0x0800be91   Thumb Code    16  wirelesstemp.o(i.TempValEnable)
-    i.Timer_1ms_Init                         0x0800bea4   Section        0  hw_timer.o(i.Timer_1ms_Init)
-    i.USART0_IRQHandler                      0x0800befc   Section        0  hw_uart.o(i.USART0_IRQHandler)
-    i.USART2_IRQHandler                      0x0800bf2c   Section        0  hw_uart.o(i.USART2_IRQHandler)
-    i.UartCommuncateInit                     0x0800bf5c   Section        0  hw_uart.o(i.UartCommuncateInit)
-    UartCommuncateInit                       0x0800bf5d   Thumb Code   130  hw_uart.o(i.UartCommuncateInit)
-    i.UartInit                               0x0800bfe8   Section        0  hw_uart.o(i.UartInit)
-    i.UartNbInit                             0x0800bff4   Section        0  hw_uart.o(i.UartNbInit)
-    UartNbInit                               0x0800bff5   Thumb Code   126  hw_uart.o(i.UartNbInit)
-    i.Unix_to_UTC                            0x0800c07c   Section        0  gui.o(i.Unix_to_UTC)
-    Unix_to_UTC                              0x0800c07d   Thumb Code    52  gui.o(i.Unix_to_UTC)
-    i.UsageFault_Handler                     0x0800c0b0   Section        0  gd32f10x_it.o(i.UsageFault_Handler)
-    i.VarInit                                0x0800c0b4   Section        0  init.o(i.VarInit)
-    VarInit                                  0x0800c0b5   Thumb Code    32  init.o(i.VarInit)
-    i.VolDisable                             0x0800c0e0   Section        0  wirelesstemp.o(i.VolDisable)
-    VolDisable                               0x0800c0e1   Thumb Code    18  wirelesstemp.o(i.VolDisable)
-    i.VolEnable                              0x0800c0f8   Section        0  wirelesstemp.o(i.VolEnable)
-    VolEnable                                0x0800c0f9   Thumb Code    16  wirelesstemp.o(i.VolEnable)
-    i.VolGet                                 0x0800c10c   Section        0  protocol.o(i.VolGet)
-    VolGet                                   0x0800c10d   Thumb Code    92  protocol.o(i.VolGet)
-    i.VolGetFunc                             0x0800c170   Section        0  wirelesstemp.o(i.VolGetFunc)
-    VolGetFunc                               0x0800c171   Thumb Code   148  wirelesstemp.o(i.VolGetFunc)
-    i.WlDevIdSet                             0x0800c214   Section        0  protocol.o(i.WlDevIdSet)
-    WlDevIdSet                               0x0800c215   Thumb Code   118  protocol.o(i.WlDevIdSet)
-    i.WlVarInit                              0x0800c298   Section        0  wirelesstemp.o(i.WlVarInit)
-    i.Write8_8_char                          0x0800c2d8   Section        0  oled.o(i.Write8_8_char)
-    i.WriteStoreConf                         0x0800c308   Section        0  hw_fmc.o(i.WriteStoreConf)
-    WriteStoreConf                           0x0800c309   Thumb Code    82  hw_fmc.o(i.WriteStoreConf)
-    i.WriteStoreInfo                         0x0800c364   Section        0  hw_fmc.o(i.WriteStoreInfo)
-    i.Write_Command                          0x0800c3c0   Section        0  oled.o(i.Write_Command)
-    Write_Command                            0x0800c3c1   Thumb Code    50  oled.o(i.Write_Command)
-    i.Write_Data                             0x0800c3f8   Section        0  oled.o(i.Write_Data)
-    Write_Data                               0x0800c3f9   Thumb Code    50  oled.o(i.Write_Data)
-    i.__0printf                              0x0800c430   Section        0  printfa.o(i.__0printf)
-    i.__0sprintf                             0x0800c450   Section        0  printfa.o(i.__0sprintf)
-    i.__scatterload_copy                     0x0800c478   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x0800c486   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x0800c488   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i._fp_digits                             0x0800c498   Section        0  printfa.o(i._fp_digits)
-    _fp_digits                               0x0800c499   Thumb Code   366  printfa.o(i._fp_digits)
-    i._printf_core                           0x0800c61c   Section        0  printfa.o(i._printf_core)
-    _printf_core                             0x0800c61d   Thumb Code  1744  printfa.o(i._printf_core)
-    i._printf_post_padding                   0x0800ccf8   Section        0  printfa.o(i._printf_post_padding)
-    _printf_post_padding                     0x0800ccf9   Thumb Code    36  printfa.o(i._printf_post_padding)
-    i._printf_pre_padding                    0x0800cd1c   Section        0  printfa.o(i._printf_pre_padding)
-    _printf_pre_padding                      0x0800cd1d   Thumb Code    46  printfa.o(i._printf_pre_padding)
-    i._sputc                                 0x0800cd4a   Section        0  printfa.o(i._sputc)
-    _sputc                                   0x0800cd4b   Thumb Code    10  printfa.o(i._sputc)
-    i.delay_1ms                              0x0800cd54   Section        0  systick.o(i.delay_1ms)
-    i.exti_init                              0x0800cdb4   Section        0  gd32f10x_exti.o(i.exti_init)
-    i.exti_interrupt_flag_clear              0x0800ce70   Section        0  gd32f10x_exti.o(i.exti_interrupt_flag_clear)
-    i.exti_interrupt_flag_get                0x0800ce7c   Section        0  gd32f10x_exti.o(i.exti_interrupt_flag_get)
-    i.fmc_bank0_ready_wait                   0x0800ce94   Section        0  gd32f10x_fmc.o(i.fmc_bank0_ready_wait)
-    i.fmc_bank0_state_get                    0x0800ceb8   Section        0  gd32f10x_fmc.o(i.fmc_bank0_state_get)
-    i.fmc_bank1_ready_wait                   0x0800cee8   Section        0  gd32f10x_fmc.o(i.fmc_bank1_ready_wait)
-    i.fmc_bank1_state_get                    0x0800cf0c   Section        0  gd32f10x_fmc.o(i.fmc_bank1_state_get)
-    i.fmc_flag_clear                         0x0800cf3c   Section        0  gd32f10x_fmc.o(i.fmc_flag_clear)
-    i.fmc_lock                               0x0800cf5c   Section        0  gd32f10x_fmc.o(i.fmc_lock)
-    i.fmc_page_erase                         0x0800cf88   Section        0  gd32f10x_fmc.o(i.fmc_page_erase)
-    i.fmc_unlock                             0x0800d074   Section        0  gd32f10x_fmc.o(i.fmc_unlock)
-    i.fmc_word_program                       0x0800d0b8   Section        0  gd32f10x_fmc.o(i.fmc_word_program)
-    i.fputc                                  0x0800d178   Section        0  hw_uart.o(i.fputc)
-    i.gpio_bit_reset                         0x0800d19c   Section        0  gd32f10x_gpio.o(i.gpio_bit_reset)
-    i.gpio_bit_set                           0x0800d1a0   Section        0  gd32f10x_gpio.o(i.gpio_bit_set)
-    i.gpio_exti_source_select                0x0800d1a4   Section        0  gd32f10x_gpio.o(i.gpio_exti_source_select)
-    i.gpio_init                              0x0800d23c   Section        0  gd32f10x_gpio.o(i.gpio_init)
-    i.gpio_input_bit_get                     0x0800d2e8   Section        0  gd32f10x_gpio.o(i.gpio_input_bit_get)
-    i.gpio_pin_remap_config                  0x0800d2f8   Section        0  gd32f10x_gpio.o(i.gpio_pin_remap_config)
-    i.main                                   0x0800d388   Section        0  main.o(i.main)
-    i.modbusMasterParse                      0x0800d3c0   Section        0  modbus.o(i.modbusMasterParse)
-    i.modbusValInit                          0x0800d554   Section        0  modbus.o(i.modbusValInit)
-    i.nvic_config                            0x0800d57c   Section        0  hw_timer.o(i.nvic_config)
-    i.nvic_irq_enable                        0x0800d594   Section        0  gd32f10x_misc.o(i.nvic_irq_enable)
-    i.nvic_priority_group_set                0x0800d640   Section        0  gd32f10x_misc.o(i.nvic_priority_group_set)
-    i.nvic_vector_table_set                  0x0800d654   Section        0  gd32f10x_misc.o(i.nvic_vector_table_set)
-    i.rcu_clock_freq_get                     0x0800d668   Section        0  gd32f10x_rcu.o(i.rcu_clock_freq_get)
-    i.rcu_periph_clock_enable                0x0800d78c   Section        0  gd32f10x_rcu.o(i.rcu_periph_clock_enable)
-    i.rcu_periph_reset_disable               0x0800d7ac   Section        0  gd32f10x_rcu.o(i.rcu_periph_reset_disable)
-    i.rcu_periph_reset_enable                0x0800d7cc   Section        0  gd32f10x_rcu.o(i.rcu_periph_reset_enable)
-    i.spi_send_byte                          0x0800d7ec   Section        0  hw_spi.o(i.spi_send_byte)
-    i.system_clock_108m_hxtal                0x0800d824   Section        0  system_gd32f10x.o(i.system_clock_108m_hxtal)
-    system_clock_108m_hxtal                  0x0800d825   Thumb Code   182  system_gd32f10x.o(i.system_clock_108m_hxtal)
-    i.system_clock_config                    0x0800d8e8   Section        0  system_gd32f10x.o(i.system_clock_config)
-    system_clock_config                      0x0800d8e9   Thumb Code     8  system_gd32f10x.o(i.system_clock_config)
-    i.systick_clksource_set                  0x0800d8f0   Section        0  gd32f10x_misc.o(i.systick_clksource_set)
-    i.systick_config                         0x0800d918   Section        0  systick.o(i.systick_config)
-    i.timer_deinit                           0x0800d95c   Section        0  gd32f10x_timer.o(i.timer_deinit)
-    i.timer_enable                           0x0800da38   Section        0  gd32f10x_timer.o(i.timer_enable)
-    i.timer_init                             0x0800da44   Section        0  gd32f10x_timer.o(i.timer_init)
-    i.timer_interrupt_enable                 0x0800db24   Section        0  gd32f10x_timer.o(i.timer_interrupt_enable)
-    i.timer_interrupt_flag_clear             0x0800db2c   Section        0  gd32f10x_timer.o(i.timer_interrupt_flag_clear)
-    i.timer_interrupt_flag_get               0x0800db32   Section        0  gd32f10x_timer.o(i.timer_interrupt_flag_get)
-    i.usart_baudrate_set                     0x0800db4c   Section        0  gd32f10x_usart.o(i.usart_baudrate_set)
-    i.usart_data_receive                     0x0800dbdc   Section        0  gd32f10x_usart.o(i.usart_data_receive)
-    i.usart_data_transmit                    0x0800dbe6   Section        0  gd32f10x_usart.o(i.usart_data_transmit)
-    i.usart_deinit                           0x0800dbf0   Section        0  gd32f10x_usart.o(i.usart_deinit)
-    i.usart_enable                           0x0800dc80   Section        0  gd32f10x_usart.o(i.usart_enable)
-    i.usart_flag_get                         0x0800dc8a   Section        0  gd32f10x_usart.o(i.usart_flag_get)
-    i.usart_hardware_flow_cts_config         0x0800dca8   Section        0  gd32f10x_usart.o(i.usart_hardware_flow_cts_config)
-    i.usart_hardware_flow_rts_config         0x0800dcb8   Section        0  gd32f10x_usart.o(i.usart_hardware_flow_rts_config)
-    i.usart_interrupt_disable                0x0800dcc8   Section        0  gd32f10x_usart.o(i.usart_interrupt_disable)
-    i.usart_interrupt_enable                 0x0800dce2   Section        0  gd32f10x_usart.o(i.usart_interrupt_enable)
-    i.usart_interrupt_flag_clear             0x0800dcfc   Section        0  gd32f10x_usart.o(i.usart_interrupt_flag_clear)
-    i.usart_interrupt_flag_get               0x0800dd16   Section        0  gd32f10x_usart.o(i.usart_interrupt_flag_get)
-    i.usart_parity_config                    0x0800dd4e   Section        0  gd32f10x_usart.o(i.usart_parity_config)
-    i.usart_receive_config                   0x0800dd5e   Section        0  gd32f10x_usart.o(i.usart_receive_config)
-    i.usart_stop_bit_set                     0x0800dd6e   Section        0  gd32f10x_usart.o(i.usart_stop_bit_set)
-    i.usart_transmit_config                  0x0800dd7e   Section        0  gd32f10x_usart.o(i.usart_transmit_config)
-    i.usart_word_length_set                  0x0800dd8e   Section        0  gd32f10x_usart.o(i.usart_word_length_set)
-    .constdata                               0x0800dd9e   Section     2834  gui.o(.constdata)
-    .constdata                               0x0800e8b0   Section       12  localtime.o(.constdata)
-    monlen                                   0x0800e8b0   Data          12  localtime.o(.constdata)
+    CheckTempIDFunc                          0x08005035   Thumb Code   310  wirelesstemp.o(i.CheckTempIDFunc)
+    i.CheckTempValFunc                       0x08005184   Section        0  wirelesstemp.o(i.CheckTempValFunc)
+    CheckTempValFunc                         0x08005185   Thumb Code   304  wirelesstemp.o(i.CheckTempValFunc)
+    i.CheckTimeStore                         0x080052c8   Section        0  protocol.o(i.CheckTimeStore)
+    CheckTimeStore                           0x080052c9   Thumb Code   152  protocol.o(i.CheckTimeStore)
+    i.CommunAdd                              0x0800536c   Section        0  hw_uart.o(i.CommunAdd)
+    i.CommunCheck                            0x080053c0   Section        0  hw_uart.o(i.CommunCheck)
+    i.CommunGetData                          0x080053d4   Section        0  hw_uart.o(i.CommunGetData)
+    i.CommunUartSendBuf                      0x08005430   Section        0  hw_uart.o(i.CommunUartSendBuf)
+    i.CommunicationFailFun                   0x08005460   Section        0  gui.o(i.CommunicationFailFun)
+    i.ConactTempSecondFun                    0x080054d4   Section        0  gui.o(i.ConactTempSecondFun)
+    i.ContactTempFirstFun                    0x08005778   Section        0  gui.o(i.ContactTempFirstFun)
+    i.DataAbnormalFlash                      0x08005a1c   Section        0  protocol.o(i.DataAbnormalFlash)
+    DataAbnormalFlash                        0x08005a1d   Thumb Code    72  protocol.o(i.DataAbnormalFlash)
+    i.DataLogShowDataMenuFun                 0x08005a70   Section        0  gui.o(i.DataLogShowDataMenuFun)
+    DataLogShowDataMenuFun                   0x08005a71   Thumb Code   702  gui.o(i.DataLogShowDataMenuFun)
+    i.DatalogMenuFun                         0x08005d60   Section        0  gui.o(i.DatalogMenuFun)
+    i.DebugMon_Handler                       0x08005f1c   Section        0  gd32f10x_it.o(i.DebugMon_Handler)
+    i.DeviceInitFun                          0x08005f20   Section        0  gui.o(i.DeviceInitFun)
+    i.DeviceStartFun                         0x08005fb8   Section        0  gui.o(i.DeviceStartFun)
+    i.DisalyAbnormalHumiAdd                  0x08006018   Section        0  oled.o(i.DisalyAbnormalHumiAdd)
+    i.DispalyHumiStoreAdd                    0x08006088   Section        0  oled.o(i.DispalyHumiStoreAdd)
+    i.DispalyTempStoreAdd                    0x080060e0   Section        0  oled.o(i.DispalyTempStoreAdd)
+    i.DisplayAbnormalSignalAdd               0x08006164   Section        0  oled.o(i.DisplayAbnormalSignalAdd)
+    i.DisplayAnnormalTempAdd                 0x080061ec   Section        0  oled.o(i.DisplayAnnormalTempAdd)
+    i.DisplayInterTempAdd                    0x0800625c   Section        0  oled.o(i.DisplayInterTempAdd)
+    i.DisplayMainProInit                     0x080062c4   Section        0  protocol.o(i.DisplayMainProInit)
+    i.DisplayMainProTask                     0x080062e0   Section        0  protocol.o(i.DisplayMainProTask)
+    i.DisplayOnePage                         0x0800630e   Section        0  oled.o(i.DisplayOnePage)
+    i.DisplaySignalStoreAdd                  0x08006364   Section        0  oled.o(i.DisplaySignalStoreAdd)
+    i.EXTI10_15_IRQHandler                   0x08006440   Section        0  hw_exit.o(i.EXTI10_15_IRQHandler)
+    i.EnbaleFunc                             0x080064f0   Section        0  wirelesstemp.o(i.EnbaleFunc)
+    EnbaleFunc                               0x080064f1   Thumb Code   380  wirelesstemp.o(i.EnbaleFunc)
+    i.EnterUpgradeAction                     0x08006688   Section        0  commucateslave.o(i.EnterUpgradeAction)
+    EnterUpgradeAction                       0x08006689   Thumb Code    58  commucateslave.o(i.EnterUpgradeAction)
+    i.FMC_StoreInfoInit                      0x080066d0   Section        0  hw_fmc.o(i.FMC_StoreInfoInit)
+    i.Fill_RAM                               0x08006800   Section        0  oled.o(i.Fill_RAM)
+    i.FlashEarsePage                         0x08006830   Section        0  hw_fmc.o(i.FlashEarsePage)
+    i.GUI_AbnormalMenu                       0x08006874   Section        0  gui.o(i.GUI_AbnormalMenu)
+    GUI_AbnormalMenu                         0x08006875   Thumb Code   722  gui.o(i.GUI_AbnormalMenu)
+    i.GUI_AbnormalTile                       0x08006b6c   Section        0  gui.o(i.GUI_AbnormalTile)
+    GUI_AbnormalTile                         0x08006b6d   Thumb Code   250  gui.o(i.GUI_AbnormalTile)
+    i.GUI_CommuncationFail                   0x08006c84   Section        0  gui.o(i.GUI_CommuncationFail)
+    i.GUI_ContactTemp                        0x08006cb0   Section        0  gui.o(i.GUI_ContactTemp)
+    GUI_ContactTemp                          0x08006cb1   Thumb Code   152  gui.o(i.GUI_ContactTemp)
+    i.GUI_ContactTempSecond                  0x08006d5c   Section        0  gui.o(i.GUI_ContactTempSecond)
+    GUI_ContactTempSecond                    0x08006d5d   Thumb Code   152  gui.o(i.GUI_ContactTempSecond)
+    i.GUI_DataLogList                        0x08006e08   Section        0  gui.o(i.GUI_DataLogList)
+    GUI_DataLogList                          0x08006e09   Thumb Code   662  gui.o(i.GUI_DataLogList)
+    i.GUI_DataLogMenu                        0x080070c0   Section        0  gui.o(i.GUI_DataLogMenu)
+    GUI_DataLogMenu                          0x080070c1   Thumb Code    26  gui.o(i.GUI_DataLogMenu)
+    i.GUI_DeviceInit                         0x080070e0   Section        0  gui.o(i.GUI_DeviceInit)
+    GUI_DeviceInit                           0x080070e1   Thumb Code   166  gui.o(i.GUI_DeviceInit)
+    i.GUI_DeviceStart                        0x0800719c   Section        0  gui.o(i.GUI_DeviceStart)
+    GUI_DeviceStart                          0x0800719d   Thumb Code   244  gui.o(i.GUI_DeviceStart)
+    i.GUI_InterlayerHumi                     0x080072a8   Section        0  gui.o(i.GUI_InterlayerHumi)
+    GUI_InterlayerHumi                       0x080072a9   Thumb Code   152  gui.o(i.GUI_InterlayerHumi)
+    i.GUI_MainMenu                           0x08007354   Section        0  gui.o(i.GUI_MainMenu)
+    i.GUI_UpdateProcessBar                   0x08007464   Section        0  gui.o(i.GUI_UpdateProcessBar)
+    i.GUI_showLog                            0x08007498   Section        0  gui.o(i.GUI_showLog)
+    GUI_showLog                              0x08007499   Thumb Code   382  gui.o(i.GUI_showLog)
+    i.GetAbnormalCode                        0x0800763c   Section        0  gui.o(i.GetAbnormalCode)
+    GetAbnormalCode                          0x0800763d   Thumb Code  1414  gui.o(i.GetAbnormalCode)
+    i.GetButtonVal                           0x08007bf4   Section        0  hw_exit.o(i.GetButtonVal)
+    i.GetContactTempDataCode                 0x08007c04   Section        0  gui.o(i.GetContactTempDataCode)
+    GetContactTempDataCode                   0x08007c05   Thumb Code   560  gui.o(i.GetContactTempDataCode)
+    i.GetDatalogCode                         0x08007e64   Section        0  gui.o(i.GetDatalogCode)
+    GetDatalogCode                           0x08007e65   Thumb Code  1632  gui.o(i.GetDatalogCode)
+    i.GetHumiID                              0x080084fc   Section        0  protocol.o(i.GetHumiID)
+    GetHumiID                                0x080084fd   Thumb Code    92  protocol.o(i.GetHumiID)
+    i.GetHumiVal                             0x08008560   Section        0  protocol.o(i.GetHumiVal)
+    GetHumiVal                               0x08008561   Thumb Code    80  protocol.o(i.GetHumiVal)
+    i.GetInterHumiDataCode                   0x080085b4   Section        0  gui.o(i.GetInterHumiDataCode)
+    GetInterHumiDataCode                     0x080085b5   Thumb Code   342  gui.o(i.GetInterHumiDataCode)
+    i.GetMainBoardInfo                       0x08008738   Section        0  gui.o(i.GetMainBoardInfo)
+    i.GetMechProDataCloseCode                0x08008a34   Section        0  gui.o(i.GetMechProDataCloseCode)
+    GetMechProDataCloseCode                  0x08008a35   Thumb Code   468  gui.o(i.GetMechProDataCloseCode)
+    i.GetMechProDataInterTemCode             0x08008c40   Section        0  gui.o(i.GetMechProDataInterTemCode)
+    GetMechProDataInterTemCode               0x08008c41   Thumb Code   610  gui.o(i.GetMechProDataInterTemCode)
+    i.GetMechProDataOpenCode                 0x08008ee0   Section        0  gui.o(i.GetMechProDataOpenCode)
+    GetMechProDataOpenCode                   0x08008ee1   Thumb Code   468  gui.o(i.GetMechProDataOpenCode)
+    i.GetMechProDataTitleCode                0x080090ec   Section        0  gui.o(i.GetMechProDataTitleCode)
+    GetMechProDataTitleCode                  0x080090ed   Thumb Code   248  gui.o(i.GetMechProDataTitleCode)
+    i.GetTempID                              0x080091f0   Section        0  protocol.o(i.GetTempID)
+    GetTempID                                0x080091f1   Thumb Code    96  protocol.o(i.GetTempID)
+    i.GetTempVal                             0x08009254   Section        0  protocol.o(i.GetTempVal)
+    GetTempVal                               0x08009255   Thumb Code    80  protocol.o(i.GetTempVal)
+    i.GetVolCode                             0x080092a8   Section        0  gui.o(i.GetVolCode)
+    GetVolCode                               0x080092a9   Thumb Code   532  gui.o(i.GetVolCode)
+    i.GetWirelessTempTask                    0x080094fc   Section        0  wirelesstemp.o(i.GetWirelessTempTask)
+    i.GetWlStatus                            0x08009508   Section        0  protocol.o(i.GetWlStatus)
+    GetWlStatus                              0x08009509   Thumb Code    28  protocol.o(i.GetWlStatus)
+    i.GpioInit                               0x08009528   Section        0  init.o(i.GpioInit)
+    GpioInit                                 0x08009529   Thumb Code    76  init.o(i.GpioInit)
+    i.HardFault_Handler                      0x08009578   Section        0  gd32f10x_it.o(i.HardFault_Handler)
+    i.HumiIDEnable                           0x0800957c   Section        0  wirelesstemp.o(i.HumiIDEnable)
+    HumiIDEnable                             0x0800957d   Thumb Code    16  wirelesstemp.o(i.HumiIDEnable)
+    i.InterlayerHumidityFun                  0x08009590   Section        0  gui.o(i.InterlayerHumidityFun)
+    i.KeyBackScan                            0x08009704   Section        0  hw_exit.o(i.KeyBackScan)
+    KeyBackScan                              0x08009705   Thumb Code   204  hw_exit.o(i.KeyBackScan)
+    i.KeyDownScan                            0x080097ec   Section        0  hw_exit.o(i.KeyDownScan)
+    KeyDownScan                              0x080097ed   Thumb Code   204  hw_exit.o(i.KeyDownScan)
+    i.KeyEnterScan                           0x080098d4   Section        0  hw_exit.o(i.KeyEnterScan)
+    KeyEnterScan                             0x080098d5   Thumb Code   204  hw_exit.o(i.KeyEnterScan)
+    i.KeyUpScan                              0x080099bc   Section        0  hw_exit.o(i.KeyUpScan)
+    KeyUpScan                                0x080099bd   Thumb Code   204  hw_exit.o(i.KeyUpScan)
+    i.LedControl                             0x08009aa4   Section        0  protocol.o(i.LedControl)
+    LedControl                               0x08009aa5   Thumb Code    68  protocol.o(i.LedControl)
+    i.MCU_Init                               0x08009af0   Section        0  init.o(i.MCU_Init)
+    i.MainBoardInfoFun                       0x08009b8c   Section        0  gui.o(i.MainBoardInfoFun)
+    i.MainMenuFun                            0x08009e58   Section        0  gui.o(i.MainMenuFun)
+    i.MechProShowScrolling                   0x08009f8c   Section        0  oled.o(i.MechProShowScrolling)
+    i.MechProperitesFun                      0x0800a0a8   Section        0  gui.o(i.MechProperitesFun)
+    i.MemManage_Handler                      0x0800a31c   Section        0  gd32f10x_it.o(i.MemManage_Handler)
+    i.Modbus_Crc_Compute                     0x0800a320   Section        0  modbus.o(i.Modbus_Crc_Compute)
+    i.NMI_Handler                            0x0800a350   Section        0  gd32f10x_it.o(i.NMI_Handler)
+    i.NbAdd                                  0x0800a354   Section        0  hw_uart.o(i.NbAdd)
+    i.NbCheck                                0x0800a3a8   Section        0  hw_uart.o(i.NbCheck)
+    i.NbGetData                              0x0800a3bc   Section        0  hw_uart.o(i.NbGetData)
+    i.NbUartSendBuf                          0x0800a418   Section        0  hw_uart.o(i.NbUartSendBuf)
+    i.NetLedFlash                            0x0800a448   Section        0  protocol.o(i.NetLedFlash)
+    NetLedFlash                              0x0800a449   Thumb Code    92  protocol.o(i.NetLedFlash)
+    i.NumTempDisable                         0x0800a4b8   Section        0  wirelesstemp.o(i.NumTempDisable)
+    NumTempDisable                           0x0800a4b9   Thumb Code    18  wirelesstemp.o(i.NumTempDisable)
+    i.NumTempEnable                          0x0800a4d0   Section        0  wirelesstemp.o(i.NumTempEnable)
+    NumTempEnable                            0x0800a4d1   Thumb Code    16  wirelesstemp.o(i.NumTempEnable)
+    i.OledGpioInit                           0x0800a4e4   Section        0  oled.o(i.OledGpioInit)
+    OledGpioInit                             0x0800a4e5   Thumb Code    64  oled.o(i.OledGpioInit)
+    i.OledInit                               0x0800a528   Section        0  oled.o(i.OledInit)
+    i.Oled_ConfigInit                        0x0800a538   Section        0  oled.o(i.Oled_ConfigInit)
+    i.PakAction                              0x0800a5cc   Section        0  commucateslave.o(i.PakAction)
+    PakAction                                0x0800a5cd   Thumb Code    20  commucateslave.o(i.PakAction)
+    i.PakStuctInit                           0x0800a5e4   Section        0  commucateslave.o(i.PakStuctInit)
+    i.PakTimerRun                            0x0800a61c   Section        0  commucateslave.o(i.PakTimerRun)
+    i.PakTimerStart                          0x0800a654   Section        0  commucateslave.o(i.PakTimerStart)
+    PakTimerStart                            0x0800a655   Thumb Code    12  commucateslave.o(i.PakTimerStart)
+    i.PakTimerStop                           0x0800a664   Section        0  commucateslave.o(i.PakTimerStop)
+    PakTimerStop                             0x0800a665   Thumb Code    10  commucateslave.o(i.PakTimerStop)
+    i.ParseModbus                            0x0800a674   Section        0  wirelesstemp.o(i.ParseModbus)
+    ParseModbus                              0x0800a675   Thumb Code    72  wirelesstemp.o(i.ParseModbus)
+    i.PendSV_Handler                         0x0800a6c4   Section        0  gd32f10x_it.o(i.PendSV_Handler)
+    i.ProAction                              0x0800a6c8   Section        0  protocol.o(i.ProAction)
+    ProAction                                0x0800a6c9   Thumb Code    46  protocol.o(i.ProAction)
+    i.ProParse                               0x0800a700   Section        0  protocol.o(i.ProParse)
+    i.ProResponse                            0x0800a880   Section        0  protocol.o(i.ProResponse)
+    ProResponse                              0x0800a881   Thumb Code   150  protocol.o(i.ProResponse)
+    i.PtimerDisable                          0x0800a918   Section        0  protocol.o(i.PtimerDisable)
+    PtimerDisable                            0x0800a919   Thumb Code    10  protocol.o(i.PtimerDisable)
+    i.PtimerEnable                           0x0800a928   Section        0  protocol.o(i.PtimerEnable)
+    PtimerEnable                             0x0800a929   Thumb Code    12  protocol.o(i.PtimerEnable)
+    i.PtimerRun                              0x0800a938   Section        0  protocol.o(i.PtimerRun)
+    PtimerRun                                0x0800a939   Thumb Code    40  protocol.o(i.PtimerRun)
+    i.RcuClockInit                           0x0800a968   Section        0  init.o(i.RcuClockInit)
+    RcuClockInit                             0x0800a969   Thumb Code    68  init.o(i.RcuClockInit)
+    i.ReceParse                              0x0800a9b0   Section        0  commucateslave.o(i.ReceParse)
+    i.ResponsePak                            0x0800aac0   Section        0  commucateslave.o(i.ResponsePak)
+    ResponsePak                              0x0800aac1   Thumb Code   132  commucateslave.o(i.ResponsePak)
+    i.RunCheckConnect                        0x0800ab48   Section        0  wirelesstemp.o(i.RunCheckConnect)
+    RunCheckConnect                          0x0800ab49   Thumb Code    32  wirelesstemp.o(i.RunCheckConnect)
+    i.RunFunc                                0x0800ab6c   Section        0  wirelesstemp.o(i.RunFunc)
+    RunFunc                                  0x0800ab6d   Thumb Code    26  wirelesstemp.o(i.RunFunc)
+    i.RunGetNumTemp                          0x0800ab8c   Section        0  wirelesstemp.o(i.RunGetNumTemp)
+    RunGetNumTemp                            0x0800ab8d   Thumb Code    32  wirelesstemp.o(i.RunGetNumTemp)
+    i.RunSetDevId                            0x0800abb0   Section        0  wirelesstemp.o(i.RunSetDevId)
+    RunSetDevId                              0x0800abb1   Thumb Code    30  wirelesstemp.o(i.RunSetDevId)
+    i.RunTempID                              0x0800abd4   Section        0  wirelesstemp.o(i.RunTempID)
+    RunTempID                                0x0800abd5   Thumb Code    32  wirelesstemp.o(i.RunTempID)
+    i.RunTempVal                             0x0800abf8   Section        0  wirelesstemp.o(i.RunTempVal)
+    RunTempVal                               0x0800abf9   Thumb Code    32  wirelesstemp.o(i.RunTempVal)
+    i.RunVolGet                              0x0800ac1c   Section        0  wirelesstemp.o(i.RunVolGet)
+    RunVolGet                                0x0800ac1d   Thumb Code    32  wirelesstemp.o(i.RunVolGet)
+    i.SVC_Handler                            0x0800ac40   Section        0  gd32f10x_it.o(i.SVC_Handler)
+    i.SendCheckConnect                       0x0800ac42   Section        0  wirelesstemp.o(i.SendCheckConnect)
+    SendCheckConnect                         0x0800ac43   Thumb Code    74  wirelesstemp.o(i.SendCheckConnect)
+    i.SendCommunictionStatus                 0x0800ac8c   Section        0  protocol.o(i.SendCommunictionStatus)
+    SendCommunictionStatus                   0x0800ac8d   Thumb Code    28  protocol.o(i.SendCommunictionStatus)
+    i.SendGetVol                             0x0800acac   Section        0  wirelesstemp.o(i.SendGetVol)
+    SendGetVol                               0x0800acad   Thumb Code    92  wirelesstemp.o(i.SendGetVol)
+    i.SendMainBoardInfo                      0x0800ad0c   Section        0  protocol.o(i.SendMainBoardInfo)
+    SendMainBoardInfo                        0x0800ad0d   Thumb Code   182  protocol.o(i.SendMainBoardInfo)
+    i.SendNumTemp                            0x0800add0   Section        0  wirelesstemp.o(i.SendNumTemp)
+    SendNumTemp                              0x0800add1   Thumb Code    78  wirelesstemp.o(i.SendNumTemp)
+    i.SendSetDevId                           0x0800ae20   Section        0  wirelesstemp.o(i.SendSetDevId)
+    SendSetDevId                             0x0800ae21   Thumb Code   224  wirelesstemp.o(i.SendSetDevId)
+    i.SendSignalInfo                         0x0800af04   Section        0  protocol.o(i.SendSignalInfo)
+    SendSignalInfo                           0x0800af05   Thumb Code   126  protocol.o(i.SendSignalInfo)
+    i.SendTempID                             0x0800af8c   Section        0  wirelesstemp.o(i.SendTempID)
+    SendTempID                               0x0800af8d   Thumb Code   142  wirelesstemp.o(i.SendTempID)
+    i.SendTempVal                            0x0800b020   Section        0  wirelesstemp.o(i.SendTempVal)
+    SendTempVal                              0x0800b021   Thumb Code   130  wirelesstemp.o(i.SendTempVal)
+    i.SetAbnormal                            0x0800b0a8   Section        0  protocol.o(i.SetAbnormal)
+    SetAbnormal                              0x0800b0a9   Thumb Code    66  protocol.o(i.SetAbnormal)
+    i.SetDevIdDisable                        0x0800b0f4   Section        0  wirelesstemp.o(i.SetDevIdDisable)
+    SetDevIdDisable                          0x0800b0f5   Thumb Code    18  wirelesstemp.o(i.SetDevIdDisable)
+    i.SetDevIdEnable                         0x0800b10c   Section        0  wirelesstemp.o(i.SetDevIdEnable)
+    i.SetSelfTempHumi                        0x0800b120   Section        0  protocol.o(i.SetSelfTempHumi)
+    SetSelfTempHumi                          0x0800b121   Thumb Code  1802  protocol.o(i.SetSelfTempHumi)
+    i.Set_Addressing_Mode                    0x0800b834   Section        0  oled.o(i.Set_Addressing_Mode)
+    i.Set_Charge_Pump                        0x0800b846   Section        0  oled.o(i.Set_Charge_Pump)
+    i.Set_Common_Config                      0x0800b858   Section        0  oled.o(i.Set_Common_Config)
+    i.Set_Common_Remap                       0x0800b86a   Section        0  oled.o(i.Set_Common_Remap)
+    i.Set_Contrast_Control                   0x0800b876   Section        0  oled.o(i.Set_Contrast_Control)
+    i.Set_Display_Clock                      0x0800b888   Section        0  oled.o(i.Set_Display_Clock)
+    i.Set_Display_Offset                     0x0800b89a   Section        0  oled.o(i.Set_Display_Offset)
+    i.Set_Display_On_Off                     0x0800b8ac   Section        0  oled.o(i.Set_Display_On_Off)
+    i.Set_Entire_Display                     0x0800b8b8   Section        0  oled.o(i.Set_Entire_Display)
+    i.Set_Inverse_Display                    0x0800b8c4   Section        0  oled.o(i.Set_Inverse_Display)
+    i.Set_Multiplex_Ratio                    0x0800b8d0   Section        0  oled.o(i.Set_Multiplex_Ratio)
+    i.Set_Precharge_Period                   0x0800b8e2   Section        0  oled.o(i.Set_Precharge_Period)
+    i.Set_Segment_Remap                      0x0800b8f4   Section        0  oled.o(i.Set_Segment_Remap)
+    i.Set_Start_Column                       0x0800b900   Section        0  oled.o(i.Set_Start_Column)
+    i.Set_Start_Line                         0x0800b92c   Section        0  oled.o(i.Set_Start_Line)
+    i.Set_Start_Page                         0x0800b93a   Section        0  oled.o(i.Set_Start_Page)
+    i.Set_VCOMH                              0x0800b948   Section        0  oled.o(i.Set_VCOMH)
+    i.ShowChar                               0x0800b95a   Section        0  oled.o(i.ShowChar)
+    i.ShowChinese                            0x0800b9ce   Section        0  oled.o(i.ShowChinese)
+    i.ShowVolFun                             0x0800ba44   Section        0  gui.o(i.ShowVolFun)
+    i.SignalTimerInit                        0x0800bd50   Section        0  hw_timer.o(i.SignalTimerInit)
+    i.SpiInit                                0x0800bd9c   Section        0  hw_spi.o(i.SpiInit)
+    i.StoreConfStore                         0x0800bde0   Section        0  hw_fmc.o(i.StoreConfStore)
+    i.StoreInfoStore                         0x0800bdf8   Section        0  hw_fmc.o(i.StoreInfoStore)
+    i.SysTick_Handler                        0x0800be14   Section        0  gd32f10x_it.o(i.SysTick_Handler)
+    i.SystemInit                             0x0800be18   Section        0  system_gd32f10x.o(i.SystemInit)
+    i.TIMER1_IRQHandler                      0x0800be9c   Section        0  hw_timer.o(i.TIMER1_IRQHandler)
+    i.TIMER2_IRQHandler                      0x0800bec8   Section        0  hw_timer.o(i.TIMER2_IRQHandler)
+    i.TempIDDisable                          0x0800bee4   Section        0  wirelesstemp.o(i.TempIDDisable)
+    TempIDDisable                            0x0800bee5   Thumb Code    18  wirelesstemp.o(i.TempIDDisable)
+    i.TempIDEnable                           0x0800befc   Section        0  wirelesstemp.o(i.TempIDEnable)
+    TempIDEnable                             0x0800befd   Thumb Code    16  wirelesstemp.o(i.TempIDEnable)
+    i.TempValDisable                         0x0800bf10   Section        0  wirelesstemp.o(i.TempValDisable)
+    TempValDisable                           0x0800bf11   Thumb Code    18  wirelesstemp.o(i.TempValDisable)
+    i.TempValEnable                          0x0800bf28   Section        0  wirelesstemp.o(i.TempValEnable)
+    TempValEnable                            0x0800bf29   Thumb Code    16  wirelesstemp.o(i.TempValEnable)
+    i.Timer_1ms_Init                         0x0800bf3c   Section        0  hw_timer.o(i.Timer_1ms_Init)
+    i.USART0_IRQHandler                      0x0800bf94   Section        0  hw_uart.o(i.USART0_IRQHandler)
+    i.USART2_IRQHandler                      0x0800bfc4   Section        0  hw_uart.o(i.USART2_IRQHandler)
+    i.UartCommuncateInit                     0x0800bff4   Section        0  hw_uart.o(i.UartCommuncateInit)
+    UartCommuncateInit                       0x0800bff5   Thumb Code   130  hw_uart.o(i.UartCommuncateInit)
+    i.UartInit                               0x0800c080   Section        0  hw_uart.o(i.UartInit)
+    i.UartNbInit                             0x0800c08c   Section        0  hw_uart.o(i.UartNbInit)
+    UartNbInit                               0x0800c08d   Thumb Code   126  hw_uart.o(i.UartNbInit)
+    i.Unix_to_UTC                            0x0800c114   Section        0  gui.o(i.Unix_to_UTC)
+    Unix_to_UTC                              0x0800c115   Thumb Code    52  gui.o(i.Unix_to_UTC)
+    i.UsageFault_Handler                     0x0800c148   Section        0  gd32f10x_it.o(i.UsageFault_Handler)
+    i.VarInit                                0x0800c14c   Section        0  init.o(i.VarInit)
+    VarInit                                  0x0800c14d   Thumb Code    32  init.o(i.VarInit)
+    i.VolDisable                             0x0800c178   Section        0  wirelesstemp.o(i.VolDisable)
+    VolDisable                               0x0800c179   Thumb Code    18  wirelesstemp.o(i.VolDisable)
+    i.VolEnable                              0x0800c190   Section        0  wirelesstemp.o(i.VolEnable)
+    VolEnable                                0x0800c191   Thumb Code    16  wirelesstemp.o(i.VolEnable)
+    i.VolGet                                 0x0800c1a4   Section        0  protocol.o(i.VolGet)
+    VolGet                                   0x0800c1a5   Thumb Code    92  protocol.o(i.VolGet)
+    i.VolGetFunc                             0x0800c208   Section        0  wirelesstemp.o(i.VolGetFunc)
+    VolGetFunc                               0x0800c209   Thumb Code   148  wirelesstemp.o(i.VolGetFunc)
+    i.WlDevIdSet                             0x0800c2ac   Section        0  protocol.o(i.WlDevIdSet)
+    WlDevIdSet                               0x0800c2ad   Thumb Code   140  protocol.o(i.WlDevIdSet)
+    i.WlVarInit                              0x0800c344   Section        0  wirelesstemp.o(i.WlVarInit)
+    i.Write8_8_char                          0x0800c39c   Section        0  oled.o(i.Write8_8_char)
+    i.WriteStoreConf                         0x0800c3cc   Section        0  hw_fmc.o(i.WriteStoreConf)
+    WriteStoreConf                           0x0800c3cd   Thumb Code    82  hw_fmc.o(i.WriteStoreConf)
+    i.WriteStoreInfo                         0x0800c428   Section        0  hw_fmc.o(i.WriteStoreInfo)
+    i.Write_Command                          0x0800c484   Section        0  oled.o(i.Write_Command)
+    Write_Command                            0x0800c485   Thumb Code    50  oled.o(i.Write_Command)
+    i.Write_Data                             0x0800c4bc   Section        0  oled.o(i.Write_Data)
+    Write_Data                               0x0800c4bd   Thumb Code    50  oled.o(i.Write_Data)
+    i.__0printf                              0x0800c4f4   Section        0  printfa.o(i.__0printf)
+    i.__0sprintf                             0x0800c514   Section        0  printfa.o(i.__0sprintf)
+    i.__scatterload_copy                     0x0800c53c   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800c54a   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0800c54c   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i._fp_digits                             0x0800c55c   Section        0  printfa.o(i._fp_digits)
+    _fp_digits                               0x0800c55d   Thumb Code   366  printfa.o(i._fp_digits)
+    i._printf_core                           0x0800c6e0   Section        0  printfa.o(i._printf_core)
+    _printf_core                             0x0800c6e1   Thumb Code  1744  printfa.o(i._printf_core)
+    i._printf_post_padding                   0x0800cdbc   Section        0  printfa.o(i._printf_post_padding)
+    _printf_post_padding                     0x0800cdbd   Thumb Code    36  printfa.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x0800cde0   Section        0  printfa.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x0800cde1   Thumb Code    46  printfa.o(i._printf_pre_padding)
+    i._sputc                                 0x0800ce0e   Section        0  printfa.o(i._sputc)
+    _sputc                                   0x0800ce0f   Thumb Code    10  printfa.o(i._sputc)
+    i.delay_1ms                              0x0800ce18   Section        0  systick.o(i.delay_1ms)
+    i.exti_init                              0x0800ce78   Section        0  gd32f10x_exti.o(i.exti_init)
+    i.exti_interrupt_flag_clear              0x0800cf34   Section        0  gd32f10x_exti.o(i.exti_interrupt_flag_clear)
+    i.exti_interrupt_flag_get                0x0800cf40   Section        0  gd32f10x_exti.o(i.exti_interrupt_flag_get)
+    i.fmc_bank0_ready_wait                   0x0800cf58   Section        0  gd32f10x_fmc.o(i.fmc_bank0_ready_wait)
+    i.fmc_bank0_state_get                    0x0800cf7c   Section        0  gd32f10x_fmc.o(i.fmc_bank0_state_get)
+    i.fmc_bank1_ready_wait                   0x0800cfac   Section        0  gd32f10x_fmc.o(i.fmc_bank1_ready_wait)
+    i.fmc_bank1_state_get                    0x0800cfd0   Section        0  gd32f10x_fmc.o(i.fmc_bank1_state_get)
+    i.fmc_flag_clear                         0x0800d000   Section        0  gd32f10x_fmc.o(i.fmc_flag_clear)
+    i.fmc_lock                               0x0800d020   Section        0  gd32f10x_fmc.o(i.fmc_lock)
+    i.fmc_page_erase                         0x0800d04c   Section        0  gd32f10x_fmc.o(i.fmc_page_erase)
+    i.fmc_unlock                             0x0800d138   Section        0  gd32f10x_fmc.o(i.fmc_unlock)
+    i.fmc_word_program                       0x0800d17c   Section        0  gd32f10x_fmc.o(i.fmc_word_program)
+    i.fputc                                  0x0800d23c   Section        0  hw_uart.o(i.fputc)
+    i.gpio_bit_reset                         0x0800d260   Section        0  gd32f10x_gpio.o(i.gpio_bit_reset)
+    i.gpio_bit_set                           0x0800d264   Section        0  gd32f10x_gpio.o(i.gpio_bit_set)
+    i.gpio_exti_source_select                0x0800d268   Section        0  gd32f10x_gpio.o(i.gpio_exti_source_select)
+    i.gpio_init                              0x0800d300   Section        0  gd32f10x_gpio.o(i.gpio_init)
+    i.gpio_input_bit_get                     0x0800d3ac   Section        0  gd32f10x_gpio.o(i.gpio_input_bit_get)
+    i.gpio_pin_remap_config                  0x0800d3bc   Section        0  gd32f10x_gpio.o(i.gpio_pin_remap_config)
+    i.main                                   0x0800d44c   Section        0  main.o(i.main)
+    i.modbusMasterParse                      0x0800d484   Section        0  modbus.o(i.modbusMasterParse)
+    i.modbusValInit                          0x0800d618   Section        0  modbus.o(i.modbusValInit)
+    i.nvic_config                            0x0800d640   Section        0  hw_timer.o(i.nvic_config)
+    i.nvic_irq_enable                        0x0800d658   Section        0  gd32f10x_misc.o(i.nvic_irq_enable)
+    i.nvic_priority_group_set                0x0800d704   Section        0  gd32f10x_misc.o(i.nvic_priority_group_set)
+    i.nvic_vector_table_set                  0x0800d718   Section        0  gd32f10x_misc.o(i.nvic_vector_table_set)
+    i.rcu_clock_freq_get                     0x0800d72c   Section        0  gd32f10x_rcu.o(i.rcu_clock_freq_get)
+    i.rcu_periph_clock_enable                0x0800d850   Section        0  gd32f10x_rcu.o(i.rcu_periph_clock_enable)
+    i.rcu_periph_reset_disable               0x0800d870   Section        0  gd32f10x_rcu.o(i.rcu_periph_reset_disable)
+    i.rcu_periph_reset_enable                0x0800d890   Section        0  gd32f10x_rcu.o(i.rcu_periph_reset_enable)
+    i.spi_send_byte                          0x0800d8b0   Section        0  hw_spi.o(i.spi_send_byte)
+    i.system_clock_108m_hxtal                0x0800d8e8   Section        0  system_gd32f10x.o(i.system_clock_108m_hxtal)
+    system_clock_108m_hxtal                  0x0800d8e9   Thumb Code   182  system_gd32f10x.o(i.system_clock_108m_hxtal)
+    i.system_clock_config                    0x0800d9ac   Section        0  system_gd32f10x.o(i.system_clock_config)
+    system_clock_config                      0x0800d9ad   Thumb Code     8  system_gd32f10x.o(i.system_clock_config)
+    i.systick_clksource_set                  0x0800d9b4   Section        0  gd32f10x_misc.o(i.systick_clksource_set)
+    i.systick_config                         0x0800d9dc   Section        0  systick.o(i.systick_config)
+    i.timer_deinit                           0x0800da20   Section        0  gd32f10x_timer.o(i.timer_deinit)
+    i.timer_enable                           0x0800dafc   Section        0  gd32f10x_timer.o(i.timer_enable)
+    i.timer_init                             0x0800db08   Section        0  gd32f10x_timer.o(i.timer_init)
+    i.timer_interrupt_enable                 0x0800dbe8   Section        0  gd32f10x_timer.o(i.timer_interrupt_enable)
+    i.timer_interrupt_flag_clear             0x0800dbf0   Section        0  gd32f10x_timer.o(i.timer_interrupt_flag_clear)
+    i.timer_interrupt_flag_get               0x0800dbf6   Section        0  gd32f10x_timer.o(i.timer_interrupt_flag_get)
+    i.usart_baudrate_set                     0x0800dc10   Section        0  gd32f10x_usart.o(i.usart_baudrate_set)
+    i.usart_data_receive                     0x0800dca0   Section        0  gd32f10x_usart.o(i.usart_data_receive)
+    i.usart_data_transmit                    0x0800dcaa   Section        0  gd32f10x_usart.o(i.usart_data_transmit)
+    i.usart_deinit                           0x0800dcb4   Section        0  gd32f10x_usart.o(i.usart_deinit)
+    i.usart_enable                           0x0800dd44   Section        0  gd32f10x_usart.o(i.usart_enable)
+    i.usart_flag_get                         0x0800dd4e   Section        0  gd32f10x_usart.o(i.usart_flag_get)
+    i.usart_hardware_flow_cts_config         0x0800dd6c   Section        0  gd32f10x_usart.o(i.usart_hardware_flow_cts_config)
+    i.usart_hardware_flow_rts_config         0x0800dd7c   Section        0  gd32f10x_usart.o(i.usart_hardware_flow_rts_config)
+    i.usart_interrupt_disable                0x0800dd8c   Section        0  gd32f10x_usart.o(i.usart_interrupt_disable)
+    i.usart_interrupt_enable                 0x0800dda6   Section        0  gd32f10x_usart.o(i.usart_interrupt_enable)
+    i.usart_interrupt_flag_clear             0x0800ddc0   Section        0  gd32f10x_usart.o(i.usart_interrupt_flag_clear)
+    i.usart_interrupt_flag_get               0x0800ddda   Section        0  gd32f10x_usart.o(i.usart_interrupt_flag_get)
+    i.usart_parity_config                    0x0800de12   Section        0  gd32f10x_usart.o(i.usart_parity_config)
+    i.usart_receive_config                   0x0800de22   Section        0  gd32f10x_usart.o(i.usart_receive_config)
+    i.usart_stop_bit_set                     0x0800de32   Section        0  gd32f10x_usart.o(i.usart_stop_bit_set)
+    i.usart_transmit_config                  0x0800de42   Section        0  gd32f10x_usart.o(i.usart_transmit_config)
+    i.usart_word_length_set                  0x0800de52   Section        0  gd32f10x_usart.o(i.usart_word_length_set)
+    .constdata                               0x0800de62   Section     2834  gui.o(.constdata)
+    .constdata                               0x0800e974   Section       12  localtime.o(.constdata)
+    monlen                                   0x0800e974   Data          12  localtime.o(.constdata)
     .data                                    0x20000000   Section        4  system_gd32f10x.o(.data)
     .data                                    0x20000004   Section        8  systick.o(.data)
     count_1us                                0x20000004   Data           4  systick.o(.data)
@@ -2489,17 +2490,17 @@ Image Symbol Table
     .bss                                     0x200004dc   Section     2176  oled.o(.bss)
     .bss                                     0x20000d5c   Section      776  modbus.o(.bss)
     TempBuf                                  0x20000f64   Data         256  modbus.o(.bss)
-    .bss                                     0x20001064   Section      506  wirelesstemp.o(.bss)
-    .bss                                     0x20001260   Section      444  protocol.o(.bss)
-    tempBuf                                  0x20001354   Data         200  protocol.o(.bss)
-    .bss                                     0x2000141c   Section      156  commucateslave.o(.bss)
-    .bss                                     0x200014b8   Section      510  hw_uart.o(.bss)
-    NbBuff                                   0x200014b8   Data         255  hw_uart.o(.bss)
-    CommunBuff                               0x200015b7   Data         255  hw_uart.o(.bss)
-    .bss                                     0x200016b8   Section       40  hw_fmc.o(.bss)
-    .bss                                     0x200016e0   Section       44  localtime.o(.bss)
-    _tms                                     0x200016e0   Data          44  localtime.o(.bss)
-    STACK                                    0x20001710   Section     8192  startup_gd32f10x_md.o(STACK)
+    .bss                                     0x20001064   Section      628  wirelesstemp.o(.bss)
+    .bss                                     0x200012d8   Section      444  protocol.o(.bss)
+    tempBuf                                  0x200013cc   Data         200  protocol.o(.bss)
+    .bss                                     0x20001494   Section      156  commucateslave.o(.bss)
+    .bss                                     0x20001530   Section      510  hw_uart.o(.bss)
+    NbBuff                                   0x20001530   Data         255  hw_uart.o(.bss)
+    CommunBuff                               0x2000162f   Data         255  hw_uart.o(.bss)
+    .bss                                     0x20001730   Section       40  hw_fmc.o(.bss)
+    .bss                                     0x20001758   Section       44  localtime.o(.bss)
+    _tms                                     0x20001758   Data          44  localtime.o(.bss)
+    STACK                                    0x20001788   Section     8192  startup_gd32f10x_md.o(STACK)
 
     Global Symbols
 
@@ -2652,188 +2653,188 @@ Image Symbol Table
     ButtonInit                               0x08004d81   Thumb Code   174  hw_exit.o(i.ButtonInit)
     ButtonScan                               0x08004e35   Thumb Code    60  hw_exit.o(i.ButtonScan)
     CheckCRC                                 0x08004e7d   Thumb Code    28  hw_fmc.o(i.CheckCRC)
-    CommunAdd                                0x0800533d   Thumb Code    66  hw_uart.o(i.CommunAdd)
-    CommunCheck                              0x08005391   Thumb Code    16  hw_uart.o(i.CommunCheck)
-    CommunGetData                            0x080053a5   Thumb Code    76  hw_uart.o(i.CommunGetData)
-    CommunUartSendBuf                        0x08005401   Thumb Code    44  hw_uart.o(i.CommunUartSendBuf)
-    CommunicationFailFun                     0x08005431   Thumb Code   104  gui.o(i.CommunicationFailFun)
-    ConactTempSecondFun                      0x080054a5   Thumb Code   626  gui.o(i.ConactTempSecondFun)
-    ContactTempFirstFun                      0x08005749   Thumb Code   626  gui.o(i.ContactTempFirstFun)
-    DatalogMenuFun                           0x08005d31   Thumb Code   412  gui.o(i.DatalogMenuFun)
-    DebugMon_Handler                         0x08005eed   Thumb Code     2  gd32f10x_it.o(i.DebugMon_Handler)
-    DeviceInitFun                            0x08005ef1   Thumb Code   122  gui.o(i.DeviceInitFun)
-    DeviceStartFun                           0x08005f89   Thumb Code    78  gui.o(i.DeviceStartFun)
-    DisalyAbnormalHumiAdd                    0x08005fe9   Thumb Code   104  oled.o(i.DisalyAbnormalHumiAdd)
-    DispalyHumiStoreAdd                      0x08006059   Thumb Code    80  oled.o(i.DispalyHumiStoreAdd)
-    DispalyTempStoreAdd                      0x080060b1   Thumb Code   122  oled.o(i.DispalyTempStoreAdd)
-    DisplayAbnormalSignalAdd                 0x08006135   Thumb Code   126  oled.o(i.DisplayAbnormalSignalAdd)
-    DisplayAnnormalTempAdd                   0x080061bd   Thumb Code   104  oled.o(i.DisplayAnnormalTempAdd)
-    DisplayInterTempAdd                      0x0800622d   Thumb Code   100  oled.o(i.DisplayInterTempAdd)
-    DisplayMainProInit                       0x08006295   Thumb Code    18  protocol.o(i.DisplayMainProInit)
-    DisplayMainProTask                       0x080062b1   Thumb Code    46  protocol.o(i.DisplayMainProTask)
-    DisplayOnePage                           0x080062df   Thumb Code    84  oled.o(i.DisplayOnePage)
-    DisplaySignalStoreAdd                    0x08006335   Thumb Code   206  oled.o(i.DisplaySignalStoreAdd)
-    EXTI10_15_IRQHandler                     0x08006411   Thumb Code   172  hw_exit.o(i.EXTI10_15_IRQHandler)
-    FMC_StoreInfoInit                        0x08006629   Thumb Code   278  hw_fmc.o(i.FMC_StoreInfoInit)
-    Fill_RAM                                 0x08006759   Thumb Code    48  oled.o(i.Fill_RAM)
-    FlashEarsePage                           0x08006789   Thumb Code    68  hw_fmc.o(i.FlashEarsePage)
-    GUI_CommuncationFail                     0x08006bdd   Thumb Code    36  gui.o(i.GUI_CommuncationFail)
-    GUI_MainMenu                             0x080072ad   Thumb Code   254  gui.o(i.GUI_MainMenu)
-    GUI_UpdateProcessBar                     0x080073bd   Thumb Code    48  gui.o(i.GUI_UpdateProcessBar)
-    GetButtonVal                             0x08007b4d   Thumb Code    12  hw_exit.o(i.GetButtonVal)
-    GetMainBoardInfo                         0x08008691   Thumb Code   694  gui.o(i.GetMainBoardInfo)
-    GetWirelessTempTask                      0x08009455   Thumb Code    12  wirelesstemp.o(i.GetWirelessTempTask)
-    HardFault_Handler                        0x080094d1   Thumb Code     4  gd32f10x_it.o(i.HardFault_Handler)
-    InterlayerHumidityFun                    0x080094e9   Thumb Code   332  gui.o(i.InterlayerHumidityFun)
-    MCU_Init                                 0x08009a49   Thumb Code    74  init.o(i.MCU_Init)
-    MainBoardInfoFun                         0x08009ae5   Thumb Code   670  gui.o(i.MainBoardInfoFun)
-    MainMenuFun                              0x08009db1   Thumb Code   274  gui.o(i.MainMenuFun)
-    MechProShowScrolling                     0x08009ee5   Thumb Code   282  oled.o(i.MechProShowScrolling)
-    MechProperitesFun                        0x0800a001   Thumb Code   590  gui.o(i.MechProperitesFun)
-    MemManage_Handler                        0x0800a275   Thumb Code     4  gd32f10x_it.o(i.MemManage_Handler)
-    Modbus_Crc_Compute                       0x0800a279   Thumb Code    42  modbus.o(i.Modbus_Crc_Compute)
-    NMI_Handler                              0x0800a2a9   Thumb Code     2  gd32f10x_it.o(i.NMI_Handler)
-    NbAdd                                    0x0800a2ad   Thumb Code    66  hw_uart.o(i.NbAdd)
-    NbCheck                                  0x0800a301   Thumb Code    16  hw_uart.o(i.NbCheck)
-    NbGetData                                0x0800a315   Thumb Code    76  hw_uart.o(i.NbGetData)
-    NbUartSendBuf                            0x0800a371   Thumb Code    44  hw_uart.o(i.NbUartSendBuf)
-    OledInit                                 0x0800a481   Thumb Code    16  oled.o(i.OledInit)
-    Oled_ConfigInit                          0x0800a491   Thumb Code   142  oled.o(i.Oled_ConfigInit)
-    PakStuctInit                             0x0800a53d   Thumb Code    46  commucateslave.o(i.PakStuctInit)
-    PakTimerRun                              0x0800a575   Thumb Code    44  commucateslave.o(i.PakTimerRun)
-    PendSV_Handler                           0x0800a61d   Thumb Code     2  gd32f10x_it.o(i.PendSV_Handler)
-    ProParse                                 0x0800a659   Thumb Code   360  protocol.o(i.ProParse)
-    ReceParse                                0x0800a909   Thumb Code   258  commucateslave.o(i.ReceParse)
-    SVC_Handler                              0x0800ab99   Thumb Code     2  gd32f10x_it.o(i.SVC_Handler)
-    SetDevIdEnable                           0x0800b075   Thumb Code    16  wirelesstemp.o(i.SetDevIdEnable)
-    Set_Addressing_Mode                      0x0800b79d   Thumb Code    18  oled.o(i.Set_Addressing_Mode)
-    Set_Charge_Pump                          0x0800b7af   Thumb Code    18  oled.o(i.Set_Charge_Pump)
-    Set_Common_Config                        0x0800b7c1   Thumb Code    18  oled.o(i.Set_Common_Config)
-    Set_Common_Remap                         0x0800b7d3   Thumb Code    12  oled.o(i.Set_Common_Remap)
-    Set_Contrast_Control                     0x0800b7df   Thumb Code    18  oled.o(i.Set_Contrast_Control)
-    Set_Display_Clock                        0x0800b7f1   Thumb Code    18  oled.o(i.Set_Display_Clock)
-    Set_Display_Offset                       0x0800b803   Thumb Code    18  oled.o(i.Set_Display_Offset)
-    Set_Display_On_Off                       0x0800b815   Thumb Code    12  oled.o(i.Set_Display_On_Off)
-    Set_Entire_Display                       0x0800b821   Thumb Code    12  oled.o(i.Set_Entire_Display)
-    Set_Inverse_Display                      0x0800b82d   Thumb Code    12  oled.o(i.Set_Inverse_Display)
-    Set_Multiplex_Ratio                      0x0800b839   Thumb Code    18  oled.o(i.Set_Multiplex_Ratio)
-    Set_Precharge_Period                     0x0800b84b   Thumb Code    18  oled.o(i.Set_Precharge_Period)
-    Set_Segment_Remap                        0x0800b85d   Thumb Code    12  oled.o(i.Set_Segment_Remap)
-    Set_Start_Column                         0x0800b869   Thumb Code    44  oled.o(i.Set_Start_Column)
-    Set_Start_Line                           0x0800b895   Thumb Code    14  oled.o(i.Set_Start_Line)
-    Set_Start_Page                           0x0800b8a3   Thumb Code    14  oled.o(i.Set_Start_Page)
-    Set_VCOMH                                0x0800b8b1   Thumb Code    18  oled.o(i.Set_VCOMH)
-    ShowChar                                 0x0800b8c3   Thumb Code   116  oled.o(i.ShowChar)
-    ShowChinese                              0x0800b937   Thumb Code   116  oled.o(i.ShowChinese)
-    ShowVolFun                               0x0800b9ad   Thumb Code   744  gui.o(i.ShowVolFun)
-    SignalTimerInit                          0x0800bcb9   Thumb Code    72  hw_timer.o(i.SignalTimerInit)
-    SpiInit                                  0x0800bd05   Thumb Code    64  hw_spi.o(i.SpiInit)
-    StoreConfStore                           0x0800bd49   Thumb Code    20  hw_fmc.o(i.StoreConfStore)
-    StoreInfoStore                           0x0800bd61   Thumb Code    24  hw_fmc.o(i.StoreInfoStore)
-    SysTick_Handler                          0x0800bd7d   Thumb Code     2  gd32f10x_it.o(i.SysTick_Handler)
-    SystemInit                               0x0800bd81   Thumb Code   116  system_gd32f10x.o(i.SystemInit)
-    TIMER1_IRQHandler                        0x0800be05   Thumb Code    38  hw_timer.o(i.TIMER1_IRQHandler)
-    TIMER2_IRQHandler                        0x0800be31   Thumb Code    24  hw_timer.o(i.TIMER2_IRQHandler)
-    Timer_1ms_Init                           0x0800bea5   Thumb Code    86  hw_timer.o(i.Timer_1ms_Init)
-    USART0_IRQHandler                        0x0800befd   Thumb Code    38  hw_uart.o(i.USART0_IRQHandler)
-    USART2_IRQHandler                        0x0800bf2d   Thumb Code    38  hw_uart.o(i.USART2_IRQHandler)
-    UartInit                                 0x0800bfe9   Thumb Code    12  hw_uart.o(i.UartInit)
-    UsageFault_Handler                       0x0800c0b1   Thumb Code     4  gd32f10x_it.o(i.UsageFault_Handler)
-    WlVarInit                                0x0800c299   Thumb Code    54  wirelesstemp.o(i.WlVarInit)
-    Write8_8_char                            0x0800c2d9   Thumb Code    48  oled.o(i.Write8_8_char)
-    WriteStoreInfo                           0x0800c365   Thumb Code    82  hw_fmc.o(i.WriteStoreInfo)
-    __0printf                                0x0800c431   Thumb Code    22  printfa.o(i.__0printf)
-    __1printf                                0x0800c431   Thumb Code     0  printfa.o(i.__0printf)
-    __2printf                                0x0800c431   Thumb Code     0  printfa.o(i.__0printf)
-    __c89printf                              0x0800c431   Thumb Code     0  printfa.o(i.__0printf)
-    printf                                   0x0800c431   Thumb Code     0  printfa.o(i.__0printf)
-    __0sprintf                               0x0800c451   Thumb Code    34  printfa.o(i.__0sprintf)
-    __1sprintf                               0x0800c451   Thumb Code     0  printfa.o(i.__0sprintf)
-    __2sprintf                               0x0800c451   Thumb Code     0  printfa.o(i.__0sprintf)
-    __c89sprintf                             0x0800c451   Thumb Code     0  printfa.o(i.__0sprintf)
-    sprintf                                  0x0800c451   Thumb Code     0  printfa.o(i.__0sprintf)
-    __scatterload_copy                       0x0800c479   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x0800c487   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x0800c489   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    delay_1ms                                0x0800cd55   Thumb Code    90  systick.o(i.delay_1ms)
-    exti_init                                0x0800cdb5   Thumb Code   184  gd32f10x_exti.o(i.exti_init)
-    exti_interrupt_flag_clear                0x0800ce71   Thumb Code     6  gd32f10x_exti.o(i.exti_interrupt_flag_clear)
-    exti_interrupt_flag_get                  0x0800ce7d   Thumb Code    18  gd32f10x_exti.o(i.exti_interrupt_flag_get)
-    fmc_bank0_ready_wait                     0x0800ce95   Thumb Code    34  gd32f10x_fmc.o(i.fmc_bank0_ready_wait)
-    fmc_bank0_state_get                      0x0800ceb9   Thumb Code    44  gd32f10x_fmc.o(i.fmc_bank0_state_get)
-    fmc_bank1_ready_wait                     0x0800cee9   Thumb Code    34  gd32f10x_fmc.o(i.fmc_bank1_ready_wait)
-    fmc_bank1_state_get                      0x0800cf0d   Thumb Code    44  gd32f10x_fmc.o(i.fmc_bank1_state_get)
-    fmc_flag_clear                           0x0800cf3d   Thumb Code    28  gd32f10x_fmc.o(i.fmc_flag_clear)
-    fmc_lock                                 0x0800cf5d   Thumb Code    34  gd32f10x_fmc.o(i.fmc_lock)
-    fmc_page_erase                           0x0800cf89   Thumb Code   222  gd32f10x_fmc.o(i.fmc_page_erase)
-    fmc_unlock                               0x0800d075   Thumb Code    52  gd32f10x_fmc.o(i.fmc_unlock)
-    fmc_word_program                         0x0800d0b9   Thumb Code   178  gd32f10x_fmc.o(i.fmc_word_program)
-    fputc                                    0x0800d179   Thumb Code    32  hw_uart.o(i.fputc)
-    gpio_bit_reset                           0x0800d19d   Thumb Code     4  gd32f10x_gpio.o(i.gpio_bit_reset)
-    gpio_bit_set                             0x0800d1a1   Thumb Code     4  gd32f10x_gpio.o(i.gpio_bit_set)
-    gpio_exti_source_select                  0x0800d1a5   Thumb Code   146  gd32f10x_gpio.o(i.gpio_exti_source_select)
-    gpio_init                                0x0800d23d   Thumb Code   172  gd32f10x_gpio.o(i.gpio_init)
-    gpio_input_bit_get                       0x0800d2e9   Thumb Code    16  gd32f10x_gpio.o(i.gpio_input_bit_get)
-    gpio_pin_remap_config                    0x0800d2f9   Thumb Code   138  gd32f10x_gpio.o(i.gpio_pin_remap_config)
-    main                                     0x0800d389   Thumb Code    48  main.o(i.main)
-    modbusMasterParse                        0x0800d3c1   Thumb Code   386  modbus.o(i.modbusMasterParse)
-    modbusValInit                            0x0800d555   Thumb Code    36  modbus.o(i.modbusValInit)
-    nvic_config                              0x0800d57d   Thumb Code    22  hw_timer.o(i.nvic_config)
-    nvic_irq_enable                          0x0800d595   Thumb Code   162  gd32f10x_misc.o(i.nvic_irq_enable)
-    nvic_priority_group_set                  0x0800d641   Thumb Code    10  gd32f10x_misc.o(i.nvic_priority_group_set)
-    nvic_vector_table_set                    0x0800d655   Thumb Code    12  gd32f10x_misc.o(i.nvic_vector_table_set)
-    rcu_clock_freq_get                       0x0800d669   Thumb Code   264  gd32f10x_rcu.o(i.rcu_clock_freq_get)
-    rcu_periph_clock_enable                  0x0800d78d   Thumb Code    28  gd32f10x_rcu.o(i.rcu_periph_clock_enable)
-    rcu_periph_reset_disable                 0x0800d7ad   Thumb Code    28  gd32f10x_rcu.o(i.rcu_periph_reset_disable)
-    rcu_periph_reset_enable                  0x0800d7cd   Thumb Code    28  gd32f10x_rcu.o(i.rcu_periph_reset_enable)
-    spi_send_byte                            0x0800d7ed   Thumb Code    52  hw_spi.o(i.spi_send_byte)
-    systick_clksource_set                    0x0800d8f1   Thumb Code    40  gd32f10x_misc.o(i.systick_clksource_set)
-    systick_config                           0x0800d919   Thumb Code    46  systick.o(i.systick_config)
-    timer_deinit                             0x0800d95d   Thumb Code   210  gd32f10x_timer.o(i.timer_deinit)
-    timer_enable                             0x0800da39   Thumb Code    10  gd32f10x_timer.o(i.timer_enable)
-    timer_init                               0x0800da45   Thumb Code   170  gd32f10x_timer.o(i.timer_init)
-    timer_interrupt_enable                   0x0800db25   Thumb Code     8  gd32f10x_timer.o(i.timer_interrupt_enable)
-    timer_interrupt_flag_clear               0x0800db2d   Thumb Code     6  gd32f10x_timer.o(i.timer_interrupt_flag_clear)
-    timer_interrupt_flag_get                 0x0800db33   Thumb Code    24  gd32f10x_timer.o(i.timer_interrupt_flag_get)
-    usart_baudrate_set                       0x0800db4d   Thumb Code   136  gd32f10x_usart.o(i.usart_baudrate_set)
-    usart_data_receive                       0x0800dbdd   Thumb Code    10  gd32f10x_usart.o(i.usart_data_receive)
-    usart_data_transmit                      0x0800dbe7   Thumb Code     8  gd32f10x_usart.o(i.usart_data_transmit)
-    usart_deinit                             0x0800dbf1   Thumb Code   136  gd32f10x_usart.o(i.usart_deinit)
-    usart_enable                             0x0800dc81   Thumb Code    10  gd32f10x_usart.o(i.usart_enable)
-    usart_flag_get                           0x0800dc8b   Thumb Code    30  gd32f10x_usart.o(i.usart_flag_get)
-    usart_hardware_flow_cts_config           0x0800dca9   Thumb Code    16  gd32f10x_usart.o(i.usart_hardware_flow_cts_config)
-    usart_hardware_flow_rts_config           0x0800dcb9   Thumb Code    16  gd32f10x_usart.o(i.usart_hardware_flow_rts_config)
-    usart_interrupt_disable                  0x0800dcc9   Thumb Code    26  gd32f10x_usart.o(i.usart_interrupt_disable)
-    usart_interrupt_enable                   0x0800dce3   Thumb Code    26  gd32f10x_usart.o(i.usart_interrupt_enable)
-    usart_interrupt_flag_clear               0x0800dcfd   Thumb Code    26  gd32f10x_usart.o(i.usart_interrupt_flag_clear)
-    usart_interrupt_flag_get                 0x0800dd17   Thumb Code    56  gd32f10x_usart.o(i.usart_interrupt_flag_get)
-    usart_parity_config                      0x0800dd4f   Thumb Code    16  gd32f10x_usart.o(i.usart_parity_config)
-    usart_receive_config                     0x0800dd5f   Thumb Code    16  gd32f10x_usart.o(i.usart_receive_config)
-    usart_stop_bit_set                       0x0800dd6f   Thumb Code    16  gd32f10x_usart.o(i.usart_stop_bit_set)
-    usart_transmit_config                    0x0800dd7f   Thumb Code    16  gd32f10x_usart.o(i.usart_transmit_config)
-    usart_word_length_set                    0x0800dd8f   Thumb Code    16  gd32f10x_usart.o(i.usart_word_length_set)
-    MainMenu                                 0x0800dd9e   Data          96  gui.o(.constdata)
-    DataShow                                 0x0800ddfe   Data         160  gui.o(.constdata)
-    dataLog                                  0x0800de9e   Data         160  gui.o(.constdata)
-    AbnrmalData                              0x0800df3e   Data         160  gui.o(.constdata)
-    AsciiIndex                               0x0800dfde   Data          50  gui.o(.constdata)
-    AsciiCode                                0x0800e010   Data         784  gui.o(.constdata)
-    MechPeoCode                              0x0800e320   Data         128  gui.o(.constdata)
-    TempCode                                 0x0800e3a0   Data          32  gui.o(.constdata)
-    CloseCode                                0x0800e3c0   Data          64  gui.o(.constdata)
-    OpenCode                                 0x0800e400   Data          64  gui.o(.constdata)
-    InterTemCode                             0x0800e440   Data         128  gui.o(.constdata)
-    TempHumiCode                             0x0800e4c0   Data          96  gui.o(.constdata)
-    DeviceInitCode                           0x0800e520   Data          96  gui.o(.constdata)
-    ProcessBarCode                           0x0800e580   Data         208  gui.o(.constdata)
-    ContactTempCode                          0x0800e650   Data         128  gui.o(.constdata)
-    InterlayerHumiCode                       0x0800e6d0   Data         128  gui.o(.constdata)
-    upDownDirCode                            0x0800e750   Data          64  gui.o(.constdata)
-    NothingCode                              0x0800e790   Data          32  gui.o(.constdata)
-    CommuncationFailCode                     0x0800e7b0   Data         192  gui.o(.constdata)
-    ContinusCode                             0x0800e870   Data          64  gui.o(.constdata)
-    Region$$Table$$Base                      0x0800e8bc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800e8dc   Number         0  anon$$obj.o(Region$$Table)
+    CommunAdd                                0x0800536d   Thumb Code    66  hw_uart.o(i.CommunAdd)
+    CommunCheck                              0x080053c1   Thumb Code    16  hw_uart.o(i.CommunCheck)
+    CommunGetData                            0x080053d5   Thumb Code    76  hw_uart.o(i.CommunGetData)
+    CommunUartSendBuf                        0x08005431   Thumb Code    44  hw_uart.o(i.CommunUartSendBuf)
+    CommunicationFailFun                     0x08005461   Thumb Code   104  gui.o(i.CommunicationFailFun)
+    ConactTempSecondFun                      0x080054d5   Thumb Code   626  gui.o(i.ConactTempSecondFun)
+    ContactTempFirstFun                      0x08005779   Thumb Code   626  gui.o(i.ContactTempFirstFun)
+    DatalogMenuFun                           0x08005d61   Thumb Code   412  gui.o(i.DatalogMenuFun)
+    DebugMon_Handler                         0x08005f1d   Thumb Code     2  gd32f10x_it.o(i.DebugMon_Handler)
+    DeviceInitFun                            0x08005f21   Thumb Code   122  gui.o(i.DeviceInitFun)
+    DeviceStartFun                           0x08005fb9   Thumb Code    78  gui.o(i.DeviceStartFun)
+    DisalyAbnormalHumiAdd                    0x08006019   Thumb Code   104  oled.o(i.DisalyAbnormalHumiAdd)
+    DispalyHumiStoreAdd                      0x08006089   Thumb Code    80  oled.o(i.DispalyHumiStoreAdd)
+    DispalyTempStoreAdd                      0x080060e1   Thumb Code   122  oled.o(i.DispalyTempStoreAdd)
+    DisplayAbnormalSignalAdd                 0x08006165   Thumb Code   126  oled.o(i.DisplayAbnormalSignalAdd)
+    DisplayAnnormalTempAdd                   0x080061ed   Thumb Code   104  oled.o(i.DisplayAnnormalTempAdd)
+    DisplayInterTempAdd                      0x0800625d   Thumb Code   100  oled.o(i.DisplayInterTempAdd)
+    DisplayMainProInit                       0x080062c5   Thumb Code    18  protocol.o(i.DisplayMainProInit)
+    DisplayMainProTask                       0x080062e1   Thumb Code    46  protocol.o(i.DisplayMainProTask)
+    DisplayOnePage                           0x0800630f   Thumb Code    84  oled.o(i.DisplayOnePage)
+    DisplaySignalStoreAdd                    0x08006365   Thumb Code   206  oled.o(i.DisplaySignalStoreAdd)
+    EXTI10_15_IRQHandler                     0x08006441   Thumb Code   172  hw_exit.o(i.EXTI10_15_IRQHandler)
+    FMC_StoreInfoInit                        0x080066d1   Thumb Code   278  hw_fmc.o(i.FMC_StoreInfoInit)
+    Fill_RAM                                 0x08006801   Thumb Code    48  oled.o(i.Fill_RAM)
+    FlashEarsePage                           0x08006831   Thumb Code    68  hw_fmc.o(i.FlashEarsePage)
+    GUI_CommuncationFail                     0x08006c85   Thumb Code    36  gui.o(i.GUI_CommuncationFail)
+    GUI_MainMenu                             0x08007355   Thumb Code   254  gui.o(i.GUI_MainMenu)
+    GUI_UpdateProcessBar                     0x08007465   Thumb Code    48  gui.o(i.GUI_UpdateProcessBar)
+    GetButtonVal                             0x08007bf5   Thumb Code    12  hw_exit.o(i.GetButtonVal)
+    GetMainBoardInfo                         0x08008739   Thumb Code   694  gui.o(i.GetMainBoardInfo)
+    GetWirelessTempTask                      0x080094fd   Thumb Code    12  wirelesstemp.o(i.GetWirelessTempTask)
+    HardFault_Handler                        0x08009579   Thumb Code     4  gd32f10x_it.o(i.HardFault_Handler)
+    InterlayerHumidityFun                    0x08009591   Thumb Code   332  gui.o(i.InterlayerHumidityFun)
+    MCU_Init                                 0x08009af1   Thumb Code    74  init.o(i.MCU_Init)
+    MainBoardInfoFun                         0x08009b8d   Thumb Code   670  gui.o(i.MainBoardInfoFun)
+    MainMenuFun                              0x08009e59   Thumb Code   274  gui.o(i.MainMenuFun)
+    MechProShowScrolling                     0x08009f8d   Thumb Code   282  oled.o(i.MechProShowScrolling)
+    MechProperitesFun                        0x0800a0a9   Thumb Code   590  gui.o(i.MechProperitesFun)
+    MemManage_Handler                        0x0800a31d   Thumb Code     4  gd32f10x_it.o(i.MemManage_Handler)
+    Modbus_Crc_Compute                       0x0800a321   Thumb Code    42  modbus.o(i.Modbus_Crc_Compute)
+    NMI_Handler                              0x0800a351   Thumb Code     2  gd32f10x_it.o(i.NMI_Handler)
+    NbAdd                                    0x0800a355   Thumb Code    66  hw_uart.o(i.NbAdd)
+    NbCheck                                  0x0800a3a9   Thumb Code    16  hw_uart.o(i.NbCheck)
+    NbGetData                                0x0800a3bd   Thumb Code    76  hw_uart.o(i.NbGetData)
+    NbUartSendBuf                            0x0800a419   Thumb Code    44  hw_uart.o(i.NbUartSendBuf)
+    OledInit                                 0x0800a529   Thumb Code    16  oled.o(i.OledInit)
+    Oled_ConfigInit                          0x0800a539   Thumb Code   142  oled.o(i.Oled_ConfigInit)
+    PakStuctInit                             0x0800a5e5   Thumb Code    46  commucateslave.o(i.PakStuctInit)
+    PakTimerRun                              0x0800a61d   Thumb Code    44  commucateslave.o(i.PakTimerRun)
+    PendSV_Handler                           0x0800a6c5   Thumb Code     2  gd32f10x_it.o(i.PendSV_Handler)
+    ProParse                                 0x0800a701   Thumb Code   360  protocol.o(i.ProParse)
+    ReceParse                                0x0800a9b1   Thumb Code   258  commucateslave.o(i.ReceParse)
+    SVC_Handler                              0x0800ac41   Thumb Code     2  gd32f10x_it.o(i.SVC_Handler)
+    SetDevIdEnable                           0x0800b10d   Thumb Code    16  wirelesstemp.o(i.SetDevIdEnable)
+    Set_Addressing_Mode                      0x0800b835   Thumb Code    18  oled.o(i.Set_Addressing_Mode)
+    Set_Charge_Pump                          0x0800b847   Thumb Code    18  oled.o(i.Set_Charge_Pump)
+    Set_Common_Config                        0x0800b859   Thumb Code    18  oled.o(i.Set_Common_Config)
+    Set_Common_Remap                         0x0800b86b   Thumb Code    12  oled.o(i.Set_Common_Remap)
+    Set_Contrast_Control                     0x0800b877   Thumb Code    18  oled.o(i.Set_Contrast_Control)
+    Set_Display_Clock                        0x0800b889   Thumb Code    18  oled.o(i.Set_Display_Clock)
+    Set_Display_Offset                       0x0800b89b   Thumb Code    18  oled.o(i.Set_Display_Offset)
+    Set_Display_On_Off                       0x0800b8ad   Thumb Code    12  oled.o(i.Set_Display_On_Off)
+    Set_Entire_Display                       0x0800b8b9   Thumb Code    12  oled.o(i.Set_Entire_Display)
+    Set_Inverse_Display                      0x0800b8c5   Thumb Code    12  oled.o(i.Set_Inverse_Display)
+    Set_Multiplex_Ratio                      0x0800b8d1   Thumb Code    18  oled.o(i.Set_Multiplex_Ratio)
+    Set_Precharge_Period                     0x0800b8e3   Thumb Code    18  oled.o(i.Set_Precharge_Period)
+    Set_Segment_Remap                        0x0800b8f5   Thumb Code    12  oled.o(i.Set_Segment_Remap)
+    Set_Start_Column                         0x0800b901   Thumb Code    44  oled.o(i.Set_Start_Column)
+    Set_Start_Line                           0x0800b92d   Thumb Code    14  oled.o(i.Set_Start_Line)
+    Set_Start_Page                           0x0800b93b   Thumb Code    14  oled.o(i.Set_Start_Page)
+    Set_VCOMH                                0x0800b949   Thumb Code    18  oled.o(i.Set_VCOMH)
+    ShowChar                                 0x0800b95b   Thumb Code   116  oled.o(i.ShowChar)
+    ShowChinese                              0x0800b9cf   Thumb Code   116  oled.o(i.ShowChinese)
+    ShowVolFun                               0x0800ba45   Thumb Code   744  gui.o(i.ShowVolFun)
+    SignalTimerInit                          0x0800bd51   Thumb Code    72  hw_timer.o(i.SignalTimerInit)
+    SpiInit                                  0x0800bd9d   Thumb Code    64  hw_spi.o(i.SpiInit)
+    StoreConfStore                           0x0800bde1   Thumb Code    20  hw_fmc.o(i.StoreConfStore)
+    StoreInfoStore                           0x0800bdf9   Thumb Code    24  hw_fmc.o(i.StoreInfoStore)
+    SysTick_Handler                          0x0800be15   Thumb Code     2  gd32f10x_it.o(i.SysTick_Handler)
+    SystemInit                               0x0800be19   Thumb Code   116  system_gd32f10x.o(i.SystemInit)
+    TIMER1_IRQHandler                        0x0800be9d   Thumb Code    38  hw_timer.o(i.TIMER1_IRQHandler)
+    TIMER2_IRQHandler                        0x0800bec9   Thumb Code    24  hw_timer.o(i.TIMER2_IRQHandler)
+    Timer_1ms_Init                           0x0800bf3d   Thumb Code    86  hw_timer.o(i.Timer_1ms_Init)
+    USART0_IRQHandler                        0x0800bf95   Thumb Code    38  hw_uart.o(i.USART0_IRQHandler)
+    USART2_IRQHandler                        0x0800bfc5   Thumb Code    38  hw_uart.o(i.USART2_IRQHandler)
+    UartInit                                 0x0800c081   Thumb Code    12  hw_uart.o(i.UartInit)
+    UsageFault_Handler                       0x0800c149   Thumb Code     4  gd32f10x_it.o(i.UsageFault_Handler)
+    WlVarInit                                0x0800c345   Thumb Code    78  wirelesstemp.o(i.WlVarInit)
+    Write8_8_char                            0x0800c39d   Thumb Code    48  oled.o(i.Write8_8_char)
+    WriteStoreInfo                           0x0800c429   Thumb Code    82  hw_fmc.o(i.WriteStoreInfo)
+    __0printf                                0x0800c4f5   Thumb Code    22  printfa.o(i.__0printf)
+    __1printf                                0x0800c4f5   Thumb Code     0  printfa.o(i.__0printf)
+    __2printf                                0x0800c4f5   Thumb Code     0  printfa.o(i.__0printf)
+    __c89printf                              0x0800c4f5   Thumb Code     0  printfa.o(i.__0printf)
+    printf                                   0x0800c4f5   Thumb Code     0  printfa.o(i.__0printf)
+    __0sprintf                               0x0800c515   Thumb Code    34  printfa.o(i.__0sprintf)
+    __1sprintf                               0x0800c515   Thumb Code     0  printfa.o(i.__0sprintf)
+    __2sprintf                               0x0800c515   Thumb Code     0  printfa.o(i.__0sprintf)
+    __c89sprintf                             0x0800c515   Thumb Code     0  printfa.o(i.__0sprintf)
+    sprintf                                  0x0800c515   Thumb Code     0  printfa.o(i.__0sprintf)
+    __scatterload_copy                       0x0800c53d   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800c54b   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0800c54d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    delay_1ms                                0x0800ce19   Thumb Code    90  systick.o(i.delay_1ms)
+    exti_init                                0x0800ce79   Thumb Code   184  gd32f10x_exti.o(i.exti_init)
+    exti_interrupt_flag_clear                0x0800cf35   Thumb Code     6  gd32f10x_exti.o(i.exti_interrupt_flag_clear)
+    exti_interrupt_flag_get                  0x0800cf41   Thumb Code    18  gd32f10x_exti.o(i.exti_interrupt_flag_get)
+    fmc_bank0_ready_wait                     0x0800cf59   Thumb Code    34  gd32f10x_fmc.o(i.fmc_bank0_ready_wait)
+    fmc_bank0_state_get                      0x0800cf7d   Thumb Code    44  gd32f10x_fmc.o(i.fmc_bank0_state_get)
+    fmc_bank1_ready_wait                     0x0800cfad   Thumb Code    34  gd32f10x_fmc.o(i.fmc_bank1_ready_wait)
+    fmc_bank1_state_get                      0x0800cfd1   Thumb Code    44  gd32f10x_fmc.o(i.fmc_bank1_state_get)
+    fmc_flag_clear                           0x0800d001   Thumb Code    28  gd32f10x_fmc.o(i.fmc_flag_clear)
+    fmc_lock                                 0x0800d021   Thumb Code    34  gd32f10x_fmc.o(i.fmc_lock)
+    fmc_page_erase                           0x0800d04d   Thumb Code   222  gd32f10x_fmc.o(i.fmc_page_erase)
+    fmc_unlock                               0x0800d139   Thumb Code    52  gd32f10x_fmc.o(i.fmc_unlock)
+    fmc_word_program                         0x0800d17d   Thumb Code   178  gd32f10x_fmc.o(i.fmc_word_program)
+    fputc                                    0x0800d23d   Thumb Code    32  hw_uart.o(i.fputc)
+    gpio_bit_reset                           0x0800d261   Thumb Code     4  gd32f10x_gpio.o(i.gpio_bit_reset)
+    gpio_bit_set                             0x0800d265   Thumb Code     4  gd32f10x_gpio.o(i.gpio_bit_set)
+    gpio_exti_source_select                  0x0800d269   Thumb Code   146  gd32f10x_gpio.o(i.gpio_exti_source_select)
+    gpio_init                                0x0800d301   Thumb Code   172  gd32f10x_gpio.o(i.gpio_init)
+    gpio_input_bit_get                       0x0800d3ad   Thumb Code    16  gd32f10x_gpio.o(i.gpio_input_bit_get)
+    gpio_pin_remap_config                    0x0800d3bd   Thumb Code   138  gd32f10x_gpio.o(i.gpio_pin_remap_config)
+    main                                     0x0800d44d   Thumb Code    48  main.o(i.main)
+    modbusMasterParse                        0x0800d485   Thumb Code   386  modbus.o(i.modbusMasterParse)
+    modbusValInit                            0x0800d619   Thumb Code    36  modbus.o(i.modbusValInit)
+    nvic_config                              0x0800d641   Thumb Code    22  hw_timer.o(i.nvic_config)
+    nvic_irq_enable                          0x0800d659   Thumb Code   162  gd32f10x_misc.o(i.nvic_irq_enable)
+    nvic_priority_group_set                  0x0800d705   Thumb Code    10  gd32f10x_misc.o(i.nvic_priority_group_set)
+    nvic_vector_table_set                    0x0800d719   Thumb Code    12  gd32f10x_misc.o(i.nvic_vector_table_set)
+    rcu_clock_freq_get                       0x0800d72d   Thumb Code   264  gd32f10x_rcu.o(i.rcu_clock_freq_get)
+    rcu_periph_clock_enable                  0x0800d851   Thumb Code    28  gd32f10x_rcu.o(i.rcu_periph_clock_enable)
+    rcu_periph_reset_disable                 0x0800d871   Thumb Code    28  gd32f10x_rcu.o(i.rcu_periph_reset_disable)
+    rcu_periph_reset_enable                  0x0800d891   Thumb Code    28  gd32f10x_rcu.o(i.rcu_periph_reset_enable)
+    spi_send_byte                            0x0800d8b1   Thumb Code    52  hw_spi.o(i.spi_send_byte)
+    systick_clksource_set                    0x0800d9b5   Thumb Code    40  gd32f10x_misc.o(i.systick_clksource_set)
+    systick_config                           0x0800d9dd   Thumb Code    46  systick.o(i.systick_config)
+    timer_deinit                             0x0800da21   Thumb Code   210  gd32f10x_timer.o(i.timer_deinit)
+    timer_enable                             0x0800dafd   Thumb Code    10  gd32f10x_timer.o(i.timer_enable)
+    timer_init                               0x0800db09   Thumb Code   170  gd32f10x_timer.o(i.timer_init)
+    timer_interrupt_enable                   0x0800dbe9   Thumb Code     8  gd32f10x_timer.o(i.timer_interrupt_enable)
+    timer_interrupt_flag_clear               0x0800dbf1   Thumb Code     6  gd32f10x_timer.o(i.timer_interrupt_flag_clear)
+    timer_interrupt_flag_get                 0x0800dbf7   Thumb Code    24  gd32f10x_timer.o(i.timer_interrupt_flag_get)
+    usart_baudrate_set                       0x0800dc11   Thumb Code   136  gd32f10x_usart.o(i.usart_baudrate_set)
+    usart_data_receive                       0x0800dca1   Thumb Code    10  gd32f10x_usart.o(i.usart_data_receive)
+    usart_data_transmit                      0x0800dcab   Thumb Code     8  gd32f10x_usart.o(i.usart_data_transmit)
+    usart_deinit                             0x0800dcb5   Thumb Code   136  gd32f10x_usart.o(i.usart_deinit)
+    usart_enable                             0x0800dd45   Thumb Code    10  gd32f10x_usart.o(i.usart_enable)
+    usart_flag_get                           0x0800dd4f   Thumb Code    30  gd32f10x_usart.o(i.usart_flag_get)
+    usart_hardware_flow_cts_config           0x0800dd6d   Thumb Code    16  gd32f10x_usart.o(i.usart_hardware_flow_cts_config)
+    usart_hardware_flow_rts_config           0x0800dd7d   Thumb Code    16  gd32f10x_usart.o(i.usart_hardware_flow_rts_config)
+    usart_interrupt_disable                  0x0800dd8d   Thumb Code    26  gd32f10x_usart.o(i.usart_interrupt_disable)
+    usart_interrupt_enable                   0x0800dda7   Thumb Code    26  gd32f10x_usart.o(i.usart_interrupt_enable)
+    usart_interrupt_flag_clear               0x0800ddc1   Thumb Code    26  gd32f10x_usart.o(i.usart_interrupt_flag_clear)
+    usart_interrupt_flag_get                 0x0800dddb   Thumb Code    56  gd32f10x_usart.o(i.usart_interrupt_flag_get)
+    usart_parity_config                      0x0800de13   Thumb Code    16  gd32f10x_usart.o(i.usart_parity_config)
+    usart_receive_config                     0x0800de23   Thumb Code    16  gd32f10x_usart.o(i.usart_receive_config)
+    usart_stop_bit_set                       0x0800de33   Thumb Code    16  gd32f10x_usart.o(i.usart_stop_bit_set)
+    usart_transmit_config                    0x0800de43   Thumb Code    16  gd32f10x_usart.o(i.usart_transmit_config)
+    usart_word_length_set                    0x0800de53   Thumb Code    16  gd32f10x_usart.o(i.usart_word_length_set)
+    MainMenu                                 0x0800de62   Data          96  gui.o(.constdata)
+    DataShow                                 0x0800dec2   Data         160  gui.o(.constdata)
+    dataLog                                  0x0800df62   Data         160  gui.o(.constdata)
+    AbnrmalData                              0x0800e002   Data         160  gui.o(.constdata)
+    AsciiIndex                               0x0800e0a2   Data          50  gui.o(.constdata)
+    AsciiCode                                0x0800e0d4   Data         784  gui.o(.constdata)
+    MechPeoCode                              0x0800e3e4   Data         128  gui.o(.constdata)
+    TempCode                                 0x0800e464   Data          32  gui.o(.constdata)
+    CloseCode                                0x0800e484   Data          64  gui.o(.constdata)
+    OpenCode                                 0x0800e4c4   Data          64  gui.o(.constdata)
+    InterTemCode                             0x0800e504   Data         128  gui.o(.constdata)
+    TempHumiCode                             0x0800e584   Data          96  gui.o(.constdata)
+    DeviceInitCode                           0x0800e5e4   Data          96  gui.o(.constdata)
+    ProcessBarCode                           0x0800e644   Data         208  gui.o(.constdata)
+    ContactTempCode                          0x0800e714   Data         128  gui.o(.constdata)
+    InterlayerHumiCode                       0x0800e794   Data         128  gui.o(.constdata)
+    upDownDirCode                            0x0800e814   Data          64  gui.o(.constdata)
+    NothingCode                              0x0800e854   Data          32  gui.o(.constdata)
+    CommuncationFailCode                     0x0800e874   Data         192  gui.o(.constdata)
+    ContinusCode                             0x0800e934   Data          64  gui.o(.constdata)
+    Region$$Table$$Base                      0x0800e980   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800e9a0   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_gd32f10x.o(.data)
     systemFlag                               0x2000000c   Data           4  init.o(.data)
     Version                                  0x20000010   Data           6  init.o(.data)
@@ -2846,12 +2847,12 @@ Image Symbol Table
     StoreInfo                                0x2000036c   Data         368  init.o(.bss)
     DisplayData                              0x200004dc   Data        2176  oled.o(.bss)
     modbus                                   0x20000d5c   Data         520  modbus.o(.bss)
-    wlStrData                                0x20001064   Data         506  wirelesstemp.o(.bss)
-    protocol                                 0x20001260   Data         205  protocol.o(.bss)
-    MainBoardInfo                            0x20001330   Data          36  protocol.o(.bss)
-    PrtocolStr                               0x2000141c   Data         156  commucateslave.o(.bss)
-    StoreConf                                0x200016b8   Data          40  hw_fmc.o(.bss)
-    __initial_sp                             0x20003710   Data           0  startup_gd32f10x_md.o(STACK)
+    wlStrData                                0x20001064   Data         628  wirelesstemp.o(.bss)
+    protocol                                 0x200012d8   Data         205  protocol.o(.bss)
+    MainBoardInfo                            0x200013a8   Data          36  protocol.o(.bss)
+    PrtocolStr                               0x20001494   Data         156  commucateslave.o(.bss)
+    StoreConf                                0x20001730   Data          40  hw_fmc.o(.bss)
+    __initial_sp                             0x20003788   Data           0  startup_gd32f10x_md.o(STACK)
 
 
 
@@ -2861,9 +2862,9 @@ Memory Map of the image
 
   Image Entry point : 0x08004105
 
-  Load Region LR_IROM1 (Base: 0x08004000, Size: 0x0000ac48, Max: 0x0000c000, ABSOLUTE, COMPRESSED[0x0000ab5c])
+  Load Region LR_IROM1 (Base: 0x08004000, Size: 0x0000ad0c, Max: 0x0000c000, ABSOLUTE, COMPRESSED[0x0000ac20])
 
-    Execution Region ER_IROM1 (Exec base: 0x08004000, Load base: 0x08004000, Size: 0x0000a8dc, Max: 0x0000c000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08004000, Load base: 0x08004000, Size: 0x0000a9a0, Max: 0x0000c000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2915,276 +2916,276 @@ Memory Map of the image
     0x08004ec4   0x08004ec4   0x0000006c   Code   RO         4546    i.CheckConnectFun   wirelesstemp.o
     0x08004f30   0x08004f30   0x00000080   Code   RO         4547    i.CheckNumTempFunc  wirelesstemp.o
     0x08004fb0   0x08004fb0   0x00000084   Code   RO         4548    i.CheckSetDevIdFun  wirelesstemp.o
-    0x08005034   0x08005034   0x00000120   Code   RO         4549    i.CheckTempIDFunc   wirelesstemp.o
-    0x08005154   0x08005154   0x00000144   Code   RO         4550    i.CheckTempValFunc  wirelesstemp.o
-    0x08005298   0x08005298   0x000000a4   Code   RO         4793    i.CheckTimeStore    protocol.o
-    0x0800533c   0x0800533c   0x00000054   Code   RO         5067    i.CommunAdd         hw_uart.o
-    0x08005390   0x08005390   0x00000014   Code   RO         5068    i.CommunCheck       hw_uart.o
-    0x080053a4   0x080053a4   0x0000005c   Code   RO         5069    i.CommunGetData     hw_uart.o
-    0x08005400   0x08005400   0x00000030   Code   RO         5070    i.CommunUartSendBuf  hw_uart.o
-    0x08005430   0x08005430   0x00000074   Code   RO         4265    i.CommunicationFailFun  gui.o
-    0x080054a4   0x080054a4   0x000002a4   Code   RO         4266    i.ConactTempSecondFun  gui.o
-    0x08005748   0x08005748   0x000002a4   Code   RO         4267    i.ContactTempFirstFun  gui.o
-    0x080059ec   0x080059ec   0x00000054   Code   RO         4794    i.DataAbnormalFlash  protocol.o
-    0x08005a40   0x08005a40   0x000002f0   Code   RO         4268    i.DataLogShowDataMenuFun  gui.o
-    0x08005d30   0x08005d30   0x000001bc   Code   RO         4269    i.DatalogMenuFun    gui.o
-    0x08005eec   0x08005eec   0x00000002   Code   RO         3677    i.DebugMon_Handler  gd32f10x_it.o
-    0x08005eee   0x08005eee   0x00000002   PAD
-    0x08005ef0   0x08005ef0   0x00000098   Code   RO         4270    i.DeviceInitFun     gui.o
-    0x08005f88   0x08005f88   0x00000060   Code   RO         4271    i.DeviceStartFun    gui.o
-    0x08005fe8   0x08005fe8   0x00000070   Code   RO         3939    i.DisalyAbnormalHumiAdd  oled.o
-    0x08006058   0x08006058   0x00000058   Code   RO         3940    i.DispalyHumiStoreAdd  oled.o
-    0x080060b0   0x080060b0   0x00000084   Code   RO         3941    i.DispalyTempStoreAdd  oled.o
-    0x08006134   0x08006134   0x00000088   Code   RO         3942    i.DisplayAbnormalSignalAdd  oled.o
-    0x080061bc   0x080061bc   0x00000070   Code   RO         3943    i.DisplayAnnormalTempAdd  oled.o
-    0x0800622c   0x0800622c   0x00000068   Code   RO         3944    i.DisplayInterTempAdd  oled.o
-    0x08006294   0x08006294   0x0000001c   Code   RO         4795    i.DisplayMainProInit  protocol.o
-    0x080062b0   0x080062b0   0x0000002e   Code   RO         4796    i.DisplayMainProTask  protocol.o
-    0x080062de   0x080062de   0x00000054   Code   RO         3945    i.DisplayOnePage    oled.o
-    0x08006332   0x08006332   0x00000002   PAD
-    0x08006334   0x08006334   0x000000dc   Code   RO         3946    i.DisplaySignalStoreAdd  oled.o
-    0x08006410   0x08006410   0x000000b0   Code   RO         5282    i.EXTI10_15_IRQHandler  hw_exit.o
-    0x080064c0   0x080064c0   0x00000120   Code   RO         4551    i.EnbaleFunc        wirelesstemp.o
-    0x080065e0   0x080065e0   0x00000048   Code   RO         4938    i.EnterUpgradeAction  commucateslave.o
-    0x08006628   0x08006628   0x00000130   Code   RO         5167    i.FMC_StoreInfoInit  hw_fmc.o
-    0x08006758   0x08006758   0x00000030   Code   RO         3950    i.Fill_RAM          oled.o
-    0x08006788   0x08006788   0x00000044   Code   RO         5168    i.FlashEarsePage    hw_fmc.o
-    0x080067cc   0x080067cc   0x000002f8   Code   RO         4272    i.GUI_AbnormalMenu  gui.o
-    0x08006ac4   0x08006ac4   0x00000118   Code   RO         4273    i.GUI_AbnormalTile  gui.o
-    0x08006bdc   0x08006bdc   0x0000002c   Code   RO         4274    i.GUI_CommuncationFail  gui.o
-    0x08006c08   0x08006c08   0x000000ac   Code   RO         4275    i.GUI_ContactTemp   gui.o
-    0x08006cb4   0x08006cb4   0x000000ac   Code   RO         4276    i.GUI_ContactTempSecond  gui.o
-    0x08006d60   0x08006d60   0x000002b8   Code   RO         4277    i.GUI_DataLogList   gui.o
-    0x08007018   0x08007018   0x00000020   Code   RO         4278    i.GUI_DataLogMenu   gui.o
-    0x08007038   0x08007038   0x000000bc   Code   RO         4279    i.GUI_DeviceInit    gui.o
-    0x080070f4   0x080070f4   0x0000010c   Code   RO         4280    i.GUI_DeviceStart   gui.o
-    0x08007200   0x08007200   0x000000ac   Code   RO         4281    i.GUI_InterlayerHumi  gui.o
-    0x080072ac   0x080072ac   0x00000110   Code   RO         4282    i.GUI_MainMenu      gui.o
-    0x080073bc   0x080073bc   0x00000034   Code   RO         4284    i.GUI_UpdateProcessBar  gui.o
-    0x080073f0   0x080073f0   0x000001a4   Code   RO         4285    i.GUI_showLog       gui.o
-    0x08007594   0x08007594   0x000005b8   Code   RO         4286    i.GetAbnormalCode   gui.o
-    0x08007b4c   0x08007b4c   0x00000010   Code   RO         5283    i.GetButtonVal      hw_exit.o
-    0x08007b5c   0x08007b5c   0x00000260   Code   RO         4287    i.GetContactTempDataCode  gui.o
-    0x08007dbc   0x08007dbc   0x00000698   Code   RO         4288    i.GetDatalogCode    gui.o
-    0x08008454   0x08008454   0x00000064   Code   RO         4797    i.GetHumiID         protocol.o
-    0x080084b8   0x080084b8   0x00000054   Code   RO         4798    i.GetHumiVal        protocol.o
-    0x0800850c   0x0800850c   0x00000184   Code   RO         4289    i.GetInterHumiDataCode  gui.o
-    0x08008690   0x08008690   0x000002fc   Code   RO         4290    i.GetMainBoardInfo  gui.o
-    0x0800898c   0x0800898c   0x0000020c   Code   RO         4291    i.GetMechProDataCloseCode  gui.o
-    0x08008b98   0x08008b98   0x000002a0   Code   RO         4292    i.GetMechProDataInterTemCode  gui.o
-    0x08008e38   0x08008e38   0x0000020c   Code   RO         4293    i.GetMechProDataOpenCode  gui.o
-    0x08009044   0x08009044   0x00000104   Code   RO         4294    i.GetMechProDataTitleCode  gui.o
-    0x08009148   0x08009148   0x00000064   Code   RO         4799    i.GetTempID         protocol.o
-    0x080091ac   0x080091ac   0x00000054   Code   RO         4800    i.GetTempVal        protocol.o
-    0x08009200   0x08009200   0x00000254   Code   RO         4295    i.GetVolCode        gui.o
-    0x08009454   0x08009454   0x0000000c   Code   RO         4552    i.GetWirelessTempTask  wirelesstemp.o
-    0x08009460   0x08009460   0x00000020   Code   RO         4801    i.GetWlStatus       protocol.o
-    0x08009480   0x08009480   0x00000050   Code   RO         3887    i.GpioInit          init.o
-    0x080094d0   0x080094d0   0x00000004   Code   RO         3678    i.HardFault_Handler  gd32f10x_it.o
-    0x080094d4   0x080094d4   0x00000014   Code   RO         4554    i.HumiIDEnable      wirelesstemp.o
-    0x080094e8   0x080094e8   0x00000174   Code   RO         4296    i.InterlayerHumidityFun  gui.o
-    0x0800965c   0x0800965c   0x000000e8   Code   RO         5284    i.KeyBackScan       hw_exit.o
-    0x08009744   0x08009744   0x000000e8   Code   RO         5285    i.KeyDownScan       hw_exit.o
-    0x0800982c   0x0800982c   0x000000e8   Code   RO         5286    i.KeyEnterScan      hw_exit.o
-    0x08009914   0x08009914   0x000000e8   Code   RO         5287    i.KeyUpScan         hw_exit.o
-    0x080099fc   0x080099fc   0x0000004c   Code   RO         4802    i.LedControl        protocol.o
-    0x08009a48   0x08009a48   0x0000009c   Code   RO         3889    i.MCU_Init          init.o
-    0x08009ae4   0x08009ae4   0x000002cc   Code   RO         4297    i.MainBoardInfoFun  gui.o
-    0x08009db0   0x08009db0   0x00000134   Code   RO         4298    i.MainMenuFun       gui.o
-    0x08009ee4   0x08009ee4   0x0000011a   Code   RO         3953    i.MechProShowScrolling  oled.o
-    0x08009ffe   0x08009ffe   0x00000002   PAD
-    0x0800a000   0x0800a000   0x00000274   Code   RO         4299    i.MechProperitesFun  gui.o
-    0x0800a274   0x0800a274   0x00000004   Code   RO         3679    i.MemManage_Handler  gd32f10x_it.o
-    0x0800a278   0x0800a278   0x00000030   Code   RO         4497    i.Modbus_Crc_Compute  modbus.o
-    0x0800a2a8   0x0800a2a8   0x00000002   Code   RO         3680    i.NMI_Handler       gd32f10x_it.o
-    0x0800a2aa   0x0800a2aa   0x00000002   PAD
-    0x0800a2ac   0x0800a2ac   0x00000054   Code   RO         5071    i.NbAdd             hw_uart.o
-    0x0800a300   0x0800a300   0x00000014   Code   RO         5072    i.NbCheck           hw_uart.o
-    0x0800a314   0x0800a314   0x0000005c   Code   RO         5073    i.NbGetData         hw_uart.o
-    0x0800a370   0x0800a370   0x00000030   Code   RO         5074    i.NbUartSendBuf     hw_uart.o
-    0x0800a3a0   0x0800a3a0   0x00000070   Code   RO         4803    i.NetLedFlash       protocol.o
-    0x0800a410   0x0800a410   0x00000018   Code   RO         4559    i.NumTempDisable    wirelesstemp.o
-    0x0800a428   0x0800a428   0x00000014   Code   RO         4560    i.NumTempEnable     wirelesstemp.o
-    0x0800a43c   0x0800a43c   0x00000044   Code   RO         3954    i.OledGpioInit      oled.o
-    0x0800a480   0x0800a480   0x00000010   Code   RO         3955    i.OledInit          oled.o
-    0x0800a490   0x0800a490   0x00000094   Code   RO         3956    i.Oled_ConfigInit   oled.o
-    0x0800a524   0x0800a524   0x00000018   Code   RO         4939    i.PakAction         commucateslave.o
-    0x0800a53c   0x0800a53c   0x00000038   Code   RO         4940    i.PakStuctInit      commucateslave.o
-    0x0800a574   0x0800a574   0x00000038   Code   RO         4941    i.PakTimerRun       commucateslave.o
-    0x0800a5ac   0x0800a5ac   0x00000010   Code   RO         4942    i.PakTimerStart     commucateslave.o
-    0x0800a5bc   0x0800a5bc   0x00000010   Code   RO         4943    i.PakTimerStop      commucateslave.o
-    0x0800a5cc   0x0800a5cc   0x00000050   Code   RO         4561    i.ParseModbus       wirelesstemp.o
-    0x0800a61c   0x0800a61c   0x00000002   Code   RO         3681    i.PendSV_Handler    gd32f10x_it.o
-    0x0800a61e   0x0800a61e   0x00000002   PAD
-    0x0800a620   0x0800a620   0x00000038   Code   RO         4804    i.ProAction         protocol.o
-    0x0800a658   0x0800a658   0x00000180   Code   RO         4805    i.ProParse          protocol.o
-    0x0800a7d8   0x0800a7d8   0x00000096   Code   RO         4806    i.ProResponse       protocol.o
-    0x0800a86e   0x0800a86e   0x00000002   PAD
-    0x0800a870   0x0800a870   0x00000010   Code   RO         4807    i.PtimerDisable     protocol.o
-    0x0800a880   0x0800a880   0x00000010   Code   RO         4808    i.PtimerEnable      protocol.o
-    0x0800a890   0x0800a890   0x00000030   Code   RO         4809    i.PtimerRun         protocol.o
-    0x0800a8c0   0x0800a8c0   0x00000048   Code   RO         3890    i.RcuClockInit      init.o
-    0x0800a908   0x0800a908   0x00000110   Code   RO         4944    i.ReceParse         commucateslave.o
-    0x0800aa18   0x0800aa18   0x00000088   Code   RO         4945    i.ResponsePak       commucateslave.o
-    0x0800aaa0   0x0800aaa0   0x00000024   Code   RO         4562    i.RunCheckConnect   wirelesstemp.o
-    0x0800aac4   0x0800aac4   0x00000020   Code   RO         4563    i.RunFunc           wirelesstemp.o
-    0x0800aae4   0x0800aae4   0x00000024   Code   RO         4564    i.RunGetNumTemp     wirelesstemp.o
-    0x0800ab08   0x0800ab08   0x00000024   Code   RO         4567    i.RunSetDevId       wirelesstemp.o
-    0x0800ab2c   0x0800ab2c   0x00000024   Code   RO         4568    i.RunTempID         wirelesstemp.o
-    0x0800ab50   0x0800ab50   0x00000024   Code   RO         4569    i.RunTempVal        wirelesstemp.o
-    0x0800ab74   0x0800ab74   0x00000024   Code   RO         4570    i.RunVolGet         wirelesstemp.o
-    0x0800ab98   0x0800ab98   0x00000002   Code   RO         3682    i.SVC_Handler       gd32f10x_it.o
-    0x0800ab9a   0x0800ab9a   0x0000004a   Code   RO         4571    i.SendCheckConnect  wirelesstemp.o
-    0x0800abe4   0x0800abe4   0x00000020   Code   RO         4810    i.SendCommunictionStatus  protocol.o
-    0x0800ac04   0x0800ac04   0x00000060   Code   RO         4572    i.SendGetVol        wirelesstemp.o
-    0x0800ac64   0x0800ac64   0x000000c4   Code   RO         4811    i.SendMainBoardInfo  protocol.o
-    0x0800ad28   0x0800ad28   0x0000004e   Code   RO         4575    i.SendNumTemp       wirelesstemp.o
-    0x0800ad76   0x0800ad76   0x00000002   PAD
-    0x0800ad78   0x0800ad78   0x000000f4   Code   RO         4576    i.SendSetDevId      wirelesstemp.o
-    0x0800ae6c   0x0800ae6c   0x00000088   Code   RO         4812    i.SendSignalInfo    protocol.o
-    0x0800aef4   0x0800aef4   0x00000094   Code   RO         4577    i.SendTempID        wirelesstemp.o
-    0x0800af88   0x0800af88   0x00000088   Code   RO         4578    i.SendTempVal       wirelesstemp.o
-    0x0800b010   0x0800b010   0x0000004c   Code   RO         4813    i.SetAbnormal       protocol.o
-    0x0800b05c   0x0800b05c   0x00000018   Code   RO         4579    i.SetDevIdDisable   wirelesstemp.o
-    0x0800b074   0x0800b074   0x00000014   Code   RO         4580    i.SetDevIdEnable    wirelesstemp.o
-    0x0800b088   0x0800b088   0x00000714   Code   RO         4814    i.SetSelfTempHumi   protocol.o
-    0x0800b79c   0x0800b79c   0x00000012   Code   RO         3957    i.Set_Addressing_Mode  oled.o
-    0x0800b7ae   0x0800b7ae   0x00000012   Code   RO         3958    i.Set_Charge_Pump   oled.o
-    0x0800b7c0   0x0800b7c0   0x00000012   Code   RO         3960    i.Set_Common_Config  oled.o
-    0x0800b7d2   0x0800b7d2   0x0000000c   Code   RO         3961    i.Set_Common_Remap  oled.o
-    0x0800b7de   0x0800b7de   0x00000012   Code   RO         3962    i.Set_Contrast_Control  oled.o
-    0x0800b7f0   0x0800b7f0   0x00000012   Code   RO         3963    i.Set_Display_Clock  oled.o
-    0x0800b802   0x0800b802   0x00000012   Code   RO         3964    i.Set_Display_Offset  oled.o
-    0x0800b814   0x0800b814   0x0000000c   Code   RO         3965    i.Set_Display_On_Off  oled.o
-    0x0800b820   0x0800b820   0x0000000c   Code   RO         3966    i.Set_Entire_Display  oled.o
-    0x0800b82c   0x0800b82c   0x0000000c   Code   RO         3967    i.Set_Inverse_Display  oled.o
-    0x0800b838   0x0800b838   0x00000012   Code   RO         3968    i.Set_Multiplex_Ratio  oled.o
-    0x0800b84a   0x0800b84a   0x00000012   Code   RO         3971    i.Set_Precharge_Period  oled.o
-    0x0800b85c   0x0800b85c   0x0000000c   Code   RO         3972    i.Set_Segment_Remap  oled.o
-    0x0800b868   0x0800b868   0x0000002c   Code   RO         3973    i.Set_Start_Column  oled.o
-    0x0800b894   0x0800b894   0x0000000e   Code   RO         3974    i.Set_Start_Line    oled.o
-    0x0800b8a2   0x0800b8a2   0x0000000e   Code   RO         3975    i.Set_Start_Page    oled.o
-    0x0800b8b0   0x0800b8b0   0x00000012   Code   RO         3976    i.Set_VCOMH         oled.o
-    0x0800b8c2   0x0800b8c2   0x00000074   Code   RO         3977    i.ShowChar          oled.o
-    0x0800b936   0x0800b936   0x00000074   Code   RO         3978    i.ShowChinese       oled.o
-    0x0800b9aa   0x0800b9aa   0x00000002   PAD
-    0x0800b9ac   0x0800b9ac   0x0000030c   Code   RO         4300    i.ShowVolFun        gui.o
-    0x0800bcb8   0x0800bcb8   0x0000004c   Code   RO         5013    i.SignalTimerInit   hw_timer.o
-    0x0800bd04   0x0800bd04   0x00000044   Code   RO         5254    i.SpiInit           hw_spi.o
-    0x0800bd48   0x0800bd48   0x00000018   Code   RO         5169    i.StoreConfStore    hw_fmc.o
-    0x0800bd60   0x0800bd60   0x0000001c   Code   RO         5170    i.StoreInfoStore    hw_fmc.o
-    0x0800bd7c   0x0800bd7c   0x00000002   Code   RO         3683    i.SysTick_Handler   gd32f10x_it.o
-    0x0800bd7e   0x0800bd7e   0x00000002   PAD
-    0x0800bd80   0x0800bd80   0x00000084   Code   RO            4    i.SystemInit        system_gd32f10x.o
-    0x0800be04   0x0800be04   0x0000002c   Code   RO         5014    i.TIMER1_IRQHandler  hw_timer.o
-    0x0800be30   0x0800be30   0x0000001c   Code   RO         5015    i.TIMER2_IRQHandler  hw_timer.o
-    0x0800be4c   0x0800be4c   0x00000018   Code   RO         4581    i.TempIDDisable     wirelesstemp.o
-    0x0800be64   0x0800be64   0x00000014   Code   RO         4582    i.TempIDEnable      wirelesstemp.o
-    0x0800be78   0x0800be78   0x00000018   Code   RO         4583    i.TempValDisable    wirelesstemp.o
-    0x0800be90   0x0800be90   0x00000014   Code   RO         4584    i.TempValEnable     wirelesstemp.o
-    0x0800bea4   0x0800bea4   0x00000056   Code   RO         5016    i.Timer_1ms_Init    hw_timer.o
-    0x0800befa   0x0800befa   0x00000002   PAD
-    0x0800befc   0x0800befc   0x00000030   Code   RO         5075    i.USART0_IRQHandler  hw_uart.o
-    0x0800bf2c   0x0800bf2c   0x00000030   Code   RO         5076    i.USART2_IRQHandler  hw_uart.o
-    0x0800bf5c   0x0800bf5c   0x0000008c   Code   RO         5077    i.UartCommuncateInit  hw_uart.o
-    0x0800bfe8   0x0800bfe8   0x0000000c   Code   RO         5078    i.UartInit          hw_uart.o
-    0x0800bff4   0x0800bff4   0x00000088   Code   RO         5079    i.UartNbInit        hw_uart.o
-    0x0800c07c   0x0800c07c   0x00000034   Code   RO         4301    i.Unix_to_UTC       gui.o
-    0x0800c0b0   0x0800c0b0   0x00000004   Code   RO         3684    i.UsageFault_Handler  gd32f10x_it.o
-    0x0800c0b4   0x0800c0b4   0x0000002c   Code   RO         3891    i.VarInit           init.o
-    0x0800c0e0   0x0800c0e0   0x00000018   Code   RO         4585    i.VolDisable        wirelesstemp.o
-    0x0800c0f8   0x0800c0f8   0x00000014   Code   RO         4586    i.VolEnable         wirelesstemp.o
-    0x0800c10c   0x0800c10c   0x00000064   Code   RO         4815    i.VolGet            protocol.o
-    0x0800c170   0x0800c170   0x000000a4   Code   RO         4587    i.VolGetFunc        wirelesstemp.o
-    0x0800c214   0x0800c214   0x00000084   Code   RO         4816    i.WlDevIdSet        protocol.o
-    0x0800c298   0x0800c298   0x00000040   Code   RO         4588    i.WlVarInit         wirelesstemp.o
-    0x0800c2d8   0x0800c2d8   0x00000030   Code   RO         3982    i.Write8_8_char     oled.o
-    0x0800c308   0x0800c308   0x0000005c   Code   RO         5171    i.WriteStoreConf    hw_fmc.o
-    0x0800c364   0x0800c364   0x0000005c   Code   RO         5172    i.WriteStoreInfo    hw_fmc.o
-    0x0800c3c0   0x0800c3c0   0x00000038   Code   RO         3983    i.Write_Command     oled.o
-    0x0800c3f8   0x0800c3f8   0x00000038   Code   RO         3984    i.Write_Data        oled.o
-    0x0800c430   0x0800c430   0x00000020   Code   RO         5588    i.__0printf         mc_w.l(printfa.o)
-    0x0800c450   0x0800c450   0x00000028   Code   RO         5590    i.__0sprintf        mc_w.l(printfa.o)
-    0x0800c478   0x0800c478   0x0000000e   Code   RO         5672    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x0800c486   0x0800c486   0x00000002   Code   RO         5673    i.__scatterload_null  mc_w.l(handlers.o)
-    0x0800c488   0x0800c488   0x0000000e   Code   RO         5674    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x0800c496   0x0800c496   0x00000002   PAD
-    0x0800c498   0x0800c498   0x00000184   Code   RO         5595    i._fp_digits        mc_w.l(printfa.o)
-    0x0800c61c   0x0800c61c   0x000006dc   Code   RO         5596    i._printf_core      mc_w.l(printfa.o)
-    0x0800ccf8   0x0800ccf8   0x00000024   Code   RO         5597    i._printf_post_padding  mc_w.l(printfa.o)
-    0x0800cd1c   0x0800cd1c   0x0000002e   Code   RO         5598    i._printf_pre_padding  mc_w.l(printfa.o)
-    0x0800cd4a   0x0800cd4a   0x0000000a   Code   RO         5600    i._sputc            mc_w.l(printfa.o)
-    0x0800cd54   0x0800cd54   0x00000060   Code   RO         3853    i.delay_1ms         systick.o
-    0x0800cdb4   0x0800cdb4   0x000000bc   Code   RO         1294    i.exti_init         gd32f10x_exti.o
-    0x0800ce70   0x0800ce70   0x0000000c   Code   RO         1297    i.exti_interrupt_flag_clear  gd32f10x_exti.o
-    0x0800ce7c   0x0800ce7c   0x00000018   Code   RO         1298    i.exti_interrupt_flag_get  gd32f10x_exti.o
-    0x0800ce94   0x0800ce94   0x00000022   Code   RO         1377    i.fmc_bank0_ready_wait  gd32f10x_fmc.o
-    0x0800ceb6   0x0800ceb6   0x00000002   PAD
-    0x0800ceb8   0x0800ceb8   0x00000030   Code   RO         1378    i.fmc_bank0_state_get  gd32f10x_fmc.o
-    0x0800cee8   0x0800cee8   0x00000022   Code   RO         1382    i.fmc_bank1_ready_wait  gd32f10x_fmc.o
-    0x0800cf0a   0x0800cf0a   0x00000002   PAD
-    0x0800cf0c   0x0800cf0c   0x00000030   Code   RO         1383    i.fmc_bank1_state_get  gd32f10x_fmc.o
-    0x0800cf3c   0x0800cf3c   0x00000020   Code   RO         1385    i.fmc_flag_clear    gd32f10x_fmc.o
-    0x0800cf5c   0x0800cf5c   0x0000002c   Code   RO         1392    i.fmc_lock          gd32f10x_fmc.o
-    0x0800cf88   0x0800cf88   0x000000ec   Code   RO         1394    i.fmc_page_erase    gd32f10x_fmc.o
-    0x0800d074   0x0800d074   0x00000044   Code   RO         1395    i.fmc_unlock        gd32f10x_fmc.o
-    0x0800d0b8   0x0800d0b8   0x000000c0   Code   RO         1396    i.fmc_word_program  gd32f10x_fmc.o
-    0x0800d178   0x0800d178   0x00000024   Code   RO         5080    i.fputc             hw_uart.o
-    0x0800d19c   0x0800d19c   0x00000004   Code   RO         1644    i.gpio_bit_reset    gd32f10x_gpio.o
-    0x0800d1a0   0x0800d1a0   0x00000004   Code   RO         1645    i.gpio_bit_set      gd32f10x_gpio.o
-    0x0800d1a4   0x0800d1a4   0x00000098   Code   RO         1651    i.gpio_exti_source_select  gd32f10x_gpio.o
-    0x0800d23c   0x0800d23c   0x000000ac   Code   RO         1652    i.gpio_init         gd32f10x_gpio.o
-    0x0800d2e8   0x0800d2e8   0x00000010   Code   RO         1653    i.gpio_input_bit_get  gd32f10x_gpio.o
-    0x0800d2f8   0x0800d2f8   0x00000090   Code   RO         1658    i.gpio_pin_remap_config  gd32f10x_gpio.o
-    0x0800d388   0x0800d388   0x00000038   Code   RO         3806    i.main              main.o
-    0x0800d3c0   0x0800d3c0   0x00000194   Code   RO         4498    i.modbusMasterParse  modbus.o
-    0x0800d554   0x0800d554   0x00000028   Code   RO         4499    i.modbusValInit     modbus.o
-    0x0800d57c   0x0800d57c   0x00000016   Code   RO         5017    i.nvic_config       hw_timer.o
-    0x0800d592   0x0800d592   0x00000002   PAD
-    0x0800d594   0x0800d594   0x000000ac   Code   RO         1960    i.nvic_irq_enable   gd32f10x_misc.o
-    0x0800d640   0x0800d640   0x00000014   Code   RO         1961    i.nvic_priority_group_set  gd32f10x_misc.o
-    0x0800d654   0x0800d654   0x00000014   Code   RO         1962    i.nvic_vector_table_set  gd32f10x_misc.o
-    0x0800d668   0x0800d668   0x00000124   Code   RO         2110    i.rcu_clock_freq_get  gd32f10x_rcu.o
-    0x0800d78c   0x0800d78c   0x00000020   Code   RO         2127    i.rcu_periph_clock_enable  gd32f10x_rcu.o
-    0x0800d7ac   0x0800d7ac   0x00000020   Code   RO         2130    i.rcu_periph_reset_disable  gd32f10x_rcu.o
-    0x0800d7cc   0x0800d7cc   0x00000020   Code   RO         2131    i.rcu_periph_reset_enable  gd32f10x_rcu.o
-    0x0800d7ec   0x0800d7ec   0x00000038   Code   RO         5255    i.spi_send_byte     hw_spi.o
-    0x0800d824   0x0800d824   0x000000c4   Code   RO            5    i.system_clock_108m_hxtal  system_gd32f10x.o
-    0x0800d8e8   0x0800d8e8   0x00000008   Code   RO            6    i.system_clock_config  system_gd32f10x.o
-    0x0800d8f0   0x0800d8f0   0x00000028   Code   RO         1965    i.systick_clksource_set  gd32f10x_misc.o
-    0x0800d918   0x0800d918   0x00000044   Code   RO         3855    i.systick_config    systick.o
-    0x0800d95c   0x0800d95c   0x000000dc   Code   RO         2951    i.timer_deinit      gd32f10x_timer.o
-    0x0800da38   0x0800da38   0x0000000a   Code   RO         2956    i.timer_enable      gd32f10x_timer.o
-    0x0800da42   0x0800da42   0x00000002   PAD
-    0x0800da44   0x0800da44   0x000000e0   Code   RO         2966    i.timer_init        gd32f10x_timer.o
-    0x0800db24   0x0800db24   0x00000008   Code   RO         2973    i.timer_interrupt_enable  gd32f10x_timer.o
-    0x0800db2c   0x0800db2c   0x00000006   Code   RO         2974    i.timer_interrupt_flag_clear  gd32f10x_timer.o
-    0x0800db32   0x0800db32   0x00000018   Code   RO         2975    i.timer_interrupt_flag_get  gd32f10x_timer.o
-    0x0800db4a   0x0800db4a   0x00000002   PAD
-    0x0800db4c   0x0800db4c   0x00000090   Code   RO         3349    i.usart_baudrate_set  gd32f10x_usart.o
-    0x0800dbdc   0x0800dbdc   0x0000000a   Code   RO         3350    i.usart_data_receive  gd32f10x_usart.o
-    0x0800dbe6   0x0800dbe6   0x00000008   Code   RO         3351    i.usart_data_transmit  gd32f10x_usart.o
-    0x0800dbee   0x0800dbee   0x00000002   PAD
-    0x0800dbf0   0x0800dbf0   0x00000090   Code   RO         3352    i.usart_deinit      gd32f10x_usart.o
-    0x0800dc80   0x0800dc80   0x0000000a   Code   RO         3356    i.usart_enable      gd32f10x_usart.o
-    0x0800dc8a   0x0800dc8a   0x0000001e   Code   RO         3358    i.usart_flag_get    gd32f10x_usart.o
-    0x0800dca8   0x0800dca8   0x00000010   Code   RO         3362    i.usart_hardware_flow_cts_config  gd32f10x_usart.o
-    0x0800dcb8   0x0800dcb8   0x00000010   Code   RO         3363    i.usart_hardware_flow_rts_config  gd32f10x_usart.o
-    0x0800dcc8   0x0800dcc8   0x0000001a   Code   RO         3364    i.usart_interrupt_disable  gd32f10x_usart.o
-    0x0800dce2   0x0800dce2   0x0000001a   Code   RO         3365    i.usart_interrupt_enable  gd32f10x_usart.o
-    0x0800dcfc   0x0800dcfc   0x0000001a   Code   RO         3366    i.usart_interrupt_flag_clear  gd32f10x_usart.o
-    0x0800dd16   0x0800dd16   0x00000038   Code   RO         3367    i.usart_interrupt_flag_get  gd32f10x_usart.o
-    0x0800dd4e   0x0800dd4e   0x00000010   Code   RO         3377    i.usart_parity_config  gd32f10x_usart.o
-    0x0800dd5e   0x0800dd5e   0x00000010   Code   RO         3379    i.usart_receive_config  gd32f10x_usart.o
-    0x0800dd6e   0x0800dd6e   0x00000010   Code   RO         3385    i.usart_stop_bit_set  gd32f10x_usart.o
-    0x0800dd7e   0x0800dd7e   0x00000010   Code   RO         3389    i.usart_transmit_config  gd32f10x_usart.o
-    0x0800dd8e   0x0800dd8e   0x00000010   Code   RO         3390    i.usart_word_length_set  gd32f10x_usart.o
-    0x0800dd9e   0x0800dd9e   0x00000b12   Data   RO         4302    .constdata          gui.o
-    0x0800e8b0   0x0800e8b0   0x0000000c   Data   RO         5343    .constdata          mc_w.l(localtime.o)
-    0x0800e8bc   0x0800e8bc   0x00000020   Data   RO         5670    Region$$Table       anon$$obj.o
+    0x08005034   0x08005034   0x00000150   Code   RO         4549    i.CheckTempIDFunc   wirelesstemp.o
+    0x08005184   0x08005184   0x00000144   Code   RO         4550    i.CheckTempValFunc  wirelesstemp.o
+    0x080052c8   0x080052c8   0x000000a4   Code   RO         4793    i.CheckTimeStore    protocol.o
+    0x0800536c   0x0800536c   0x00000054   Code   RO         5067    i.CommunAdd         hw_uart.o
+    0x080053c0   0x080053c0   0x00000014   Code   RO         5068    i.CommunCheck       hw_uart.o
+    0x080053d4   0x080053d4   0x0000005c   Code   RO         5069    i.CommunGetData     hw_uart.o
+    0x08005430   0x08005430   0x00000030   Code   RO         5070    i.CommunUartSendBuf  hw_uart.o
+    0x08005460   0x08005460   0x00000074   Code   RO         4265    i.CommunicationFailFun  gui.o
+    0x080054d4   0x080054d4   0x000002a4   Code   RO         4266    i.ConactTempSecondFun  gui.o
+    0x08005778   0x08005778   0x000002a4   Code   RO         4267    i.ContactTempFirstFun  gui.o
+    0x08005a1c   0x08005a1c   0x00000054   Code   RO         4794    i.DataAbnormalFlash  protocol.o
+    0x08005a70   0x08005a70   0x000002f0   Code   RO         4268    i.DataLogShowDataMenuFun  gui.o
+    0x08005d60   0x08005d60   0x000001bc   Code   RO         4269    i.DatalogMenuFun    gui.o
+    0x08005f1c   0x08005f1c   0x00000002   Code   RO         3677    i.DebugMon_Handler  gd32f10x_it.o
+    0x08005f1e   0x08005f1e   0x00000002   PAD
+    0x08005f20   0x08005f20   0x00000098   Code   RO         4270    i.DeviceInitFun     gui.o
+    0x08005fb8   0x08005fb8   0x00000060   Code   RO         4271    i.DeviceStartFun    gui.o
+    0x08006018   0x08006018   0x00000070   Code   RO         3939    i.DisalyAbnormalHumiAdd  oled.o
+    0x08006088   0x08006088   0x00000058   Code   RO         3940    i.DispalyHumiStoreAdd  oled.o
+    0x080060e0   0x080060e0   0x00000084   Code   RO         3941    i.DispalyTempStoreAdd  oled.o
+    0x08006164   0x08006164   0x00000088   Code   RO         3942    i.DisplayAbnormalSignalAdd  oled.o
+    0x080061ec   0x080061ec   0x00000070   Code   RO         3943    i.DisplayAnnormalTempAdd  oled.o
+    0x0800625c   0x0800625c   0x00000068   Code   RO         3944    i.DisplayInterTempAdd  oled.o
+    0x080062c4   0x080062c4   0x0000001c   Code   RO         4795    i.DisplayMainProInit  protocol.o
+    0x080062e0   0x080062e0   0x0000002e   Code   RO         4796    i.DisplayMainProTask  protocol.o
+    0x0800630e   0x0800630e   0x00000054   Code   RO         3945    i.DisplayOnePage    oled.o
+    0x08006362   0x08006362   0x00000002   PAD
+    0x08006364   0x08006364   0x000000dc   Code   RO         3946    i.DisplaySignalStoreAdd  oled.o
+    0x08006440   0x08006440   0x000000b0   Code   RO         5282    i.EXTI10_15_IRQHandler  hw_exit.o
+    0x080064f0   0x080064f0   0x00000198   Code   RO         4551    i.EnbaleFunc        wirelesstemp.o
+    0x08006688   0x08006688   0x00000048   Code   RO         4938    i.EnterUpgradeAction  commucateslave.o
+    0x080066d0   0x080066d0   0x00000130   Code   RO         5167    i.FMC_StoreInfoInit  hw_fmc.o
+    0x08006800   0x08006800   0x00000030   Code   RO         3950    i.Fill_RAM          oled.o
+    0x08006830   0x08006830   0x00000044   Code   RO         5168    i.FlashEarsePage    hw_fmc.o
+    0x08006874   0x08006874   0x000002f8   Code   RO         4272    i.GUI_AbnormalMenu  gui.o
+    0x08006b6c   0x08006b6c   0x00000118   Code   RO         4273    i.GUI_AbnormalTile  gui.o
+    0x08006c84   0x08006c84   0x0000002c   Code   RO         4274    i.GUI_CommuncationFail  gui.o
+    0x08006cb0   0x08006cb0   0x000000ac   Code   RO         4275    i.GUI_ContactTemp   gui.o
+    0x08006d5c   0x08006d5c   0x000000ac   Code   RO         4276    i.GUI_ContactTempSecond  gui.o
+    0x08006e08   0x08006e08   0x000002b8   Code   RO         4277    i.GUI_DataLogList   gui.o
+    0x080070c0   0x080070c0   0x00000020   Code   RO         4278    i.GUI_DataLogMenu   gui.o
+    0x080070e0   0x080070e0   0x000000bc   Code   RO         4279    i.GUI_DeviceInit    gui.o
+    0x0800719c   0x0800719c   0x0000010c   Code   RO         4280    i.GUI_DeviceStart   gui.o
+    0x080072a8   0x080072a8   0x000000ac   Code   RO         4281    i.GUI_InterlayerHumi  gui.o
+    0x08007354   0x08007354   0x00000110   Code   RO         4282    i.GUI_MainMenu      gui.o
+    0x08007464   0x08007464   0x00000034   Code   RO         4284    i.GUI_UpdateProcessBar  gui.o
+    0x08007498   0x08007498   0x000001a4   Code   RO         4285    i.GUI_showLog       gui.o
+    0x0800763c   0x0800763c   0x000005b8   Code   RO         4286    i.GetAbnormalCode   gui.o
+    0x08007bf4   0x08007bf4   0x00000010   Code   RO         5283    i.GetButtonVal      hw_exit.o
+    0x08007c04   0x08007c04   0x00000260   Code   RO         4287    i.GetContactTempDataCode  gui.o
+    0x08007e64   0x08007e64   0x00000698   Code   RO         4288    i.GetDatalogCode    gui.o
+    0x080084fc   0x080084fc   0x00000064   Code   RO         4797    i.GetHumiID         protocol.o
+    0x08008560   0x08008560   0x00000054   Code   RO         4798    i.GetHumiVal        protocol.o
+    0x080085b4   0x080085b4   0x00000184   Code   RO         4289    i.GetInterHumiDataCode  gui.o
+    0x08008738   0x08008738   0x000002fc   Code   RO         4290    i.GetMainBoardInfo  gui.o
+    0x08008a34   0x08008a34   0x0000020c   Code   RO         4291    i.GetMechProDataCloseCode  gui.o
+    0x08008c40   0x08008c40   0x000002a0   Code   RO         4292    i.GetMechProDataInterTemCode  gui.o
+    0x08008ee0   0x08008ee0   0x0000020c   Code   RO         4293    i.GetMechProDataOpenCode  gui.o
+    0x080090ec   0x080090ec   0x00000104   Code   RO         4294    i.GetMechProDataTitleCode  gui.o
+    0x080091f0   0x080091f0   0x00000064   Code   RO         4799    i.GetTempID         protocol.o
+    0x08009254   0x08009254   0x00000054   Code   RO         4800    i.GetTempVal        protocol.o
+    0x080092a8   0x080092a8   0x00000254   Code   RO         4295    i.GetVolCode        gui.o
+    0x080094fc   0x080094fc   0x0000000c   Code   RO         4552    i.GetWirelessTempTask  wirelesstemp.o
+    0x08009508   0x08009508   0x00000020   Code   RO         4801    i.GetWlStatus       protocol.o
+    0x08009528   0x08009528   0x00000050   Code   RO         3887    i.GpioInit          init.o
+    0x08009578   0x08009578   0x00000004   Code   RO         3678    i.HardFault_Handler  gd32f10x_it.o
+    0x0800957c   0x0800957c   0x00000014   Code   RO         4554    i.HumiIDEnable      wirelesstemp.o
+    0x08009590   0x08009590   0x00000174   Code   RO         4296    i.InterlayerHumidityFun  gui.o
+    0x08009704   0x08009704   0x000000e8   Code   RO         5284    i.KeyBackScan       hw_exit.o
+    0x080097ec   0x080097ec   0x000000e8   Code   RO         5285    i.KeyDownScan       hw_exit.o
+    0x080098d4   0x080098d4   0x000000e8   Code   RO         5286    i.KeyEnterScan      hw_exit.o
+    0x080099bc   0x080099bc   0x000000e8   Code   RO         5287    i.KeyUpScan         hw_exit.o
+    0x08009aa4   0x08009aa4   0x0000004c   Code   RO         4802    i.LedControl        protocol.o
+    0x08009af0   0x08009af0   0x0000009c   Code   RO         3889    i.MCU_Init          init.o
+    0x08009b8c   0x08009b8c   0x000002cc   Code   RO         4297    i.MainBoardInfoFun  gui.o
+    0x08009e58   0x08009e58   0x00000134   Code   RO         4298    i.MainMenuFun       gui.o
+    0x08009f8c   0x08009f8c   0x0000011a   Code   RO         3953    i.MechProShowScrolling  oled.o
+    0x0800a0a6   0x0800a0a6   0x00000002   PAD
+    0x0800a0a8   0x0800a0a8   0x00000274   Code   RO         4299    i.MechProperitesFun  gui.o
+    0x0800a31c   0x0800a31c   0x00000004   Code   RO         3679    i.MemManage_Handler  gd32f10x_it.o
+    0x0800a320   0x0800a320   0x00000030   Code   RO         4497    i.Modbus_Crc_Compute  modbus.o
+    0x0800a350   0x0800a350   0x00000002   Code   RO         3680    i.NMI_Handler       gd32f10x_it.o
+    0x0800a352   0x0800a352   0x00000002   PAD
+    0x0800a354   0x0800a354   0x00000054   Code   RO         5071    i.NbAdd             hw_uart.o
+    0x0800a3a8   0x0800a3a8   0x00000014   Code   RO         5072    i.NbCheck           hw_uart.o
+    0x0800a3bc   0x0800a3bc   0x0000005c   Code   RO         5073    i.NbGetData         hw_uart.o
+    0x0800a418   0x0800a418   0x00000030   Code   RO         5074    i.NbUartSendBuf     hw_uart.o
+    0x0800a448   0x0800a448   0x00000070   Code   RO         4803    i.NetLedFlash       protocol.o
+    0x0800a4b8   0x0800a4b8   0x00000018   Code   RO         4559    i.NumTempDisable    wirelesstemp.o
+    0x0800a4d0   0x0800a4d0   0x00000014   Code   RO         4560    i.NumTempEnable     wirelesstemp.o
+    0x0800a4e4   0x0800a4e4   0x00000044   Code   RO         3954    i.OledGpioInit      oled.o
+    0x0800a528   0x0800a528   0x00000010   Code   RO         3955    i.OledInit          oled.o
+    0x0800a538   0x0800a538   0x00000094   Code   RO         3956    i.Oled_ConfigInit   oled.o
+    0x0800a5cc   0x0800a5cc   0x00000018   Code   RO         4939    i.PakAction         commucateslave.o
+    0x0800a5e4   0x0800a5e4   0x00000038   Code   RO         4940    i.PakStuctInit      commucateslave.o
+    0x0800a61c   0x0800a61c   0x00000038   Code   RO         4941    i.PakTimerRun       commucateslave.o
+    0x0800a654   0x0800a654   0x00000010   Code   RO         4942    i.PakTimerStart     commucateslave.o
+    0x0800a664   0x0800a664   0x00000010   Code   RO         4943    i.PakTimerStop      commucateslave.o
+    0x0800a674   0x0800a674   0x00000050   Code   RO         4561    i.ParseModbus       wirelesstemp.o
+    0x0800a6c4   0x0800a6c4   0x00000002   Code   RO         3681    i.PendSV_Handler    gd32f10x_it.o
+    0x0800a6c6   0x0800a6c6   0x00000002   PAD
+    0x0800a6c8   0x0800a6c8   0x00000038   Code   RO         4804    i.ProAction         protocol.o
+    0x0800a700   0x0800a700   0x00000180   Code   RO         4805    i.ProParse          protocol.o
+    0x0800a880   0x0800a880   0x00000096   Code   RO         4806    i.ProResponse       protocol.o
+    0x0800a916   0x0800a916   0x00000002   PAD
+    0x0800a918   0x0800a918   0x00000010   Code   RO         4807    i.PtimerDisable     protocol.o
+    0x0800a928   0x0800a928   0x00000010   Code   RO         4808    i.PtimerEnable      protocol.o
+    0x0800a938   0x0800a938   0x00000030   Code   RO         4809    i.PtimerRun         protocol.o
+    0x0800a968   0x0800a968   0x00000048   Code   RO         3890    i.RcuClockInit      init.o
+    0x0800a9b0   0x0800a9b0   0x00000110   Code   RO         4944    i.ReceParse         commucateslave.o
+    0x0800aac0   0x0800aac0   0x00000088   Code   RO         4945    i.ResponsePak       commucateslave.o
+    0x0800ab48   0x0800ab48   0x00000024   Code   RO         4562    i.RunCheckConnect   wirelesstemp.o
+    0x0800ab6c   0x0800ab6c   0x00000020   Code   RO         4563    i.RunFunc           wirelesstemp.o
+    0x0800ab8c   0x0800ab8c   0x00000024   Code   RO         4564    i.RunGetNumTemp     wirelesstemp.o
+    0x0800abb0   0x0800abb0   0x00000024   Code   RO         4567    i.RunSetDevId       wirelesstemp.o
+    0x0800abd4   0x0800abd4   0x00000024   Code   RO         4568    i.RunTempID         wirelesstemp.o
+    0x0800abf8   0x0800abf8   0x00000024   Code   RO         4569    i.RunTempVal        wirelesstemp.o
+    0x0800ac1c   0x0800ac1c   0x00000024   Code   RO         4570    i.RunVolGet         wirelesstemp.o
+    0x0800ac40   0x0800ac40   0x00000002   Code   RO         3682    i.SVC_Handler       gd32f10x_it.o
+    0x0800ac42   0x0800ac42   0x0000004a   Code   RO         4571    i.SendCheckConnect  wirelesstemp.o
+    0x0800ac8c   0x0800ac8c   0x00000020   Code   RO         4810    i.SendCommunictionStatus  protocol.o
+    0x0800acac   0x0800acac   0x00000060   Code   RO         4572    i.SendGetVol        wirelesstemp.o
+    0x0800ad0c   0x0800ad0c   0x000000c4   Code   RO         4811    i.SendMainBoardInfo  protocol.o
+    0x0800add0   0x0800add0   0x0000004e   Code   RO         4575    i.SendNumTemp       wirelesstemp.o
+    0x0800ae1e   0x0800ae1e   0x00000002   PAD
+    0x0800ae20   0x0800ae20   0x000000e4   Code   RO         4576    i.SendSetDevId      wirelesstemp.o
+    0x0800af04   0x0800af04   0x00000088   Code   RO         4812    i.SendSignalInfo    protocol.o
+    0x0800af8c   0x0800af8c   0x00000094   Code   RO         4577    i.SendTempID        wirelesstemp.o
+    0x0800b020   0x0800b020   0x00000088   Code   RO         4578    i.SendTempVal       wirelesstemp.o
+    0x0800b0a8   0x0800b0a8   0x0000004c   Code   RO         4813    i.SetAbnormal       protocol.o
+    0x0800b0f4   0x0800b0f4   0x00000018   Code   RO         4579    i.SetDevIdDisable   wirelesstemp.o
+    0x0800b10c   0x0800b10c   0x00000014   Code   RO         4580    i.SetDevIdEnable    wirelesstemp.o
+    0x0800b120   0x0800b120   0x00000714   Code   RO         4814    i.SetSelfTempHumi   protocol.o
+    0x0800b834   0x0800b834   0x00000012   Code   RO         3957    i.Set_Addressing_Mode  oled.o
+    0x0800b846   0x0800b846   0x00000012   Code   RO         3958    i.Set_Charge_Pump   oled.o
+    0x0800b858   0x0800b858   0x00000012   Code   RO         3960    i.Set_Common_Config  oled.o
+    0x0800b86a   0x0800b86a   0x0000000c   Code   RO         3961    i.Set_Common_Remap  oled.o
+    0x0800b876   0x0800b876   0x00000012   Code   RO         3962    i.Set_Contrast_Control  oled.o
+    0x0800b888   0x0800b888   0x00000012   Code   RO         3963    i.Set_Display_Clock  oled.o
+    0x0800b89a   0x0800b89a   0x00000012   Code   RO         3964    i.Set_Display_Offset  oled.o
+    0x0800b8ac   0x0800b8ac   0x0000000c   Code   RO         3965    i.Set_Display_On_Off  oled.o
+    0x0800b8b8   0x0800b8b8   0x0000000c   Code   RO         3966    i.Set_Entire_Display  oled.o
+    0x0800b8c4   0x0800b8c4   0x0000000c   Code   RO         3967    i.Set_Inverse_Display  oled.o
+    0x0800b8d0   0x0800b8d0   0x00000012   Code   RO         3968    i.Set_Multiplex_Ratio  oled.o
+    0x0800b8e2   0x0800b8e2   0x00000012   Code   RO         3971    i.Set_Precharge_Period  oled.o
+    0x0800b8f4   0x0800b8f4   0x0000000c   Code   RO         3972    i.Set_Segment_Remap  oled.o
+    0x0800b900   0x0800b900   0x0000002c   Code   RO         3973    i.Set_Start_Column  oled.o
+    0x0800b92c   0x0800b92c   0x0000000e   Code   RO         3974    i.Set_Start_Line    oled.o
+    0x0800b93a   0x0800b93a   0x0000000e   Code   RO         3975    i.Set_Start_Page    oled.o
+    0x0800b948   0x0800b948   0x00000012   Code   RO         3976    i.Set_VCOMH         oled.o
+    0x0800b95a   0x0800b95a   0x00000074   Code   RO         3977    i.ShowChar          oled.o
+    0x0800b9ce   0x0800b9ce   0x00000074   Code   RO         3978    i.ShowChinese       oled.o
+    0x0800ba42   0x0800ba42   0x00000002   PAD
+    0x0800ba44   0x0800ba44   0x0000030c   Code   RO         4300    i.ShowVolFun        gui.o
+    0x0800bd50   0x0800bd50   0x0000004c   Code   RO         5013    i.SignalTimerInit   hw_timer.o
+    0x0800bd9c   0x0800bd9c   0x00000044   Code   RO         5254    i.SpiInit           hw_spi.o
+    0x0800bde0   0x0800bde0   0x00000018   Code   RO         5169    i.StoreConfStore    hw_fmc.o
+    0x0800bdf8   0x0800bdf8   0x0000001c   Code   RO         5170    i.StoreInfoStore    hw_fmc.o
+    0x0800be14   0x0800be14   0x00000002   Code   RO         3683    i.SysTick_Handler   gd32f10x_it.o
+    0x0800be16   0x0800be16   0x00000002   PAD
+    0x0800be18   0x0800be18   0x00000084   Code   RO            4    i.SystemInit        system_gd32f10x.o
+    0x0800be9c   0x0800be9c   0x0000002c   Code   RO         5014    i.TIMER1_IRQHandler  hw_timer.o
+    0x0800bec8   0x0800bec8   0x0000001c   Code   RO         5015    i.TIMER2_IRQHandler  hw_timer.o
+    0x0800bee4   0x0800bee4   0x00000018   Code   RO         4581    i.TempIDDisable     wirelesstemp.o
+    0x0800befc   0x0800befc   0x00000014   Code   RO         4582    i.TempIDEnable      wirelesstemp.o
+    0x0800bf10   0x0800bf10   0x00000018   Code   RO         4583    i.TempValDisable    wirelesstemp.o
+    0x0800bf28   0x0800bf28   0x00000014   Code   RO         4584    i.TempValEnable     wirelesstemp.o
+    0x0800bf3c   0x0800bf3c   0x00000056   Code   RO         5016    i.Timer_1ms_Init    hw_timer.o
+    0x0800bf92   0x0800bf92   0x00000002   PAD
+    0x0800bf94   0x0800bf94   0x00000030   Code   RO         5075    i.USART0_IRQHandler  hw_uart.o
+    0x0800bfc4   0x0800bfc4   0x00000030   Code   RO         5076    i.USART2_IRQHandler  hw_uart.o
+    0x0800bff4   0x0800bff4   0x0000008c   Code   RO         5077    i.UartCommuncateInit  hw_uart.o
+    0x0800c080   0x0800c080   0x0000000c   Code   RO         5078    i.UartInit          hw_uart.o
+    0x0800c08c   0x0800c08c   0x00000088   Code   RO         5079    i.UartNbInit        hw_uart.o
+    0x0800c114   0x0800c114   0x00000034   Code   RO         4301    i.Unix_to_UTC       gui.o
+    0x0800c148   0x0800c148   0x00000004   Code   RO         3684    i.UsageFault_Handler  gd32f10x_it.o
+    0x0800c14c   0x0800c14c   0x0000002c   Code   RO         3891    i.VarInit           init.o
+    0x0800c178   0x0800c178   0x00000018   Code   RO         4585    i.VolDisable        wirelesstemp.o
+    0x0800c190   0x0800c190   0x00000014   Code   RO         4586    i.VolEnable         wirelesstemp.o
+    0x0800c1a4   0x0800c1a4   0x00000064   Code   RO         4815    i.VolGet            protocol.o
+    0x0800c208   0x0800c208   0x000000a4   Code   RO         4587    i.VolGetFunc        wirelesstemp.o
+    0x0800c2ac   0x0800c2ac   0x00000098   Code   RO         4816    i.WlDevIdSet        protocol.o
+    0x0800c344   0x0800c344   0x00000058   Code   RO         4588    i.WlVarInit         wirelesstemp.o
+    0x0800c39c   0x0800c39c   0x00000030   Code   RO         3982    i.Write8_8_char     oled.o
+    0x0800c3cc   0x0800c3cc   0x0000005c   Code   RO         5171    i.WriteStoreConf    hw_fmc.o
+    0x0800c428   0x0800c428   0x0000005c   Code   RO         5172    i.WriteStoreInfo    hw_fmc.o
+    0x0800c484   0x0800c484   0x00000038   Code   RO         3983    i.Write_Command     oled.o
+    0x0800c4bc   0x0800c4bc   0x00000038   Code   RO         3984    i.Write_Data        oled.o
+    0x0800c4f4   0x0800c4f4   0x00000020   Code   RO         5588    i.__0printf         mc_w.l(printfa.o)
+    0x0800c514   0x0800c514   0x00000028   Code   RO         5590    i.__0sprintf        mc_w.l(printfa.o)
+    0x0800c53c   0x0800c53c   0x0000000e   Code   RO         5672    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800c54a   0x0800c54a   0x00000002   Code   RO         5673    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800c54c   0x0800c54c   0x0000000e   Code   RO         5674    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800c55a   0x0800c55a   0x00000002   PAD
+    0x0800c55c   0x0800c55c   0x00000184   Code   RO         5595    i._fp_digits        mc_w.l(printfa.o)
+    0x0800c6e0   0x0800c6e0   0x000006dc   Code   RO         5596    i._printf_core      mc_w.l(printfa.o)
+    0x0800cdbc   0x0800cdbc   0x00000024   Code   RO         5597    i._printf_post_padding  mc_w.l(printfa.o)
+    0x0800cde0   0x0800cde0   0x0000002e   Code   RO         5598    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x0800ce0e   0x0800ce0e   0x0000000a   Code   RO         5600    i._sputc            mc_w.l(printfa.o)
+    0x0800ce18   0x0800ce18   0x00000060   Code   RO         3853    i.delay_1ms         systick.o
+    0x0800ce78   0x0800ce78   0x000000bc   Code   RO         1294    i.exti_init         gd32f10x_exti.o
+    0x0800cf34   0x0800cf34   0x0000000c   Code   RO         1297    i.exti_interrupt_flag_clear  gd32f10x_exti.o
+    0x0800cf40   0x0800cf40   0x00000018   Code   RO         1298    i.exti_interrupt_flag_get  gd32f10x_exti.o
+    0x0800cf58   0x0800cf58   0x00000022   Code   RO         1377    i.fmc_bank0_ready_wait  gd32f10x_fmc.o
+    0x0800cf7a   0x0800cf7a   0x00000002   PAD
+    0x0800cf7c   0x0800cf7c   0x00000030   Code   RO         1378    i.fmc_bank0_state_get  gd32f10x_fmc.o
+    0x0800cfac   0x0800cfac   0x00000022   Code   RO         1382    i.fmc_bank1_ready_wait  gd32f10x_fmc.o
+    0x0800cfce   0x0800cfce   0x00000002   PAD
+    0x0800cfd0   0x0800cfd0   0x00000030   Code   RO         1383    i.fmc_bank1_state_get  gd32f10x_fmc.o
+    0x0800d000   0x0800d000   0x00000020   Code   RO         1385    i.fmc_flag_clear    gd32f10x_fmc.o
+    0x0800d020   0x0800d020   0x0000002c   Code   RO         1392    i.fmc_lock          gd32f10x_fmc.o
+    0x0800d04c   0x0800d04c   0x000000ec   Code   RO         1394    i.fmc_page_erase    gd32f10x_fmc.o
+    0x0800d138   0x0800d138   0x00000044   Code   RO         1395    i.fmc_unlock        gd32f10x_fmc.o
+    0x0800d17c   0x0800d17c   0x000000c0   Code   RO         1396    i.fmc_word_program  gd32f10x_fmc.o
+    0x0800d23c   0x0800d23c   0x00000024   Code   RO         5080    i.fputc             hw_uart.o
+    0x0800d260   0x0800d260   0x00000004   Code   RO         1644    i.gpio_bit_reset    gd32f10x_gpio.o
+    0x0800d264   0x0800d264   0x00000004   Code   RO         1645    i.gpio_bit_set      gd32f10x_gpio.o
+    0x0800d268   0x0800d268   0x00000098   Code   RO         1651    i.gpio_exti_source_select  gd32f10x_gpio.o
+    0x0800d300   0x0800d300   0x000000ac   Code   RO         1652    i.gpio_init         gd32f10x_gpio.o
+    0x0800d3ac   0x0800d3ac   0x00000010   Code   RO         1653    i.gpio_input_bit_get  gd32f10x_gpio.o
+    0x0800d3bc   0x0800d3bc   0x00000090   Code   RO         1658    i.gpio_pin_remap_config  gd32f10x_gpio.o
+    0x0800d44c   0x0800d44c   0x00000038   Code   RO         3806    i.main              main.o
+    0x0800d484   0x0800d484   0x00000194   Code   RO         4498    i.modbusMasterParse  modbus.o
+    0x0800d618   0x0800d618   0x00000028   Code   RO         4499    i.modbusValInit     modbus.o
+    0x0800d640   0x0800d640   0x00000016   Code   RO         5017    i.nvic_config       hw_timer.o
+    0x0800d656   0x0800d656   0x00000002   PAD
+    0x0800d658   0x0800d658   0x000000ac   Code   RO         1960    i.nvic_irq_enable   gd32f10x_misc.o
+    0x0800d704   0x0800d704   0x00000014   Code   RO         1961    i.nvic_priority_group_set  gd32f10x_misc.o
+    0x0800d718   0x0800d718   0x00000014   Code   RO         1962    i.nvic_vector_table_set  gd32f10x_misc.o
+    0x0800d72c   0x0800d72c   0x00000124   Code   RO         2110    i.rcu_clock_freq_get  gd32f10x_rcu.o
+    0x0800d850   0x0800d850   0x00000020   Code   RO         2127    i.rcu_periph_clock_enable  gd32f10x_rcu.o
+    0x0800d870   0x0800d870   0x00000020   Code   RO         2130    i.rcu_periph_reset_disable  gd32f10x_rcu.o
+    0x0800d890   0x0800d890   0x00000020   Code   RO         2131    i.rcu_periph_reset_enable  gd32f10x_rcu.o
+    0x0800d8b0   0x0800d8b0   0x00000038   Code   RO         5255    i.spi_send_byte     hw_spi.o
+    0x0800d8e8   0x0800d8e8   0x000000c4   Code   RO            5    i.system_clock_108m_hxtal  system_gd32f10x.o
+    0x0800d9ac   0x0800d9ac   0x00000008   Code   RO            6    i.system_clock_config  system_gd32f10x.o
+    0x0800d9b4   0x0800d9b4   0x00000028   Code   RO         1965    i.systick_clksource_set  gd32f10x_misc.o
+    0x0800d9dc   0x0800d9dc   0x00000044   Code   RO         3855    i.systick_config    systick.o
+    0x0800da20   0x0800da20   0x000000dc   Code   RO         2951    i.timer_deinit      gd32f10x_timer.o
+    0x0800dafc   0x0800dafc   0x0000000a   Code   RO         2956    i.timer_enable      gd32f10x_timer.o
+    0x0800db06   0x0800db06   0x00000002   PAD
+    0x0800db08   0x0800db08   0x000000e0   Code   RO         2966    i.timer_init        gd32f10x_timer.o
+    0x0800dbe8   0x0800dbe8   0x00000008   Code   RO         2973    i.timer_interrupt_enable  gd32f10x_timer.o
+    0x0800dbf0   0x0800dbf0   0x00000006   Code   RO         2974    i.timer_interrupt_flag_clear  gd32f10x_timer.o
+    0x0800dbf6   0x0800dbf6   0x00000018   Code   RO         2975    i.timer_interrupt_flag_get  gd32f10x_timer.o
+    0x0800dc0e   0x0800dc0e   0x00000002   PAD
+    0x0800dc10   0x0800dc10   0x00000090   Code   RO         3349    i.usart_baudrate_set  gd32f10x_usart.o
+    0x0800dca0   0x0800dca0   0x0000000a   Code   RO         3350    i.usart_data_receive  gd32f10x_usart.o
+    0x0800dcaa   0x0800dcaa   0x00000008   Code   RO         3351    i.usart_data_transmit  gd32f10x_usart.o
+    0x0800dcb2   0x0800dcb2   0x00000002   PAD
+    0x0800dcb4   0x0800dcb4   0x00000090   Code   RO         3352    i.usart_deinit      gd32f10x_usart.o
+    0x0800dd44   0x0800dd44   0x0000000a   Code   RO         3356    i.usart_enable      gd32f10x_usart.o
+    0x0800dd4e   0x0800dd4e   0x0000001e   Code   RO         3358    i.usart_flag_get    gd32f10x_usart.o
+    0x0800dd6c   0x0800dd6c   0x00000010   Code   RO         3362    i.usart_hardware_flow_cts_config  gd32f10x_usart.o
+    0x0800dd7c   0x0800dd7c   0x00000010   Code   RO         3363    i.usart_hardware_flow_rts_config  gd32f10x_usart.o
+    0x0800dd8c   0x0800dd8c   0x0000001a   Code   RO         3364    i.usart_interrupt_disable  gd32f10x_usart.o
+    0x0800dda6   0x0800dda6   0x0000001a   Code   RO         3365    i.usart_interrupt_enable  gd32f10x_usart.o
+    0x0800ddc0   0x0800ddc0   0x0000001a   Code   RO         3366    i.usart_interrupt_flag_clear  gd32f10x_usart.o
+    0x0800ddda   0x0800ddda   0x00000038   Code   RO         3367    i.usart_interrupt_flag_get  gd32f10x_usart.o
+    0x0800de12   0x0800de12   0x00000010   Code   RO         3377    i.usart_parity_config  gd32f10x_usart.o
+    0x0800de22   0x0800de22   0x00000010   Code   RO         3379    i.usart_receive_config  gd32f10x_usart.o
+    0x0800de32   0x0800de32   0x00000010   Code   RO         3385    i.usart_stop_bit_set  gd32f10x_usart.o
+    0x0800de42   0x0800de42   0x00000010   Code   RO         3389    i.usart_transmit_config  gd32f10x_usart.o
+    0x0800de52   0x0800de52   0x00000010   Code   RO         3390    i.usart_word_length_set  gd32f10x_usart.o
+    0x0800de62   0x0800de62   0x00000b12   Data   RO         4302    .constdata          gui.o
+    0x0800e974   0x0800e974   0x0000000c   Data   RO         5343    .constdata          mc_w.l(localtime.o)
+    0x0800e980   0x0800e980   0x00000020   Data   RO         5670    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800e8dc, Size: 0x00003710, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x00000280])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800e9a0, Size: 0x00003788, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x00000280])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3206,16 +3207,15 @@ Memory Map of the image
     0x2000036c        -       0x00000170   Zero   RW         3892    .bss                init.o
     0x200004dc        -       0x00000880   Zero   RW         3985    .bss                oled.o
     0x20000d5c        -       0x00000308   Zero   RW         4500    .bss                modbus.o
-    0x20001064        -       0x000001fa   Zero   RW         4589    .bss                wirelesstemp.o
-    0x2000125e   COMPRESSED   0x00000002   PAD
-    0x20001260        -       0x000001bc   Zero   RW         4817    .bss                protocol.o
-    0x2000141c        -       0x0000009c   Zero   RW         4946    .bss                commucateslave.o
-    0x200014b8        -       0x000001fe   Zero   RW         5081    .bss                hw_uart.o
-    0x200016b6   COMPRESSED   0x00000002   PAD
-    0x200016b8        -       0x00000028   Zero   RW         5173    .bss                hw_fmc.o
-    0x200016e0        -       0x0000002c   Zero   RW         5342    .bss                mc_w.l(localtime.o)
-    0x2000170c   COMPRESSED   0x00000004   PAD
-    0x20001710        -       0x00002000   Zero   RW          137    STACK               startup_gd32f10x_md.o
+    0x20001064        -       0x00000274   Zero   RW         4589    .bss                wirelesstemp.o
+    0x200012d8        -       0x000001bc   Zero   RW         4817    .bss                protocol.o
+    0x20001494        -       0x0000009c   Zero   RW         4946    .bss                commucateslave.o
+    0x20001530        -       0x000001fe   Zero   RW         5081    .bss                hw_uart.o
+    0x2000172e   COMPRESSED   0x00000002   PAD
+    0x20001730        -       0x00000028   Zero   RW         5173    .bss                hw_fmc.o
+    0x20001758        -       0x0000002c   Zero   RW         5342    .bss                mc_w.l(localtime.o)
+    0x20001784   COMPRESSED   0x00000004   PAD
+    0x20001788        -       0x00002000   Zero   RW          137    STACK               startup_gd32f10x_md.o
 
 
 ==============================================================================
@@ -3244,16 +3244,16 @@ Image component sizes
         56          8          0          0          0       2263   main.o
        492         38          0        516        776       3826   modbus.o
       2236         84          0          0       2176      24234   oled.o
-      4064        224          0        117        444      14305   protocol.o
+      4084        222          0        117        444      14245   protocol.o
         36          8        260          0       8192        840   startup_gd32f10x_md.o
        336         30          0          4          0      53451   system_gd32f10x.o
        164         28          0          8          0       1181   systick.o
-      2896        246          0         48        506      19562   wirelesstemp.o
+      3072        252          0         48        628      19658   wirelesstemp.o
 
     ----------------------------------------------------------------------
-     35622       3094       3126        872      13172     245945   Object Totals
+     35818       3098       3126        872      13292     245981   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        32          0          0          6          4          0   (incl. Padding)
+        32          0          0          6          2          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -3318,15 +3318,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     40090       3216       3138        876      13220     234749   Grand Totals
-     40090       3216       3138        640      13220     234749   ELF Image Totals (compressed)
-     40090       3216       3138        640          0          0   ROM Totals
+     40286       3220       3138        876      13340     234785   Grand Totals
+     40286       3220       3138        640      13340     234785   ELF Image Totals (compressed)
+     40286       3220       3138        640          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                43228 (  42.21kB)
-    Total RW  Size (RW Data + ZI Data)             14096 (  13.77kB)
-    Total ROM Size (Code + RO Data + RW Data)      43868 (  42.84kB)
+    Total RO  Size (Code + RO Data)                43424 (  42.41kB)
+    Total RW  Size (RW Data + ZI Data)             14216 (  13.88kB)
+    Total ROM Size (Code + RO Data + RW Data)      44064 (  43.03kB)
 
 ==============================================================================
 

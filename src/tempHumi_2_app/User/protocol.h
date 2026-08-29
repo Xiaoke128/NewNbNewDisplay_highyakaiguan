@@ -23,6 +23,7 @@ typedef enum{
 	RUN_SEND_COMMUNICATION_STATUS,
 	RUN_SEND_MAIN_BOARD_INFO,
 	RUN_GET_VOL,
+	RUN_SET_DEV_ID,
 }RunStep;
 
 typedef union {
@@ -52,7 +53,8 @@ typedef union{
 		uint8_t		SendCommunicateStatus	:1;
 		uint8_t		SendMainBoardInfo			:1;
 		uint8_t		GetVol								:1;
-		uint8_t		reserved							:5;
+		uint8_t 	SetDevId							:1;
+		uint8_t		reserved							:4;
 	}bit;
 }ProEnableFlag;
 
@@ -68,6 +70,7 @@ typedef enum{
 	COMMAND_SEND_COMMUNICATION_STATUS,
 	COMMAND_SEND_MAIN_BOARD_INFO,
 	COMMAND_GET_VOL,
+	COMMAND_SET_DEV_ID,
 }ComEnum;
 
 typedef enum{
@@ -99,5 +102,5 @@ typedef struct{
 void ParsePro(uint8_t ch);
 void ProtocolTask(void);
 void SendMainBoardInfoEnable(void);
-
+void SetDevIdEnable(void);
 #endif

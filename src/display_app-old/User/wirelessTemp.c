@@ -144,14 +144,8 @@ static void SendSetDevId(void)
 		data[i++] = 0x50;
 		for(j = 0; j < 20; j++)
 		{
-				if(wlStrData.WlSetDevId[j] == 0x0000) {
-						data[i++] = 0x00;
-						data[i++] = 0x00;
-				}
-				else {
-						data[i++] = 0xFF;
-						data[i++] = 0xFF;
-				}
+				data[i++] = wlStrData.WlSetDevId[j] >> 24;
+				data[i++] = wlStrData.WlSetDevId[j] >> 16;
 				data[i++] = wlStrData.WlSetDevId[j] >> 8;
 				data[i++] = wlStrData.WlSetDevId[j];
 		}
@@ -289,9 +283,10 @@ static void CheckTempIDFunc(void)
 						j = 1;
 						for(i = 0; i < temp; i++)
 						{
-								j += 2;
-								wlStrData.tempID_Val[idBufIndex++][0] = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
-								j += 2;
+								//j += 2;
+								wlStrData.WlGetDevId[idBufIndex] = ((uint32_t)modbus.data[j] << 24) + (uint32_t)(modbus.data[j + 1] << 16) + ((uint32_t)modbus.data[j + 2] << 8) + (uint32_t)modbus.data[j + 3];
+								wlStrData.tempID_Val[idBufIndex++][0] = ((uint16_t)modbus.data[j + 2] << 8) + (uint16_t)modbus.data[j + 3];
+								j += 4;
 								//idBufIndex++;
 						}
 						if(idBufIndex >= wlStrData.NumTemp) {
@@ -791,11 +786,25 @@ static void EnbaleFunc(void)
 				{
 						CheckConnectEnable();
 				}
+				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp > 0) && wlStrData.sysFlag.bit.TempIDGet && wlStrData.sysFlag.bit.Connected)
+				{
+						if(memcmp(wlStrData.WlSetDevId, wlStrData.WlGetDevId, sizeof(wlStrData.WlSetDevId)) != 0)
+						{
+								SetDevIdEnable();
+						}
+				}
+				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp == 0) && wlStrData.sysFlag.bit.Connected)
+				{
+						if(memcmp(wlStrData.WlSetDevId, wlStrData.WlGetDevId, sizeof(wlStrData.WlSetDevId)) != 0)
+						{
+								SetDevIdEnable();
+						}
+				}
 		}
 		if(count2 >= 2000)
 		{
 				count2 = 0;
-				if(!wlStrData.sysFlag.bit.TempIDGet && wlStrData.sysFlag.bit.Connected)
+				if(!wlStrData.sysFlag.bit.TempIDGet && wlStrData.sysFlag.bit.Connected && wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp > 0))
 				{
 						TempIDEnable();
 				}
@@ -847,6 +856,8 @@ void WlVarInit(void)
 		memset(wlStrData.humiID_Val, 0xFF, sizeof(wlStrData.humiID_Val));
 		memset(wlStrData.tempID_Val, 0xFF, sizeof(wlStrData.tempID_Val));
 		memset(wlStrData.Voltage, 0xFF, sizeof(wlStrData.Voltage));
+		memset(wlStrData.WlSetDevId, 0xFF, sizeof(wlStrData.WlSetDevId));
+		memset(wlStrData.WlGetDevId, 0xFF, sizeof(wlStrData.WlGetDevId));
 		CheckConnectEnable();
 }
 

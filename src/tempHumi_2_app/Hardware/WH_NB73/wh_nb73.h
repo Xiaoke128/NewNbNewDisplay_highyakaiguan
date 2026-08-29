@@ -180,6 +180,7 @@ typedef struct{
 	uint8_t SlaveAddr;
 	uint8_t Ch3_Set;
 	uint32_t BaudRateModbus;
+	uint32_t WlTempId[20];
 	uint32_t CrcVal;
 }StoreConfStr;
 

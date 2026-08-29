@@ -363,23 +363,24 @@ static void VolGet(void)
 static void WlDevIdSet(void)
 {
 		uint8_t i = 0, j = 0;
-		uint16_t tenpBuf[20] = {0};
 	
 		for(i = 0; i < 20; i++)
 		{
-				wlStrData.WlSetDevId[i] = (uint16_t)(protocol.data[j] << 8) + (uint16_t)(protocol.data[j + 1]);
-				j += 2;
+				wlStrData.WlSetDevId[i] = (uint32_t)(protocol.data[j] << 24) + (uint32_t)(protocol.data[j + 1] << 16) + (uint32_t)(protocol.data[j + 2] << 8) + (uint32_t)(protocol.data[j + 3]);
+				j += 4;
 		}
 		ProResponse(COMMAND_SET_WL_DEV_ID, NULL, 0);
 		
-		for(i = 0; i < 20; i++)
+		if((memcmp(wlStrData.WlSetDevId, wlStrData.WlGetDevId, sizeof(wlStrData.WlSetDevId)) != 0))// && wlStrData.sysFlag.bit.TempIDGet)
 		{
-				tenpBuf[i] = wlStrData.humiID_Val[i][0];
-		}
-		if((memcmp(wlStrData.WlSetDevId, tenpBuf, sizeof(tenpBuf)) != 0) && wlStrData.sysFlag.bit.TempIDGet)
-		{
-				//memcpy(wlStrData.WlDevId, tenpBuf, sizeof(tenpBuf));
-				SetDevIdEnable();
+				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp > 0) && wlStrData.sysFlag.bit.TempIDGet)
+				{
+						SetDevIdEnable();
+				}
+				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp == 0))
+				{
+						SetDevIdEnable();
+				}
 		}
 }
 
