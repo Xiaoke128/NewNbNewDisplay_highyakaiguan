@@ -78,5 +78,5 @@ extern MainBoardInfoStr MainBoardInfo;
 
 void DisplayMainProInit(void);
 void DisplayMainProTask(void);
-
+uint8_t CheckSetDevId(void);
 #endif

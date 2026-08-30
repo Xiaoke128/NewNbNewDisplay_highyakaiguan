@@ -359,6 +359,22 @@ static void VolGet(void)
 		ProResponse(COMMAND_GET_VOL_VALUE, buf, sizeof(buf));
 }
 
+uint8_t CheckSetDevId(void)
+{
+		uint8_t i = 0;
+	
+		for(i = 0; i < 20; i++)
+		{
+				if(wlStrData.WlSetDevId[i] != wlStrData.WlGetDevId[i])
+				{
+						if((wlStrData.WlSetDevId[i] != 0x00000000) || (wlStrData.WlGetDevId[i] != 0xFFFFFFFF))
+						{
+								return 1;
+						}
+				}
+		}
+		return 0;
+}
 
 static void WlDevIdSet(void)
 {
@@ -371,7 +387,7 @@ static void WlDevIdSet(void)
 		}
 		ProResponse(COMMAND_SET_WL_DEV_ID, NULL, 0);
 		
-		if((memcmp(wlStrData.WlSetDevId, wlStrData.WlGetDevId, sizeof(wlStrData.WlSetDevId)) != 0))// && wlStrData.sysFlag.bit.TempIDGet)
+		if(CheckSetDevId())// && wlStrData.sysFlag.bit.TempIDGet)
 		{
 				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp > 0) && wlStrData.sysFlag.bit.TempIDGet)
 				{

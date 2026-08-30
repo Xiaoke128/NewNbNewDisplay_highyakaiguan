@@ -163,6 +163,7 @@ static void CheckSetDevIdFun(void)
 		switch(step)
 		{
 			case 0:
+				memset(wlStrData.WlGetDevId, 0xFF, sizeof(wlStrData.WlGetDevId));
 				step++;
 			break;
 			case 1://send read command
@@ -365,6 +366,7 @@ static void CheckNumTempFunc(void)
 				{
 						wlStrData.NumTemp = ((uint16_t)modbus.data[j] << 8) + (uint16_t)modbus.data[j + 1];
 						wlStrData.sysFlag.bit.NumTempGet = 1;
+						
 						step = 0;
 						NumTempDisable();
 				}
@@ -788,14 +790,14 @@ static void EnbaleFunc(void)
 				}
 				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp > 0) && wlStrData.sysFlag.bit.TempIDGet && wlStrData.sysFlag.bit.Connected)
 				{
-						if(memcmp(wlStrData.WlSetDevId, wlStrData.WlGetDevId, sizeof(wlStrData.WlSetDevId)) != 0)
+						if(CheckSetDevId())
 						{
 								SetDevIdEnable();
 						}
 				}
 				if(wlStrData.sysFlag.bit.NumTempGet && (wlStrData.NumTemp == 0) && wlStrData.sysFlag.bit.Connected)
 				{
-						if(memcmp(wlStrData.WlSetDevId, wlStrData.WlGetDevId, sizeof(wlStrData.WlSetDevId)) != 0)
+						if(CheckSetDevId())
 						{
 								SetDevIdEnable();
 						}
