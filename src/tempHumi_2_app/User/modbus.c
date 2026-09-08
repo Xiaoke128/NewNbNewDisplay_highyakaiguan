@@ -1154,7 +1154,7 @@ void modbusAct(void)
 										{
 												if((strtAddr + k - MODBUS_WL_SET_GET_DEV_ID_START_REG) < 40)
 												{
-														StoreConf.WlTempId[strtAddr + k / 2 - MODBUS_WL_SET_GET_DEV_ID_START_REG] = ((uint32_t)(modbus.data[m] << 24)) + ((uint32_t)(modbus.data[m + 1] << 16)) + ((uint32_t)(modbus.data[m + 2] << 8)) + ((uint32_t)(modbus.data[m + 3]));
+														StoreConf.WlTempId[(strtAddr + k - MODBUS_WL_SET_GET_DEV_ID_START_REG) / 2] = ((uint32_t)(modbus.data[m] << 24)) + ((uint32_t)(modbus.data[m + 1] << 16)) + ((uint32_t)(modbus.data[m + 2] << 8)) + ((uint32_t)(modbus.data[m + 3]));
 														m += 4;
 												}
 										}
